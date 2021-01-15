@@ -1,0 +1,19 @@
+{
+  "name": "meal-planner",
+  "version": "1.0.0",
+  "description": "Meal Planner is a web app created to take away the decision making process of planning your meals, while considering dietary preferences and restrictions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soccermind/meal-planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soccermind/meal-planner/issues"
+  },
+  "homepage": "https://github.com/soccermind/meal-planner#readme"
+}
