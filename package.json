@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/soccermind/meal-planner/issues"
   },
-  "homepage": "https://github.com/soccermind/meal-planner#readme"
+  "homepage": "https://github.com/soccermind/meal-planner#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
