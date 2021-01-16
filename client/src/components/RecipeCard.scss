@@ -1,12 +1,22 @@
+$card-min-width: 30rem;
+$card-max-width: 30rem;
 
-.card-bottom {
-  display: flex;
-  flex-direction: column;
-  .heart-container {
-    
-
+.card {
+  // padding: 1rem;
+  min-width: $card-min-width;
+  max-width: $card-max-width;
+  // width: 30rem;
+  .card-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    .heart-container {
+      color: tomato;
+      font-size: 2rem;
+    }
   }
-
 }
 
 
