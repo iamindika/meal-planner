@@ -2,13 +2,29 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Heading from "./components/Heading";
 import Favourites from './components/Favourites';
+import Profile from "./components/Profile";
+import RecipeForm from "./components/RecipeForm";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 const App = () => {
   return(
  <div className="App">
+   <Router>
   <Heading />
-
-  <Favourites />
+  <Switch>
+          <Route path="/"  exact component={Favourites} />
+          <Route path="/register" component={Register} />
+          <Route path="/login"  component={Login} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/new" component={RecipeForm} />
+          </Switch>
+          </Router>
 </div >
   )};
 
