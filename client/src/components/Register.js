@@ -19,13 +19,13 @@ export default function Register(props){
         name, email, password
       }
     })
-      .then(({
-       data
-      }) => {
-        var json = JSON.parse(data);
-        setSearchResults(json.results)
-      })
-      .catch((err) => console.log(err));
+      // .then(({
+      //  data
+      // }) => {
+      //   var json = JSON.parse(data);
+      //   setSearchResults(json.results)
+      // })
+      // .catch((err) => console.log(err));
   }
 
   function handleNameChange(event) {
