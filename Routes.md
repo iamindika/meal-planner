@@ -25,8 +25,6 @@
 
 ----> /recipes/new ----->POST
 
-----> /recipes/:id ----->GET
-
 ----> /logout------>POST
 
 ----> /user------>POST
