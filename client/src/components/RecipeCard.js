@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import "./RecipeCard.scss";
 
 export default function RecipeCard (props) {
-  
+  console.log(props)
   
   return (
     <Card>
