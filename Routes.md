@@ -1,4 +1,4 @@
-## FRONTEND
+
 
 -----> /     -------> GET
 
@@ -24,8 +24,6 @@
 ----> api/recipes/search -----> GET
 
 ----> /recipes/new ----->POST
-
-----> /recipes/:id ----->GET
 
 ----> /logout------>POST
 

@@ -9,7 +9,8 @@ const dbRecipeHelpers = require('./db/helpers/dbRecipeHelpers')(db);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const recipesRouter = require('./routes/recipes');
+const recipesRouter =  require('./routes/recipes');
+const searchRouter =  require('./routes/search');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/posts', usersRouter(dbHelpers));
 app.use('/api/users', usersRouter(dbHelpers));
-app.use('/recipes', recipesRouter(dbRecipeHelpers));
+app.use('/api/recipes', recipesRouter(dbHelpers));
+app.use('/api/search', searchRouter(dbHelpers));
 
 module.exports = app;
