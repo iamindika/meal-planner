@@ -6,11 +6,8 @@ import Profile from "./components/Profile";
 import RecipeForm from "./components/RecipeForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
-<<<<<<< HEAD
 import Search from "./components/Search"
-=======
 import LocalRecipes from "./components/LocalRecipes"
->>>>>>> 4a151f78133e2ad76ed57658db2860d3224c36cb
 import {
   BrowserRouter as Router,
   Switch,
