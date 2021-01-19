@@ -21,4 +21,3 @@ module.exports = (db) => {
   return router;
 }
 
-// apiKey= 8ab5b8fc182d4b448cd46f79890e625c
