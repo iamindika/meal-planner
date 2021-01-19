@@ -25,8 +25,13 @@ export default function Profile(){
     >
       <Dropdown.Item href="#">Vegan</Dropdown.Item>
       <Dropdown.Item href="#">Vegetarian</Dropdown.Item>
-      <Dropdown.Item href="#">Non-Vegetarian</Dropdown.Item>
-      <Dropdown.Item href="#">Keto</Dropdown.Item>
+      <Dropdown.Item href="#">Gluten Free</Dropdown.Item>
+      <Dropdown.Item href="#">Ketogenic</Dropdown.Item>
+      <Dropdown.Item href="#">Lacto-Vegetarian</Dropdown.Item>
+      <Dropdown.Item href="#">Pescetarian</Dropdown.Item>
+      <Dropdown.Item href="#">Paleo</Dropdown.Item>
+      <Dropdown.Item href="#">Primal</Dropdown.Item>
+      <Dropdown.Item href="#">Whole30</Dropdown.Item>
     </DropdownButton>
   </InputGroup>
 <br />
@@ -79,3 +84,4 @@ export default function Profile(){
 </Col>
   </section>
 }
+
