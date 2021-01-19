@@ -1,43 +1,66 @@
-import React from "react";
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-
+import {Card,Button} from "react-bootstrap"
+import axios from "axios"
 import "./RecipeCard.scss";
+import { useState } from "react";
 
 export default function RecipeCard (props) {
-  // console.log(props)
-  function handleClick(event){
+
+  const [instructions,setInstructions] = useState([]);
+  const [ingredients,setIngredients] = useState([]);
+  const [showInstructions,setShowInstructions] = useState(false);
+
+  function handleSubmit(event){
     event.preventDefault();
-    //  console.log(value)
+    if(!showInstructions){
+      const id = event.target.value
     axios({
       method: 'POST',
-      url: '/api/recipe/:id',
+      url:`/api/recipe/:${id}`,
       data:{
-        value
+       id
       }
     })
       .then(({
        data
       }) => {
-        var json = JSON.parse(data);
-        setSearchResults(json.results)
+       
+         setInstructions(data.instructions.instructions)
+         setIngredients(data.ingredients.ingredients)
+        //  console.log(data)
       })
       .catch((err) => console.log(err));
+      setShowInstructions(true);
+    }else{
+      setShowInstructions(false);
+    }
   }
-  }
-  
+      
+
+  const ingredientsWithAmount= ingredients.map((ingredient)=>{
+    return<div><p>
+     {ingredient.name} - {(Math.round(ingredient.amount.us.value * 100)/100)}: {ingredient.amount.us.unit}</p></div> 
+    
+  })
   return (
     <Card>
       <Card.Img variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
+        {showInstructions && 
+        <div>
         <Card.Text>
-         {props.description}
+        <h4>Ingredients</h4>
+           {ingredientsWithAmount} 
         </Card.Text>
-        <div class="card-bottom">
-          <Button variant="primary" onClick={handleClick}>View Recipe</Button>
-          <div class="heart-container">
-            <i class="fas fa-heart"></i>
+        <Card.Text>
+          <h4>Cooking Instructions</h4>
+         {instructions}  
+        </Card.Text>
+        </div>}
+        <div className="card-bottom">
+          <Button variant="primary" type="submit" onClick={handleSubmit} value={props.id} >View Recipe</Button>
+          <div className="heart-container">
+            <i className="fas fa-heart"></i>
           </div>
         </div>
       </Card.Body>

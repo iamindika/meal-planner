@@ -13,10 +13,10 @@ export default function Heading(){
     <Nav className="mr-auto"> 
     </Nav>
     <Nav>
-    <NavLink style={{color:"white",padding:"10px"}} to="/register">Register</NavLink>
-      <NavLink style={{color:"white",padding:"10px"}} to="/login">Login</NavLink>
-      <NavLink style={{color:"white",padding:"10px"}} to="/profile">Profile</NavLink>
-      <Button variant="secondary"><NavLink style={{color:"white"}} to="/new">Create New Recipe</NavLink></Button>{' '}
+    <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/register">Register</NavLink>
+      <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/login">Login</NavLink>
+      <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/profile">Profile</NavLink>
+      <NavLink id="RouterNavLink" style={{color:"white"}} to="/new"><Button variant="secondary">Create New Recipe</Button>{' '}</NavLink>
     </Nav>
   </Navbar.Collapse>
 </Navbar>

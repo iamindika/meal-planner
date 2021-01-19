@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import {Form,Button,Col,CardGroup} from "react-bootstrap"
 import RecipeCard from "./RecipeCard";
@@ -31,7 +31,7 @@ export default function Search(){
 
   
   const finalResults = searchResults.map((result)=>{
-    return <RecipeCard title={result.title} image={"https://spoonacular.com/recipeImages/" + result.image} description={result.sourceUrl} />
+    return <RecipeCard  id={result.id} key={result.id} title={result.title} image={"https://spoonacular.com/recipeImages/" + result.image} description={result.sourceUrl} />
   })
 
 
