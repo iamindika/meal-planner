@@ -5,7 +5,26 @@ import Button from 'react-bootstrap/Button'
 import "./RecipeCard.scss";
 
 export default function RecipeCard (props) {
-  console.log(props)
+  // console.log(props)
+  function handleClick(event){
+    event.preventDefault();
+    //  console.log(value)
+    axios({
+      method: 'POST',
+      url: '/api/recipe/:id',
+      data:{
+        value
+      }
+    })
+      .then(({
+       data
+      }) => {
+        var json = JSON.parse(data);
+        setSearchResults(json.results)
+      })
+      .catch((err) => console.log(err));
+  }
+  }
   
   return (
     <Card>
@@ -16,7 +35,7 @@ export default function RecipeCard (props) {
          {props.description}
         </Card.Text>
         <div class="card-bottom">
-          <Button variant="primary">View Recipe</Button>
+          <Button variant="primary" onClick={handleClick}>View Recipe</Button>
           <div class="heart-container">
             <i class="fas fa-heart"></i>
           </div>

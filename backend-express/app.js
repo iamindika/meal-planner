@@ -25,5 +25,6 @@ app.use('/api/posts', usersRouter(dbHelpers));
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/recipes', recipesRouter(dbHelpers));
 app.use('/api/search', searchRouter(dbHelpers));
+app.use('/api/:id/recipe', searchRouter(dbHelpers));
 
 module.exports = app;
