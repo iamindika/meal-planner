@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import RecipeForm from "./components/RecipeForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Recipes from "./components/Recipes"
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,8 +24,10 @@ const App = () => {
           <Route path="/login"  component={Login} />
           <Route path="/profile" component={Profile} />
           <Route path="/new" component={RecipeForm} />
+          <Route path="/recipes" component={Recipes} />
           </Switch>
           </Router>
+          
 </div >
   )};
 

@@ -6,6 +6,7 @@ import "./Favourites.scss";
 
 export default function Favourites (props) {
   
+
   
   return (
     <section>
