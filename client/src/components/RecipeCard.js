@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios"
+import React, {useState, useEffect} from "react";
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
@@ -6,6 +7,9 @@ import "./RecipeCard.scss";
 
 export default function RecipeCard (props) {
   // console.log(props)
+  // const [value, setValue] = useState();
+  // const [results, setSearchResults] = useState("");
+  // // console.log(props)
   // function handleClick(event){
   //   event.preventDefault();
   //   //  console.log(value)
@@ -24,7 +28,6 @@ export default function RecipeCard (props) {
   //     })
   //     .catch((err) => console.log(err));
   // }
-  // }
   
   return (
     <Card>
@@ -35,7 +38,7 @@ export default function RecipeCard (props) {
          {props.description}
         </Card.Text>
         <div class="card-bottom">
-          <Button variant="primary">View Recipe</Button>
+          <Button variant="primary" >View Recipe</Button>
           <div class="heart-container">
             <i class="fas fa-heart"></i>
           </div>

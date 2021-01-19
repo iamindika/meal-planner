@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Form,Button,Col,CardGroup} from "react-bootstrap"
 import RecipeCard from "./RecipeCard";
+
 export default function Search(){
   const [value,setValue] = useState();
   const [searchResults,setSearchResults] = useState([])
@@ -25,6 +26,7 @@ export default function Search(){
       })
       .catch((err) => console.log(err));
   }
+
   function handleChange(event) {
    setValue(event.target.value)
   }
