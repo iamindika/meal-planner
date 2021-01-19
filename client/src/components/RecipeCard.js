@@ -1,10 +1,10 @@
 import {Card,Button} from "react-bootstrap"
 import axios from "axios"
+import {useState} from "react";
 import "./RecipeCard.scss";
-import { useState } from "react";
 
-export default function RecipeCard (props) {
 
+ export default function RecipeCard (props) {
   const [instructions,setInstructions] = useState([]);
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);

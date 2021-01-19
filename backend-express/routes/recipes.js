@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const response = require("../responseData.json")
+ const response = require("../responseData.json")
 
 module.exports = (db) => {
 
