@@ -5,6 +5,8 @@ const logger = require('morgan');
 
 const db = require('./db');
 const dbHelpers = require('./db/helpers/dbHelpers')(db);
+const dbRecipeHelpers = require('./db/helpers/dbRecipeHelpers')(db);
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recipesRouter =  require('./routes/recipes');
