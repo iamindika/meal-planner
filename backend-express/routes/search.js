@@ -6,7 +6,7 @@ const https = require("https")
 module.exports = (db) => {
   router.post("/",(req,res)=>{
      const search = req.body.value;
-  https.get(`https://api.spoonacular.com/recipes/search?apiKey=8ab5b8fc182d4b448cd46f79890e625c&query=${search}&number=2&instructionsRequired=true`,(response)=>{
+  https.get(`https://api.spoonacular.com/recipes/search?apiKey=ece32e8a193b4f16ab25e0b78cd51160&query=${search}&number=2&instructionsRequired=true`,(response)=>{
     let body = "";
     response.setEncoding('utf8');
     response.on('data', function (chunk) {
