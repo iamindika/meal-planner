@@ -3,8 +3,6 @@ import axios from "axios";
 import { useState } from 'react';
 
 export default function Profile(){
-const [fName,setFName] = useState("");
-const [lName,setLName] = useState("");
 const [diet,setDiet] = useState("");
 const [avoidances,setAvoidances] = useState([]);
 const [cuisine,setCuisine] = useState("");
@@ -15,8 +13,7 @@ axios({
   method: 'POST',
   url:'/profile/new',
   data:{
-   fName,
-   lName,
+  
    diet,
    avoidances,
    cuisine
@@ -28,8 +25,6 @@ axios({
      console.log(data)
   })
   .catch((err) => console.log(err));
-  setFName("");
-  setLName("");
   setDiet("");
   setAvoidances([]);
   setCuisine("");
@@ -42,12 +37,6 @@ axios({
     <Col  md={{ span: 3, offset: 4 }} xs={2}> 
     <Form>
       <br />
-  <Form.Group controlId="formBasicName">
-    <Form.Control type="text"  size="lg" placeholder="Enter Your First Name" value={fName} onChange={(e) => setFName(e.target.value)} />
-  </Form.Group>
-  <Form.Group controlId="formBasicName">
-    <Form.Control type="text"  size="lg" placeholder="Enter Your Last Name" value={lName} onChange={(e) => setLName(e.target.value)} />
-  </Form.Group>
 
 
 <Form.Group controlId="exampleForm.SelectCustomSizeLg">
@@ -71,7 +60,25 @@ axios({
       <option>Celery</option>
       <option>Egg</option>
       <option>Gluten</option>
-      <option>Groundnut</option>
+      <option>Peanut</option>
+      <option>Dairy</option>
+      <option>Sesame</option>
+      <option>Soy</option>
+      <option>Tree nut</option>
+      <option>Shellfish</option>
+      <option>Wheat</option>
+      <option>Yeast</option>
+    </Form.Control>
+  </Form.Group>
+  <Form.Group controlId="exampleForm.SelectCustomSizeLg">
+<Form.Label><strong>Favourite Ingredients</strong></Form.Label>
+    <Form.Control multiple as="select" size="lg" custom value={avoidances} onChange={(e) => setAvoidances((prev)=>[...prev,e.target.value])}>
+      <option>Egg</option>
+      <option>Bacon</option>
+      <option>Celery</option>
+      <option>Bread</option>
+      <option>Apple</option>
+      <option>Banana</option>
       <option>Milk</option>
       <option>Sesame</option>
       <option>Soybean</option>
@@ -81,7 +88,7 @@ axios({
       <option>Yeast</option>
     </Form.Control>
   </Form.Group>
-  <Form.Group controlId="exampleForm.SelectCustomSizeLg">
+  {/* <Form.Group controlId="exampleForm.SelectCustomSizeLg">
 <Form.Label><strong>Cuisine</strong></Form.Label>
     <Form.Control as="select" size="lg" custom value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
       <option>African</option>
@@ -98,7 +105,7 @@ axios({
       <option>Middle Eastern</option>
       <option>Thai</option>
     </Form.Control>
-  </Form.Group>
+  </Form.Group> */}
   <br />
   <Button variant="primary" type="submit" onClick={handleSubmit}>
     Submit
