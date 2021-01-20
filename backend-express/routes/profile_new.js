@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const {
-  addName
-} = require('../db/helpers/dbHelpers');
+ require('../db/helpers/dbHelpers');
 
  
 
 module.exports = ({
-  addName
+  addDiet
 }) => {
   router.post("/",(req,res)=>{
-    // console.log(req.body);
-    const {fName,lName,diet,avoidances,cuisine} = req.body;
-    
+  const {diet,avoidances,favorites} = req.body;
+  console.log(diet,avoidances,favorites);
+  addDiet()
+
    
   });
   return router;

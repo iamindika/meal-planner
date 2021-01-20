@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function Profile(){
 const [diet,setDiet] = useState("");
 const [avoidances,setAvoidances] = useState([]);
-const [cuisine,setCuisine] = useState("");
+const [favorites,setFavorites] = useState("");
 
 function handleSubmit(event){
 event.preventDefault();
@@ -13,10 +13,9 @@ axios({
   method: 'POST',
   url:'/profile/new',
   data:{
-  
    diet,
    avoidances,
-   cuisine
+   favorites
   }
 })
   .then(({
@@ -27,7 +26,7 @@ axios({
   .catch((err) => console.log(err));
   setDiet("");
   setAvoidances([]);
-  setCuisine("");
+  setFavorites("");
 }
 
   return <section>
@@ -72,7 +71,7 @@ axios({
   </Form.Group>
   <Form.Group controlId="exampleForm.SelectCustomSizeLg">
 <Form.Label><strong>Favourite Ingredients</strong></Form.Label>
-    <Form.Control multiple as="select" size="lg" custom value={avoidances} onChange={(e) => setAvoidances((prev)=>[...prev,e.target.value])}>
+    <Form.Control multiple as="select" size="lg" custom value={favorites} onChange={(e) => setFavorites((prev)=>[...prev,e.target.value])}>
       <option>Egg</option>
       <option>Bacon</option>
       <option>Celery</option>
@@ -80,12 +79,12 @@ axios({
       <option>Apple</option>
       <option>Banana</option>
       <option>Milk</option>
-      <option>Sesame</option>
-      <option>Soybean</option>
-      <option>Tree nut</option>
-      <option>Lactose</option>
-      <option>Wheat</option>
-      <option>Yeast</option>
+      <option>Butter</option>
+      <option>Cheese</option>
+      <option>Broccoli</option>
+      <option>Kale</option>
+      <option>Potato</option>
+      <option>Pizza</option>
     </Form.Control>
   </Form.Group>
   {/* <Form.Group controlId="exampleForm.SelectCustomSizeLg">
