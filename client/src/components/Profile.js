@@ -1,9 +1,10 @@
-import {Form,Button,Col,Image,Dropdown,DropdownButton,InputGroup,FormControl} from 'react-bootstrap';
+import {Form,Button,Col,Image} from 'react-bootstrap';
 import axios from "axios";
 import { useState } from 'react';
 
 export default function Profile(){
-const [name,setName] = useState("");
+const [fName,setFName] = useState("");
+const [lName,setLName] = useState("");
 const [diet,setDiet] = useState("");
 const [avoidances,setAvoidances] = useState([]);
 const [cuisine,setCuisine] = useState("");
@@ -14,7 +15,8 @@ axios({
   method: 'POST',
   url:'/profile/new',
   data:{
-   name,
+   fName,
+   lName,
    diet,
    avoidances,
    cuisine
@@ -26,7 +28,8 @@ axios({
      console.log(data)
   })
   .catch((err) => console.log(err));
-  setName("");
+  setFName("");
+  setLName("");
   setDiet("");
   setAvoidances([]);
   setCuisine("");
@@ -40,8 +43,12 @@ axios({
     <Form>
       <br />
   <Form.Group controlId="formBasicName">
-    <Form.Control type="text"  size="lg" placeholder="Enter Your Name" value={name} onChange={(e) => setName(e.target.value)} />
+    <Form.Control type="text"  size="lg" placeholder="Enter Your First Name" value={fName} onChange={(e) => setFName(e.target.value)} />
   </Form.Group>
+  <Form.Group controlId="formBasicName">
+    <Form.Control type="text"  size="lg" placeholder="Enter Your Last Name" value={lName} onChange={(e) => setLName(e.target.value)} />
+  </Form.Group>
+
 
 <Form.Group controlId="exampleForm.SelectCustomSizeLg">
 <Form.Label><strong>Diet</strong></Form.Label>

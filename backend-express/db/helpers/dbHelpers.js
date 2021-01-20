@@ -48,10 +48,22 @@ module.exports = (db) => {
 
     }
 
+    const addDiet = (diet) =>{
+        const query = {
+            text:`INSERT INTO user_diets(name) VALUES ($1) RETURNING *`,
+           values:[fName,lName]
+        
+        }
+        return db.query(query)
+            .then(result => result.rows)
+            .catch(err => err);
+    }
+
     return {
         getUsers,
         getUserByEmail,
         addUser,
-        getUsersPosts
+        getUsersPosts,
+        addDiet
     };
 };
