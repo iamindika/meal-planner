@@ -10,7 +10,6 @@ export default function RecipeForm(){
   const [instructions, setInstructions] = useState("");
   const [image, setImage] = useState("");
   const [recipeId, setRecipeId] = useState();
-  // const [ingredients, setIngredients] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,7 +22,6 @@ export default function RecipeForm(){
       }
     })
     .then((response) => {
-      // const recipeId = response.data
       console.log("* from axios response.data.id: ", response.data.id);
       setRecipeId(response.data.id)
     })
@@ -50,9 +48,9 @@ export default function RecipeForm(){
       onChange={event => setImage(event.target.value)}
     />
   </Form.Group>
-  <Form.Group controlId="exampleForm.ControlTextarea1">
+  {/* <Form.Group controlId="exampleForm.ControlTextarea1">
     <Form.Control as="textarea" placeholder="List of Ingredients" rows={3} />
-  </Form.Group>
+  </Form.Group> */}
   <Form.Group controlId="exampleForm.ControlTextarea2">
     <Form.Control 
       as="textarea" 
