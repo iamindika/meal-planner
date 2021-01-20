@@ -1,12 +1,13 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {useState} from "react"
 import {Form,Button,Col} from "react-bootstrap"
+import axios from "axios";
 
 export default function Register(props){
-  const [name, setName] = useState();
+  const [fName, setFirstName] = useState();
+  const [lName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState({});
+  //const [error, setError] = useState({});
 
   function handleSubmit(event){
   
@@ -16,20 +17,21 @@ export default function Register(props){
       method: 'POST',
       url: '/register',
       data:{
-        name, email, password
+        fName, lName, email, password
       }
     })
-      // .then(({
-      //  data
-      // }) => {
-      //   var json = JSON.parse(data);
-      //   setSearchResults(json.results)
-      // })
-      // .catch((err) => console.log(err));
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   }
 
-  function handleNameChange(event) {
-    setName(event.target.value);
+  function handleFirstNameChange(event) {
+    setFirstName(event.target.value);
+  }
+
+  function handleLastNameChange(event) {
+    setLastName(event.target.value);
   }
 
   function handleEmailChange(event) {
@@ -45,8 +47,13 @@ export default function Register(props){
       <Col md={{ span: 3, offset: 4 }} xs={2}>
         <Form>
           <h1>Register</h1>
-          <Form.Group controlId="formBasicName">
-            <Form.Control type="text" placeholder="Enter Your Name" value={name} onChange={handleNameChange}/>
+          <Form.Group controlId="formBasicFirstName">
+            <Form.Control type="text" placeholder="Enter First Name" value={fName} onChange={handleFirstNameChange}/>
+            <p></p>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicLastName">
+            <Form.Control type="text" placeholder="Enter Last Name" value={lName} onChange={handleLastNameChange}/>
             <p></p>
           </Form.Group>
 
