@@ -1,6 +1,7 @@
 import {Form,Col,Button} from "react-bootstrap";
 import React, { useState } from "react";
 import axios from "axios";
+import IngredientsForm from "./IngredientsForm";
 
 
 
@@ -8,6 +9,8 @@ export default function RecipeForm(){
   const [name, setName] = useState("");
   const [instructions, setInstructions] = useState("");
   const [image, setImage] = useState("");
+  const [recipeId, setRecipeId] = useState();
+  // const [ingredients, setIngredients] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -20,7 +23,9 @@ export default function RecipeForm(){
       }
     })
     .then((response) => {
-      console.log("* from axios response:", response)
+      // const recipeId = response.data
+      console.log("* from axios response.data.id: ", response.data.id);
+      setRecipeId(response.data.id)
     })
     .catch( err => console.log(err))
   }
@@ -61,5 +66,8 @@ export default function RecipeForm(){
     <Button variant="primary" size="lg" onClick={handleSubmit}>
       CREATE
     </Button>{' '}</div>
-</Form></Col></section>
+</Form></Col>
+{ recipeId && (<IngredientsForm recipeId={recipeId}/>)}
+
+</section>
 }
