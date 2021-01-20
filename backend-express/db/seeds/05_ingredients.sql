@@ -1,45 +1,31 @@
 INSERT INTO 
 ingredients (name)
 VALUES 
-(
-  'Bread'
-),
-(
-  'Cheese'
-),
-(
-  'Ham'
-),
-(
-  'Mayo'
-),
-(
-  'Mustard'
-),
-(
-  'Beef Patty'
-),
-(
-  'Lettuce'
-),
-(
-  'Bacon'
-),
-(
-  'Tomato'
-),
-(
-  'Chicken'
-),
-(
-  'Steak'
-),
-(
-  'Tortilla'
-),
-(
-  'Bean'
-),
-(
-  'Hamburger Buns'
-);
+('Bread'),
+('Cheese'),
+('Ham'),
+('Mayo'),
+('Mustard'),
+('Beef Patty'),
+('Lettuce'),
+('Bacon'),
+('Tomato'),
+('Chicken'),
+('Steak'),
+('Tortilla'),
+('Bean'),
+('Hamburger Buns'),
+('Alcohol'),
+('Caffeine'),
+('Celery'),
+('Egg'),
+('Gluten'),
+('Groundnut'),
+('Milk'),
+('Sesame'),
+('Soybean'),
+('Tree'), 
+('Nut'),
+('Lactose'),
+('Wheat'),
+('Yeast');
