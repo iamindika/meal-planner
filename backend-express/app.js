@@ -14,6 +14,7 @@ const searchRouter =  require('./routes/search');
 const recipeRouter =  require('./routes/view_recipe');
 const localRecipesRouter = require('./routes/localRecipes');
 const registerRouter = require('./routes/register');
+const newProfileRouter = require('./routes/profile_new');
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use('/api/search', searchRouter(dbHelpers));
 app.use('/api/recipe/:id', recipeRouter(dbHelpers));
 app.use('/recipes', localRecipesRouter(dbRecipeHelpers));
 app.use('/register', registerRouter(dbHelpers));
+app.use('/profile/new', newProfileRouter(dbHelpers));
 
 module.exports = app;
