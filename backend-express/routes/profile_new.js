@@ -5,12 +5,12 @@ const router = express.Router();
  
 
 module.exports = ({
-  addDiet
+  addUserDiet
 }) => {
   router.post("/",(req,res)=>{
   const {diet,avoidances,favorites} = req.body;
   console.log(diet,avoidances,favorites);
-  addDiet()
+  addUserDiet()
 
    
   });
