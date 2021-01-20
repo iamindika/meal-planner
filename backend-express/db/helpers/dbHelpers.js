@@ -112,7 +112,8 @@ module.exports = (db) => {
       return db.query(query)
             .then(result => result.rows[0])
             .catch(err => err);      
-    }
+    } 
+     const addAvoidances = (userId, ingredient_)
 
     return {
         getUsers,
