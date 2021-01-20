@@ -9,16 +9,24 @@ export default function IngredientsForm(props){
   function handleSubmit(event) {
     event.preventDefault();
     ingredients.forEach( ingredient => {
-      // setIngredients({...ingredient, recipeId: props.recipeId});
       console.log(ingredient)
 
         axios({
           method: 'POST',
           url: 'ingredients/new',
-          data: ingredients
+          data: ingredient
         })
         .then((response) => {
-          console.log("* from axios response:", response)
+          console.log("* from axios first response:", response)
+          return axios({
+            method: 'POST',
+            url: 'ingredients/recipe/new',
+            data: { ...ingredient, "ingredientId": response.data.id}
+          })
+          .then((response) => {
+            console.log("* from axios second response:", response)
+          })
+          .catch( err => console.log(err))
         })
         .catch( err => console.log(err))
     
@@ -90,15 +98,15 @@ export default function IngredientsForm(props){
           <Button variant="primary" size="lg" onClick={appendFormRow}>
             +
           </Button>{' '}
-          <Col>
-              <Button 
-                variant="primary"  
-                size="lg" 
-                onClick={handleSubmit}
-              >
-                SAVE
-              </Button>
-              </Col>
+        </div>
+        <div className="mb-2">
+          <Button 
+            variant="primary"  
+            size="lg" 
+            onClick={handleSubmit}
+          >
+            SAVE ALL
+          </Button>
         </div>
 
       </Form>

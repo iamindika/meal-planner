@@ -6,12 +6,14 @@ const logger = require('morgan');
 const db = require('./db');
 const dbHelpers = require('./db/helpers/dbHelpers')(db);
 const dbRecipeHelpers = require('./db/helpers/dbRecipeHelpers')(db);
+const dbIngredientsHelpers = require('./db/helpers/dbIngredientHelpers')(db);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 // const recipesRouter =  require('./routes/recipes');
 const searchRouter =  require('./routes/search');
 const localRecipesRouter = require('./routes/localRecipes');
+const ingredientsRouter = require('./routes/ingredients');
 
 const app = express();
 
@@ -28,5 +30,6 @@ app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/search', searchRouter(dbHelpers));
 app.use('/api/:id/recipe', searchRouter(dbHelpers));
 app.use('/recipes', localRecipesRouter(dbRecipeHelpers));
+app.use('/ingredients', ingredientsRouter(dbIngredientsHelpers));
 
 module.exports = app;
