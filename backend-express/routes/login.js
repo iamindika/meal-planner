@@ -7,8 +7,11 @@ module.exports = ({getUserByEmail}) => {
     const {email, password} = req.body;
     getUserByEmail(email)
     .then(user => {
+      // console.log(user)
       if (user){
-        if (user.password === password) {
+        if (user.password === password && user.email === email) {
+          req.session['user_id'] = user.id;
+          console.log(req.session)
           res.send("User authenticated!");
         } else {
           res.send("Invalid Password please try again!")
