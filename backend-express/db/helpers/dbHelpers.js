@@ -113,7 +113,39 @@ module.exports = (db) => {
             .then(result => result.rows[0])
             .catch(err => err);      
     } 
+
+    const getIngredientId = (ingredientName) =>{
+        const query = {
+            text:`SELECT ingredients.id
+            FROM ingredients
+            WHERE ingredients.name LIKE $1`,
+            values: [ingredientName]
+        }
+        return db.query(query)
+            .then(result => result.rows[0].id)
+            .catch(err => err);      
+    } 
    
+
+    const addAvoidances = (userId,ingredientId,avoidIngredients = false) =>{
+      const query = {
+          text:`INSERT INTO user_ingredients (user_id,ingredient_id,include_ingredient) VALUES ($1,$2,$3) RETURNING *`,
+          values:[userId,ingredientId,avoidIngredients]
+      }
+      return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);      
+    }
+
+    const addUserIngredientFav = (userId,ingredientId,FavIngredients = true)=>{
+        const query = {
+            text:`INSERT INTO user_ingredients (user_id,ingredient_id,include_ingredient) VALUES ($1,$2,$3) RETURNING *`,
+            values:[userId,ingredientId,FavIngredients]
+        }
+        return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);      
+      }
 
     return {
         getUsers,
@@ -124,6 +156,10 @@ module.exports = (db) => {
         getUserIngredientPreferences,
         getDietId,
         editUserDiet,
-        addUserDiet
+        addUserDiet,
+        getIngredientId,
+        addAvoidances,
+        addUserIngredientFav
+      
     };
 };

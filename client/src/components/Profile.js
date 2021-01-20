@@ -74,11 +74,11 @@ axios({
     <Form.Control multiple as="select" size="lg" custom value={favorites} onChange={(e) => setFavorites((prev)=>[...prev,e.target.value])}>
       <option>Egg</option>
       <option>Bacon</option>
-      <option>Celery</option>
+      <option>Steak</option>
       <option>Bread</option>
       <option>Apple</option>
       <option>Banana</option>
-      <option>Milk</option>
+      <option>Mayo</option>
       <option>Butter</option>
       <option>Cheese</option>
       <option>Broccoli</option>
