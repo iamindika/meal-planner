@@ -8,6 +8,7 @@ const cookieSession = require('cookie-session');
 const db = require('./db');
 const dbHelpers = require('./db/helpers/dbHelpers')(db);
 const dbRecipeHelpers = require('./db/helpers/dbRecipeHelpers')(db);
+const dbIngredientsHelpers = require('./db/helpers/dbIngredientHelpers')(db);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -18,6 +19,7 @@ const localRecipesRouter = require('./routes/localRecipes');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const newProfileRouter = require('./routes/profile_new');
+const ingredientsRouter = require('./routes/ingredients');
 
 const app = express();
 
@@ -44,5 +46,6 @@ app.use('/recipes', localRecipesRouter(dbRecipeHelpers));
 app.use('/register', registerRouter(dbHelpers));
 app.use('/login', loginRouter(dbHelpers));
 app.use('/profile/new', newProfileRouter(dbHelpers));
+app.use('/ingredients', ingredientsRouter(dbIngredientsHelpers));
 
 module.exports = app;
