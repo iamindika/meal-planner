@@ -113,7 +113,7 @@ module.exports = (db) => {
             .then(result => result.rows[0])
             .catch(err => err);      
     } 
-     const addAvoidances = (userId, ingredient_)
+   
 
     return {
         getUsers,
