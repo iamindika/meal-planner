@@ -48,12 +48,12 @@ module.exports = (db) => {
 
     }
 
-    const getUserName = (email) => {
+    const getUserName = (userId) => {
       const query = {
         text:   `SELECT first_name, last_name 
                 FROM users
-                WHERE email LIKE $1`,
-        values: [email]
+                WHERE id = $1`,
+        values: [userId]
       }
 
       return db.query(query)
@@ -61,14 +61,14 @@ module.exports = (db) => {
             .catch(err => err);
     }
 
-    const getUserIngredientPreferences = (email, avoidIngredients = false) => {
+    const getUserIngredientPreferences = (userId, avoidIngredients = false) => {
       const query = {
         text:   `SELECT ingredients.name AS ingredient
                 FROM ingredients 
                 JOIN user_ingredients ON ingredients.id = user_ingredients.ingredient_id
                 JOIN users ON users.id = user_ingredients.user_id
-                WHERE users.email LIKE $1 AND user_ingredients.include_ingredient = $2`,
-        values: [email, avoidIngredients]
+                WHERE users.id = $1 AND user_ingredients.include_ingredient = $2`,
+        values: [userId, avoidIngredients]
       }
 
       return db.query(query)
@@ -76,12 +76,53 @@ module.exports = (db) => {
             .catch(err => err);
     }    
 
+    const getDietId = (dietName) => {
+      const query = {
+        text: `SELECT diets.id
+              FROM diets
+              WHERE diets.name LIKE $1`,
+        values: [dietName]
+      }
+
+      return db.query(query)
+            .then(result => result.rows[0].id)
+            .catch(err => err);
+    }
+
+    const editUserDiet = (userId, dietId) => {
+      const query = {
+        text: `UPDATE user_diets
+               SET diet_id = $1
+               WHERE user_id = $2`,
+        values: [dietId, userId]
+      }
+
+      return db.query(query)
+            .then(result => result.rows[0])
+            .catch(err => err);      
+    }
+
+    const addUserDiet = (userId, dietId) => {
+      const query = {
+        text: `INSERT INTO user_diets (user_id, diet_id)
+              VALUES ($1, $2)`,
+        values: [userId, dietId]
+      }
+
+      return db.query(query)
+            .then(result => result.rows[0])
+            .catch(err => err);      
+    }
+
     return {
         getUsers,
         getUserByEmail,
         addUser,
         getUsersPosts,
         getUserName,
-        getUserIngredientPreferences
+        getUserIngredientPreferences,
+        getDietId,
+        editUserDiet,
+        addUserDiet
     };
 };
