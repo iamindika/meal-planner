@@ -1,13 +1,13 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {useState} from "react"
 import {Form,Button,Col} from "react-bootstrap"
+import axios from "axios";
 
 export default function Register(props){
   const [fName, setFirstName] = useState();
   const [lName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState({});
+  //const [error, setError] = useState({});
 
   function handleSubmit(event){
   
