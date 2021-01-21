@@ -9,16 +9,19 @@ module.exports = (db) => {
           .catch((err) => err);
   };
 
-  const getUserByEmail = email => {
+  const getUserRecipes = userId => {
 
       const query = {
-          text: `SELECT * FROM users WHERE email = $1` ,
-          values: [email]
+          text: `SELECT user_id, recipe_id, name, image, instructions, day, time_slot
+                FROM recipes 
+                JOIN user_recipes on recipes.id = recipe_id
+                WHERE user_id = $1;` ,
+          values: [userId]
       }
 
       return db
           .query(query)
-          .then(result => result.rows[0])
+          .then(result => result.rows)
           .catch((err) => err);
   }
 
@@ -49,7 +52,7 @@ module.exports = (db) => {
 
   return {
       getRecipes,
-      getUserByEmail,
+      getUserRecipes,
       addRecipe,
       getUsersPosts
   };

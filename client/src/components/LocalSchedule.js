@@ -3,8 +3,8 @@ import CardGroup from 'react-bootstrap/CardGroup'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RecipeCard from './RecipeCard';
+import LocalRecipeCard from './LocalRecipeCard'
 
-// import LocalRecipeCard from './LocalRecipeCard'
 import "./Favourites.scss";
 
 
@@ -25,17 +25,17 @@ export default function LocalSchedule (props) {
       .catch((err) => console.log(err));
   }, []);
 
-  const myRecipes = userRecipes.map((recipe) => <RecipeCard key={recipe.id}  title={recipe.name} image={recipe.image} description={recipe.instructions} />)
+  // const myRecipes = userRecipes.map((recipe) => <LocalRecipeCard key={recipe.id}  name={recipe.name} image={recipe.image} description={recipe.instructions} />)
 
   return (
     <section>
       <h1> User Recipes </h1>
-      {/* <ul> {JSON.stringify(userRecipes)} </ul> */}
-      <CardGroup>
+      <ul> {JSON.stringify(userRecipes)} </ul>
+      {/* <CardGroup>
 
         {myRecipes}
 
-      </CardGroup>
+      </CardGroup> */}
     </section>
   );
 }

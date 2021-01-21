@@ -36,6 +36,7 @@ app.use('/api/recipes', recipesRouter(dbHelpers));
 app.use('/api/search', searchRouter(dbHelpers));
 app.use('/api/recipe/:id', recipeRouter(dbHelpers));
 app.use('/recipes', localRecipesRouter(dbRecipeHelpers));
+app.use('/recipes/user', localRecipesRouter(dbRecipeHelpers));
 app.use('/register', registerRouter(dbHelpers));
 app.use('/login', loginRouter(dbHelpers));
 app.use('/profile/new', newProfileRouter(dbHelpers));
