@@ -105,7 +105,7 @@ module.exports = (db) => {
     const addUserDiet = (userId, dietId) => {
       const query = {
         text: `INSERT INTO user_diets (user_id, diet_id)
-              VALUES ($1, $2)`,
+              VALUES ($1, $2) RETURNING *`,
         values: [userId, dietId]
       }
 

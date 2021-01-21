@@ -17,6 +17,7 @@ module.exports = ({
     addUserDiet(2,dietId)
     .then((result)=>console.log(result))
   });
+  
   avoidances.forEach((avoidance)=>{
     // console.log(avoidance)
     getIngredientId(avoidance)
@@ -26,13 +27,14 @@ module.exports = ({
       .then(res=>console.log(res))
      })
    });
+
    favorites.forEach((favorite)=>{
     getIngredientId(favorite)
     .then((ingredientId)=>{
       // console.log(ingredientId)
       addUserIngredientFav(4,ingredientId,true)
       .then(res=>{
-        console.log("hello:" + res)
+        console.log("hello:" , res)
       })
      })
    });

@@ -13,6 +13,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import ViewProfile from './components/ViewProfile';
 
 const App = () => {
   return(
@@ -23,10 +24,11 @@ const App = () => {
           <Route path="/"  exact component={Favourites} />
           <Route path="/register" component={Register} />
           <Route path="/login"  component={Login} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/new" component={RecipeForm} />
+          <Route path="/new/profile" component={Profile} />
+          <Route path="/new/recipe" component={RecipeForm} />
           <Route path="/search" component={Search} />
           <Route path="/recipes" component={LocalRecipes} />
+          <Route path="/profile" component={ViewProfile} />
           </Switch>
           </Router>
           

@@ -1,13 +1,17 @@
 import {Form,Button,Col,Image} from 'react-bootstrap';
 import axios from "axios";
 import { useState } from 'react';
+import {useHistory} from "react-router-dom"
 
 export default function Profile(){
 const [diet,setDiet] = useState("");
 const [avoidances,setAvoidances] = useState([]);
 const [favorites,setFavorites] = useState("");
 
+const history = useHistory();
+
 function handleSubmit(event){
+ 
 event.preventDefault();
 axios({
   method: 'POST',
@@ -27,6 +31,7 @@ axios({
   setDiet("");
   setAvoidances([]);
   setFavorites("");
+  history.push("/profile");
 }
 
   return <section>
@@ -87,24 +92,6 @@ axios({
       <option>Pizza</option>
     </Form.Control>
   </Form.Group>
-  {/* <Form.Group controlId="exampleForm.SelectCustomSizeLg">
-<Form.Label><strong>Cuisine</strong></Form.Label>
-    <Form.Control as="select" size="lg" custom value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
-      <option>African</option>
-      <option>American</option>
-      <option>British</option>
-      <option>Caribbean</option>
-      <option>Chinese</option>
-      <option>French</option>
-      <option>Greek</option>
-      <option>Italian</option>
-      <option>Indian</option>
-      <option>Korean</option>
-      <option>Mediterranean</option>
-      <option>Middle Eastern</option>
-      <option>Thai</option>
-    </Form.Control>
-  </Form.Group> */}
   <br />
   <Button variant="primary" type="submit" onClick={handleSubmit}>
     Submit
