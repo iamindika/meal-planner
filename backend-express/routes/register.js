@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -10,7 +12,6 @@ module.exports = ({addUser,getUserByEmail}) => {
     
     //Validation
     if (!fName || !lName || !email || !password) {
-      console.log('Validation Failed!');
       return res.status(400).json({ msg: 'Please enter all fields'})
     }
 
@@ -27,12 +28,26 @@ module.exports = ({addUser,getUserByEmail}) => {
           }
           addUser(fName, lName, email, hash)
             .then(user =>  {
-              res.send({
-                id: user.id,
-                firstName: user.first_name,
-                lastName: user.last_name,
-                email: user.email
-              })
+
+              jwt.sign(
+                { id: user.id },
+                process.env.JWT_SECRET,
+                { expiresIn: 3600 },
+                (err, token) => {
+                  if (err) {
+                    throw err;
+                  } 
+                  res.json({
+                    token,
+                    user: {
+                      id: user.id,
+                      firstName: user.first_name,
+                      lastName: user.last_name,
+                      email: user.email
+                    }
+                  })
+                }
+              )
             });
         });
       });

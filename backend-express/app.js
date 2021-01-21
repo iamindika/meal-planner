@@ -28,13 +28,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(
-  cookieSession({
-    name: 'session',
-    keys: ['key1', 'key2'],
-  })
-);
-
 
 app.use('/', indexRouter);
 app.use('/api/posts', usersRouter(dbHelpers));
