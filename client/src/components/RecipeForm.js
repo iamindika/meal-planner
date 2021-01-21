@@ -10,6 +10,7 @@ export default function RecipeForm(){
   const [instructions, setInstructions] = useState("");
   const [image, setImage] = useState("");
   const [recipeId, setRecipeId] = useState();
+  const [disabled, setDisabled] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,7 +24,8 @@ export default function RecipeForm(){
     })
     .then((response) => {
       console.log("* from axios response.data.id: ", response.data.id);
-      setRecipeId(response.data.id)
+      setRecipeId(response.data.id);
+      setDisabled(true);
     })
     .catch( err => console.log(err))
   }
@@ -36,6 +38,7 @@ export default function RecipeForm(){
     <Form.Control 
       type="text" 
       placeholder="Name of the Recipe" 
+      disabled={disabled}
       value={name} 
       onChange={event => setName(event.target.value)} 
     />
@@ -44,6 +47,7 @@ export default function RecipeForm(){
     <Form.Control 
       type="text" 
       placeholder="Image URL" 
+      disabled={disabled}
       value={image} 
       onChange={event => setImage(event.target.value)}
     />
@@ -54,7 +58,8 @@ export default function RecipeForm(){
   <Form.Group controlId="exampleForm.ControlTextarea2">
     <Form.Control 
       as="textarea" 
-      placeholder="Cooking Instructions" 
+      placeholder="Cooking Instructions"
+      disabled={disabled}
       rows={5} 
       value={instructions} 
       onChange={event => setInstructions(event.target.value)}
