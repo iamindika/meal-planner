@@ -1,10 +1,13 @@
 import {Form,Col,Button} from "react-bootstrap";
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 export default function IngredientsForm(props){
   console.log(props);
   const [ingredients, setIngredients] = useState([{recipeId: props.recipeId, name: '', amount: 0, unit: '' }]);
+  const [redirect, setRedirect] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -29,10 +32,9 @@ export default function IngredientsForm(props){
           .catch( err => console.log(err))
         })
         .catch( err => console.log(err))
-    
-    
      });
-
+        // setDisabled(true)
+        setRedirect(true); 
   }
 
   // When the "+" button is clicked, add a new row to enter a new ingredient data (name, amount, unit)
@@ -51,6 +53,9 @@ export default function IngredientsForm(props){
     }) )
   }
 
+  if (redirect) {
+    return <Redirect to='/' />
+  }
   return (
   <section>
     <Col md={{ span: 3, offset: 4 }} xs={2}>
@@ -63,7 +68,8 @@ export default function IngredientsForm(props){
                 <Form.Control 
                   name="name"
                   type="text"
-                  placeholder="Ingredient name" 
+                  placeholder="Ingredient name"
+                  disabled={disabled}
                   value={ingredient.name} 
                   onChange={onIngredientChange(index)}
                 />
@@ -75,6 +81,7 @@ export default function IngredientsForm(props){
                   name="amount"
                   type="number"
                   placeholder="amount"
+                  disabled={disabled}
                   value={ingredient.amount}
                   onChange={onIngredientChange(index)}  
                 />
@@ -86,6 +93,7 @@ export default function IngredientsForm(props){
                   name="unit"
                   type="text"
                   placeholder="unit" 
+                  disabled={disabled}
                   value={ingredient.unit} 
                   onChange={onIngredientChange(index)}
                 />
