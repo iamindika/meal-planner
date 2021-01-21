@@ -37,10 +37,12 @@ module.exports = ({getUserByEmail}) => {
                 } 
                 res.json({
                   token,
-                  id: user.id,
-                  firstName: user.first_name,
-                  lastName: user.last_name,
-                  email: user.email
+                  user: {
+                    id: user.id,
+                    firstName: user.first_name,
+                    lastName: user.last_name,
+                    email: user.email
+                  }
                 })
               }
             )
