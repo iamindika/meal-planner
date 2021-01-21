@@ -16,7 +16,7 @@ export default function Heading(){
     <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/register">Register</NavLink>
       <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/login">Login</NavLink>
       <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/new/profile">Profile</NavLink>
-      <NavLink id="RouterNavLink" style={{color:"white"}} to="/new/recipe"><Button variant="secondary">Create New Recipe</Button>{' '}</NavLink>
+      <NavLink id="RouterNavLink" style={{color:"white"}} to="/new"><Button variant="secondary">Create New Recipe</Button>{' '}</NavLink>
     </Nav>
   </Navbar.Collapse>
 </Navbar>

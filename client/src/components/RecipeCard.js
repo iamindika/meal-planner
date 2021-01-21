@@ -8,6 +8,7 @@ import "./RecipeCard.scss";
   const [instructions,setInstructions] = useState([]);
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);
+  const [heart,setHeart] = useState("")
 
   function handleSubmit(event){
     event.preventDefault();
@@ -34,7 +35,7 @@ import "./RecipeCard.scss";
       setShowInstructions(false);
     }
   }
-      
+ 
 
   const ingredientsWithAmount= ingredients.map((ingredient)=>{
     return<div><p>

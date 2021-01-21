@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/register" component={Register} />
           <Route path="/login"  component={Login} />
           <Route path="/new/profile" component={Profile} />
-          <Route path="/new/recipe" component={RecipeForm} />
+          <Route path="/new" component={RecipeForm} />
           <Route path="/search" component={Search} />
           <Route path="/recipes" component={LocalRecipes} />
           <Route path="/profile" component={ViewProfile} />
