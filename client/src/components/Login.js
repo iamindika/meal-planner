@@ -9,7 +9,7 @@ export default function Login(){
   function handleSubmit(event){
   
     event.preventDefault();
-    console.log("Email:", email, "Password:", password);
+    
     axios({
       method: 'POST',
       url: '/login',
@@ -20,7 +20,7 @@ export default function Login(){
       .then(res => {
         console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response.data));
   }
 
   function handleEmailChange(event) {
