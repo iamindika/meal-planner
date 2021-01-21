@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS recipe_diets CASCADE;
 CREATE TABLE recipe_diets(
     id SERIAL PRIMARY KEY NOT NULL,
-    recipe_id INTEGER REFERENCES recipes(id),
-    diet_id INTEGER REFERENCES diets(id)
+    recipe_id INTEGER REFERENCES recipes(id) ON DELETE CASCADE,
+    diet_id INTEGER REFERENCES diets(id) ON DELETE CASCADE
 );
