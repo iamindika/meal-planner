@@ -1,10 +1,12 @@
 import {Form,Col,Button} from "react-bootstrap";
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 export default function IngredientsForm(props){
   console.log(props);
   const [ingredients, setIngredients] = useState([{recipeId: props.recipeId, name: '', amount: 0, unit: '' }]);
+  const [redirect, setRedirect] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -29,10 +31,8 @@ export default function IngredientsForm(props){
           .catch( err => console.log(err))
         })
         .catch( err => console.log(err))
-    
-    
      });
-
+     setRedirect(true); // this may cause issues with async, maybe?
   }
 
   // When the "+" button is clicked, add a new row to enter a new ingredient data (name, amount, unit)
@@ -51,6 +51,9 @@ export default function IngredientsForm(props){
     }) )
   }
 
+  if (redirect) {
+    return <Redirect to='/' />
+  }
   return (
   <section>
     <Col md={{ span: 3, offset: 4 }} xs={2}>
