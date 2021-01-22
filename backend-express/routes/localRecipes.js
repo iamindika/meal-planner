@@ -21,7 +21,7 @@ module.exports = ({
     getUserRecipes,
     addRecipe
 }) => {
-    /* GET users listing. */
+    
     router.get('/', (req, res) => {
         getRecipes()
             .then((recipes) => res.json(recipes))
@@ -31,11 +31,9 @@ module.exports = ({
     });
 
     router.get('/:id', (req, res) => {
-        getUserRecipes(req.params)
-            .then((userRecipes) => {
-                const formattedRecipes = getRecipesByUsers(userRecipes);
-                res.json(formattedRecipes);
-            })
+        getUserRecipes(req.params.id)
+            .then((userRecipes) => res.json(userRecipes)
+            )
             .catch((err) => res.json({
                 error: err.message
             }));

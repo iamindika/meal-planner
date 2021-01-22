@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Search from "./components/Search"
 import LocalRecipes from "./components/LocalRecipes"
+import LocalSchedule  from "./components/LocalSchedule"
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/search" component={Search} />
           <Route path="/recipes" component={LocalRecipes} />
           <Route path="/profile" component={ViewProfile} />
+          <Route path="/schedule" component={LocalSchedule} />
           </Switch>
           </Router>
           
