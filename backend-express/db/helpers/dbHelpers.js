@@ -159,7 +159,7 @@ module.exports = (db) => {
   .then(result => result.rows[0])
   .catch(err => err);  
   }
-  const deleteUserFavRecipe = (userId,recipeId,favourites=false) => {
+  const deleteUserFavRecipe = (favourites=false,recipeId,userId) => {
     const query = {
       text:`UPDATE user_recipes SET favourites = $1 WHERE recipe_id =$2 AND user_id = $3 RETURNING *`,
       values:[favourites,recipeId,userId]

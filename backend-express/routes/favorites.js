@@ -42,7 +42,7 @@ module.exports = (
     } else {
       getRecipeById(name)
         .then((id) => {
-          deleteUserFavRecipe(4, id, false)
+          deleteUserFavRecipe(false,id,4)
             .then((result) =>
               res.json(result))
             .catch(err => console.log(err))

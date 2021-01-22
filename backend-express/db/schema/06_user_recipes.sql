@@ -5,5 +5,5 @@ CREATE TABLE user_recipes(
     recipe_id INTEGER REFERENCES recipes(id),
     day INTEGER,
     time_slot INTEGER,
-    favourites BOOLEAN 
+    favourites BOOLEAN DEFAULT true
 );
