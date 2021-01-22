@@ -122,7 +122,11 @@ module.exports = (db) => {
             values: [ingredientName]
         }
         return db.query(query)
-            .then(result => result.rows[0].id)
+            .then(result => {
+              if(result.rows[0]){
+                result.rows[0].id
+              }
+            })
             .catch(err => err);      
     } 
    
@@ -146,7 +150,24 @@ module.exports = (db) => {
         .then(result => result.rows[0])
         .catch(err => err);      
       }
-
+  const addUserFavRecipe = (userId,recipeId,favourites=true) => {
+    const query = {
+      text:`INSERT INTO user_recipes (user_id,recipe_id,favourites) VALUES ($1,$2,$3) RETURNING *`,
+      values:[userId,recipeId,favourites]
+  }
+  return db.query(query)
+  .then(result => result.rows[0])
+  .catch(err => err);  
+  }
+  const deleteUserFavRecipe = (favourites=false,recipeId,userId) => {
+    const query = {
+      text:`UPDATE user_recipes SET favourites = $1 WHERE recipe_id =$2 AND user_id = $3 RETURNING *`,
+      values:[favourites,recipeId,userId]
+  }
+  return db.query(query)
+  .then(result => result.rows[0])
+  .catch(err => err);  
+  }
     return {
         getUsers,
         getUserByEmail,
@@ -159,7 +180,10 @@ module.exports = (db) => {
         addUserDiet,
         getIngredientId,
         addAvoidances,
-        addUserIngredientFav
+        addUserIngredientFav,
+        addUserFavRecipe,
+        deleteUserFavRecipe
       
     };
 };
+// Gujarati Dry Mung Bean Curry

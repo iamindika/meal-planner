@@ -5,10 +5,11 @@ import "./RecipeCard.scss";
 
 
  export default function RecipeCard (props) {
-  const [instructions,setInstructions] = useState([]);
+   console.log(props)
+  const [instructions,setInstructions] = useState("");
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);
-  const [heart,setHeart] = useState("")
+  const [userFav,setUserFav] = useState(false)
 
   function handleSubmit(event){
     event.preventDefault();
@@ -24,7 +25,7 @@ import "./RecipeCard.scss";
       .then(({
        data
       }) => {
-       
+
          setInstructions(data.instructions.instructions)
          setIngredients(data.ingredients.ingredients)
         //  console.log(data)
@@ -36,6 +37,28 @@ import "./RecipeCard.scss";
     }
   }
  
+  function handleClick(event){
+    event.preventDefault();
+    axios({
+      method: 'POST',
+      url:`api/favorites`,
+      data:{
+        name:props.title,
+        image:props.image,
+        ingredients,
+        instructions,
+       userFav
+      }
+    })
+      .then(({
+       data
+      }) => {
+          console.log(data)
+      })
+      .catch((err) => console.log(err));
+    setUserFav(!userFav)
+  }
+      
 
   const ingredientsWithAmount= ingredients.map((ingredient)=>{
     return<div><p>
@@ -60,9 +83,10 @@ import "./RecipeCard.scss";
         </div>}
         <div className="card-bottom">
           <Button variant="primary" type="submit" onClick={handleSubmit} value={props.id} >View Recipe</Button>
+          {showInstructions && 
           <div className="heart-container">
-            <i className="fas fa-heart"></i>
-          </div>
+            <button type="submit" onClick={handleClick} style={{ border: "none",backgroundColor: "Transparent"}}>{userFav?<i class="fas fa-heart" style={{color:"red"}}></i>:<i class="far fa-heart" style={{color:"red"}}></i>}</button>
+          </div>}
         </div>
       </Card.Body>
     </Card>

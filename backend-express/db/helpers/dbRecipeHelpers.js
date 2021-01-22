@@ -8,6 +8,17 @@ module.exports = (db) => {
           .then((result) => result.rows)
           .catch((err) => err);
   };
+  const getRecipeById = (name) => {
+      const query = {
+          text:`SELECT id FROM recipes WHERE name = $1`,
+          values:[name]
+      }
+      return db
+          .query(query)
+          .then((result) => result.rows[0].id)
+          .catch((err) => err);
+  };
+  
 
   const getUserRecipes = userId => {
 
@@ -54,6 +65,7 @@ module.exports = (db) => {
       getRecipes,
       getUserRecipes,
       addRecipe,
-      getUsersPosts
+      getUsersPosts,
+      getRecipeById
   };
 };

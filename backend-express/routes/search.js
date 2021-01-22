@@ -14,7 +14,7 @@ module.exports = (db) => {
       body += chunk
     });
       response.on('end',()=>{
-       console.log("end------")
+      //  console.log("end------")
        res.json(body);
     });
   })

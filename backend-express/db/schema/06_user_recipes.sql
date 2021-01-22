@@ -5,5 +5,5 @@ CREATE TABLE user_recipes(
     recipe_id INTEGER REFERENCES recipes(id) ON DELETE CASCADE,
     day INTEGER,
     time_slot INTEGER,
-    favourite BOOLEAN DEFAULT TRUE
+    favourites BOOLEAN DEFAULT true
 );

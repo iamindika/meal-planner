@@ -19,8 +19,8 @@ module.exports = (db) => {
       response.on('end',()=>{
         const body1Json = JSON.parse(body1);
         const body2Json = JSON.parse(body2);
-        console.log(body1Json)
-        console.log(body2Json)
+        // console.log(body1Json)
+        // console.log(body2Json)
         res.json({instructions :body1Json,ingredients:body2Json})
       })
       response.on('data', function (chunk) {
