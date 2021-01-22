@@ -4,5 +4,6 @@ CREATE TABLE user_recipes(
     user_id INTEGER REFERENCES users(id),
     recipe_id INTEGER REFERENCES recipes(id),
     day INTEGER,
-    time_slot INTEGER
+    time_slot INTEGER,
+    favourites BOOLEAN 
 );

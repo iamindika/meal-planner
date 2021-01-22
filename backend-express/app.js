@@ -20,6 +20,7 @@ const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const newProfileRouter = require('./routes/profile_new');
 const ingredientsRouter = require('./routes/ingredients');
+const favoritesRouter = require('./routes/favorites')
 
 const app = express();
 
@@ -40,5 +41,6 @@ app.use('/register', registerRouter(dbHelpers));
 app.use('/login', loginRouter(dbHelpers));
 app.use('/profile/new', newProfileRouter(dbHelpers));
 app.use('/ingredients', ingredientsRouter(dbIngredientsHelpers));
+app.use('/api/favorites', favoritesRouter(dbRecipeHelpers,dbIngredientsHelpers,dbHelpers));
 
 module.exports = app;
