@@ -19,10 +19,10 @@ module.exports = ({
   });
   
   avoidances.forEach((avoidance)=>{
-    // console.log(avoidance)
-    getIngredientId(avoidance)
+     console.log(avoidance)
+     getIngredientId(avoidance)
     .then((ingredientId)=>{
-      console.log(ingredientId)
+        // console.log(ingredientId)
       addAvoidances(2,ingredientId,false)
       .then(res=>console.log(res))
      })
@@ -34,9 +34,9 @@ module.exports = ({
       // console.log(ingredientId)
       addUserIngredientFav(4,ingredientId,true)
       .then(res=>{
-        console.log("hello:" , res)
+        console.log(res)
       })
-     })
+       })
    });
   
   

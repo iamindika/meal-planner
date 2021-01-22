@@ -1,3 +1,5 @@
+const { connect } = require("..");
+
 module.exports = (db) => {
     const getUsers = () => {
         const query = {
@@ -124,8 +126,9 @@ module.exports = (db) => {
         return db.query(query)
             .then(result => {
               if(result.rows[0]){
-                result.rows[0].id
-              }
+                // console.log(result.rows)
+                return result.rows[0].id
+               }
             })
             .catch(err => err);      
     } 

@@ -4,7 +4,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import RecipeCard from './RecipeCard'
 import "./Favourites.scss";
 
-export default function Favourites() {
+export default function Favourites(props) {
 
   const [favs, setFavs] = useState([]);
   
