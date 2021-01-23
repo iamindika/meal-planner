@@ -171,6 +171,132 @@ module.exports = (db) => {
   .then(result => result.rows[0])
   .catch(err => err);  
   }
+
+  const getFavRecipe = (userId,favourites=true) =>{
+    const query = {
+      text:`SELECT * FROM user_recipes WHERE user_id = $1 AND favourites = $2 `,
+      values:[userId,favourites]
+    }
+    return db.query(query)
+  .then(result => result.rows)
+  .catch(err => err); 
+  }
+
+  const getFavRecipeIngredients = (recipeId) =>{
+    const query = {
+      text:`SELECT * FROM recipe_ingredients WHERE recipe_id = $1`,
+      values:[recipeId]
+    }
+    return db.query(query)
+  .then(result => result.rows)
+  .catch(err => err); 
+  }
+  const getIngredientName = (ingredientId,recipeId) =>{
+    const query = {
+      text:`SELECT * FROM ingredients
+      JOIN recipe_ingredients ON ingredients.id = recipe_ingredients.ingredient_id
+       WHERE ingredients.id = $1 AND recipe_id = $2`,
+      values:[ingredientId,recipeId]
+    }
+    return db.query(query)
+  .then(result => result.rows[0])
+  .catch(err => err); 
+  }
+
+  const getIngredientsName =(favourites=true,userId) => {
+
+    let favoriteRecipes = null;
+
+    const recipeInfo = {
+      text: `
+      SELECT recipes.id as recipe_id, recipes.name as recipe_name, recipes.image as recipe_image, recipes.instructions as recipe_intructions
+      FROM recipes
+      JOIN
+      user_recipes
+      ON recipes.id = user_recipes.recipe_id
+      WHERE user_recipes.favourites = $1 AND user_recipes.user_id = $2
+    `,
+      values: [favourites, userId]
+    }
+
+    return db
+      .query(recipeInfo)
+      .then(result => {
+
+        const ingredientQueries =[];
+        favoriteRecipes = result.rows.map(recipe => {
+
+          return ({
+            recipe: {
+              recipeId: recipe.recipe_id,
+              recipeName: recipe.recipe_name,
+              recipeImage: recipe.recipe_image,
+              recipeInstructions: recipe.recipe_intructions
+            },
+            ingredients: []
+          })
+        }) // closing map
+
+          for (let recipeObj of favoriteRecipes) {
+            // console.log(recipeObj.recipe.recipeId)
+            const ingredientInfo = {
+              text:`
+                SELECT ingredients.name, recipe_ingredients.quantity, recipe_ingredients.unit,recipe_ingredients.recipe_id
+                FROM ingredients
+                JOIN recipe_ingredients
+                ON ingredients.id = recipe_ingredients.ingredient_id
+                WHERE recipe_ingredients.recipe_id = $1
+              `,
+              values: [recipeObj.recipe.recipeId]
+            }
+
+            // creating a promise, and adds it to the array
+            ingredientQueries.push(db.query(ingredientInfo));
+          }
+
+        return Promise.all(ingredientQueries)
+
+        })
+        .then(result=>{
+           for(let ingredients of result){
+
+              for (let ingredient of ingredients.rows) {
+
+                const recipeFound = favoriteRecipes.find((recipeObj)=> recipeObj.recipe.recipeId === ingredient.recipe_id)
+                recipeFound.ingredients.push({name:ingredient.name,quantity:ingredient.quantity,unit:ingredient.unit})                
+              }
+           }
+           return favoriteRecipes;
+        })
+
+
+      .catch(err => {
+        console.log(err.message);
+
+      })
+
+
+
+
+
+  //   const query = {
+  //      text:`select ingredients.name as ingredients,ingredients.image,recipe_ingredients.quantity,recipe_ingredients.unit,recipe_ingredients.recipe_id from user_recipes join recipe_ingredients on user_recipes.recipe_id = recipe_ingredients.recipe_id join ingredients on recipe_ingredients.ingredient_id = ingredients.id where user_id = $1 and favourites = $2`
+  //     ,
+  //     values:[userId,favourites]
+  //   }
+  //   return db.query(query)
+  // .then(result => result.rows)
+  // .catch(err => err); 
+  // }
+  // const getRecipeName  = (recipeId) =>{
+  //   const query = {
+  //     text:`SELECT * from recipes WHERE id =$1`,
+  //     values:[recipeId]
+  //   }
+  //   return db.query(query)
+  //   .then(result => result.rows)
+  //   .catch(err => err); 
+  }
     return {
         getUsers,
         getUserByEmail,
@@ -185,7 +311,13 @@ module.exports = (db) => {
         addAvoidances,
         addUserIngredientFav,
         addUserFavRecipe,
-        deleteUserFavRecipe
+        deleteUserFavRecipe,
+        getFavRecipe,
+        getFavRecipeIngredients,
+        getIngredientName,
+        getIngredientsName,
+        // getRecipeName
+        
       
     };
 };

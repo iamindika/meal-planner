@@ -4,6 +4,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import RecipeCard from './RecipeCard'
 import "./Favourites.scss";
 
+
 export default function Favourites(props) {
 
   const [favs, setFavs] = useState([]);
@@ -13,21 +14,23 @@ export default function Favourites(props) {
       method: 'GET',
       url: '/api/recipes',
     })
-      .then(({
-        data
-      }) => {
-        setFavs(data)
+      .then((
+        response
+      ) => {
+      console.log(response.data)
+      setFavs(response.data)
       })
       .catch((err) => console.log(err));
   }, []);
-
-  const favourites = favs.map((recipe) => <RecipeCard title={recipe.title} image={recipe.image} description={recipe.instructions} />)
-
+ const favourites = favs.map((recipe)=> <RecipeCard title={recipe.recipe.recipeName} image={ recipe.recipe.recipeImage}/>
+)
+  
   return (
     <section>
       <h1>Favourites</h1>
       <CardGroup>
-        {favourites}
+       {favourites}
+         
       </CardGroup>
     </section>
   );

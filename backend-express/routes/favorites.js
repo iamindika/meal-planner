@@ -13,8 +13,7 @@ module.exports = (
   router.post('/', (req, res) => {
     // console.log(req.body.name)
     const { name, image, ingredients, instructions, userFav } = req.body;
-    //  console.log(heart, name, ingredients, image, instructions)
-    let recipeId;
+    // console.log(userFav, name, ingredients, image, instructions)
     if (!userFav) {
       addRecipe(name, instructions, image)
         .then((recipe) => {
@@ -27,10 +26,10 @@ module.exports = (
                 if (!id) {
                   addIngredient(ingredient.name, ingredient.image)
                     .then((result) => {
-                      console.log(result)
+                      // console.log(result)
                       addRecipeIngredients(recipe.id,result.id , ingredient.amount.us.value, ingredient.amount.us.unit)
                         .then((result) => {
-                          console.log(result)
+                          // console.log(result)
                         });
                        })
                 }
