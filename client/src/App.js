@@ -15,7 +15,6 @@ import {
   Route,
 } from "react-router-dom";
 import ViewProfile from './components/ViewProfile';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return(
