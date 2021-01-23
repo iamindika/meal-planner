@@ -65,6 +65,21 @@ module.exports = (db) => {
           .catch(err => err);
   }
 
+  const removeRecipeFromSchedule = (recipeId, userId) => {
+    const query = {
+        text: `UPDATE user_recipes 
+                SET day = NULL, time_slot = NULL
+                WHERE recipe_id = $1 AND user_id = $2
+                RETURNING *` ,
+        values: [recipeId, userId]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);   
+
+  }
+
   const getUsersPosts = () => {
       const query = {
           text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
@@ -84,6 +99,7 @@ module.exports = (db) => {
       getUserRecipes,
       getUserRecipesBySlot,
       addRecipe,
+      removeRecipeFromSchedule,
       getUsersPosts,
       getRecipeById
   };
