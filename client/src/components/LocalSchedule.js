@@ -29,9 +29,9 @@ export default function LocalSchedule (props) {
       })
     ])
       .then(axios.spread((data1, data2, data3) => {
-        console.log("*** data1: ", data1)
-        console.log("*** data2: ", data2)
-        console.log("*** data3: ", data3)
+        // console.log("*** data1: ", data1)
+        // console.log("*** data2: ", data2)
+        // console.log("*** data3: ", data3)
         setbreakfast((prev) => [...prev, ...data1.data])
         setlunch((prev) => [...prev, ...data2.data])
         setdinner((prev) => [...prev, ...data3.data])
@@ -41,14 +41,24 @@ export default function LocalSchedule (props) {
 
 
   const getSpotRecipes = (array) => { 
-    console.log("** array: ", array)
+    const arrayCopy = [...array];
+    const fixedArray = Array.from({ length: 7 });
+    // console.log("*** fixedArray inital: ", fixedArray);
+    arrayCopy.forEach( (recipe, index) => {
+      fixedArray[recipe.day-1] = recipe;
+    })
+    // console.log("*** fixedArray after fixing: ", fixedArray)
     return (
-    array.map((recipe) => (
-    <td>
-      <SmallRecipeCard key={recipe.id}  name={recipe.name} image={recipe.image} description={recipe.instructions} userId={id}/>
-
-    </td>
-        )
+    fixedArray.map((recipe) => {
+      if (recipe) { return (
+      <td>
+        <SmallRecipeCard key={recipe.id}  name={recipe.name} image={recipe.image} description={recipe.instructions} userId={id}/>
+      </td>
+          )
+      } else {
+        return (<td><i class="fas fa-plus-circle"></i></td>)
+      }
+    } 
      )
   )};
 
