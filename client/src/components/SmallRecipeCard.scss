@@ -1,0 +1,35 @@
+$card-min-width: 10rem;
+$card-max-width: 10rem;
+
+.card {
+  // padding: 1rem;
+  min-width: $card-min-width;
+  max-width: $card-max-width;
+  // width: 30rem;
+  .card-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    .heart-container {
+      color: tomato;
+      font-size: 2rem;
+    }
+    .minus-circle-container {
+      color: tomato;
+      font-size: 2rem;
+    }
+    .botton-container {
+      size: 1rem;
+    }
+
+    .card-img-top {
+      // width: 20%;
+    }
+  }
+}
+
+
+ 
+

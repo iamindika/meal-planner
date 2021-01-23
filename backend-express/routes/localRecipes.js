@@ -19,6 +19,7 @@ module.exports = ({
     getRecipeByName,
     getRecipeById,
     getUserRecipes,
+    getUserRecipesBySlot,
     addRecipe
 }) => {
     
@@ -32,6 +33,15 @@ module.exports = ({
 
     router.get('/:id', (req, res) => {
         getUserRecipes(req.params.id)
+            .then((userRecipes) => res.json(userRecipes)
+            )
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
+    router.get('/:id/slot/:slot', (req, res) => {
+        getUserRecipesBySlot(req.params.id, req.params.slot)
             .then((userRecipes) => res.json(userRecipes)
             )
             .catch((err) => res.json({

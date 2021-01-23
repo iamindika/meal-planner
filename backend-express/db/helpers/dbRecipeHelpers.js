@@ -36,6 +36,24 @@ module.exports = (db) => {
           .catch((err) => err);
   }
 
+  const getUserRecipesBySlot = (userId, time_slot) => {
+
+    const query = {
+        text: `SELECT user_id, recipe_id, name, image, instructions, day, time_slot
+              FROM recipes 
+              JOIN user_recipes on recipes.id = recipe_id
+              WHERE user_id = $1 AND time_slot = $2
+              ORDER BY day;` ,
+        values: [userId, time_slot]
+    }
+
+    return db
+        .query(query)
+        .then(result => result.rows)
+        .catch((err) => err);
+}
+
+
   const addRecipe = (name, instructions, image) => {
       const query = {
           text: `INSERT INTO recipes (name, instructions, image) VALUES ($1, $2, $3) RETURNING *` ,
@@ -64,6 +82,7 @@ module.exports = (db) => {
   return {
       getRecipes,
       getUserRecipes,
+      getUserRecipesBySlot,
       addRecipe,
       getUsersPosts,
       getRecipeById
