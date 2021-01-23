@@ -19,8 +19,11 @@ axios({
   data:{
    diet,
    avoidances,
-   favorites
-  }
+   favorites,
+   headers: {
+    "X-Auth-Token": localStorage.getItem("token")
+   }
+  },
 })
   .then(({
    data

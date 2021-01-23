@@ -16,9 +16,13 @@ export default function Register(props){
     axios({
       method: 'POST',
       url: '/register',
-      data:{
-        fName, lName, email, password
+      data: {
+        fName, 
+        lName, 
+        email, 
+        password
       }
+      
     })
       .then(res => {
         console.log(res.data);

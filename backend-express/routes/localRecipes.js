@@ -19,7 +19,9 @@ module.exports = ({
     getRecipeByName,
     getRecipeById,
     getUserRecipes,
-    addRecipe
+    getUserRecipesBySlot,
+    addRecipe,
+    removeRecipeFromSchedule
 }) => {
     
     router.get('/', (req, res) => {
@@ -38,6 +40,17 @@ module.exports = ({
                 error: err.message
             }));
     });
+
+    router.get('/:id/slot/:slot', (req, res) => {
+        getUserRecipesBySlot(req.params.id, req.params.slot)
+            .then((userRecipes) => res.json(userRecipes)
+            )
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
+    
 // **
     router.post('/new', (req, res) => {
 
@@ -55,7 +68,16 @@ module.exports = ({
                 error: err.message
             }));
 
-    })
+    });
+
+    router.post('/:id/user/:userId/remove', (req, res) => {
+        removeRecipeFromSchedule(req.params.id, req.params.userId)
+            .then(newRecipe => res.json(newRecipe))
+            .catch(err => res.json({
+                error: err.message
+            }));
+
+    });
 
     return router;
 };

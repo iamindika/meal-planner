@@ -6,7 +6,7 @@ import "./LocalRecipeCard.scss";
 
 export default function LocalRecipeCard (props) {
   const [showInstructions, setShowInstructions] = useState(true);
-  const [userFav, setUserFav] = useState(false);
+  const [userFav, setUserFav] = useState(true);
   console.log(props)
   
   const ingredientsWithAmount= props.ingredients.map((ingredient)=>{

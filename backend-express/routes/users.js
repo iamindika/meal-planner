@@ -13,6 +13,7 @@ const router = express.Router();
 const {
     getPostsByUsers
 } = require('../db/helpers/dbHelpers');
+const auth = require('../middleware/auth');
 
 module.exports = ({
     getUsers,
@@ -24,9 +25,7 @@ module.exports = ({
     router.get('/', (req, res) => {
         getUsers()
             .then((users) => res.json(users))
-            .catch((err) => res.json({
-                error: err.message
-            }));
+            .catch((err) => res.send(err));
     });
 
     router.get('/posts', (req, res) => {
@@ -35,12 +34,10 @@ module.exports = ({
                 const formattedPosts = getPostsByUsers(usersPosts);
                 res.json(formattedPosts);
             })
-            .catch((err) => res.json({
-                error: err.message
-            }));
+            .catch((err) => res.send(err))
     });
 
-    router.post('/', (req, res) => {
+    router.post('/', auth, (req, res) => {
 
         const {
             first_name,
@@ -57,13 +54,14 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password)
+                    addUser(first_name, last_name, email, password)
+                      .then(user => res.json(user));
                 }
 
             })
             .then(newUser => res.json(newUser))
             .catch(err => res.json({
-                error: err.message
+                msg: "something went wrong"
             }));
 
     })

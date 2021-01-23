@@ -21,35 +21,40 @@ module.exports = ({addUser,getUserByEmail}) => {
           return res.status(400).json({ msg: 'User already exists! Please login.' });
         } 
 
-        //Hash password
-        bcrypt.hash(password, saltRounds, function(err, hash) {
+        //Create salt & hash
+        bcrypt.genSalt(saltRounds, (err, salt) => {
           if (err) {
             throw err;
           }
-          addUser(fName, lName, email, hash)
-            .then(user =>  {
-
-              jwt.sign(
-                { id: user.id },
-                process.env.JWT_SECRET,
-                { expiresIn: 3600 },
-                (err, token) => {
-                  if (err) {
-                    throw err;
-                  } 
-                  res.json({
-                    token,
-                    user: {
-                      id: user.id,
-                      firstName: user.first_name,
-                      lastName: user.last_name,
-                      email: user.email
-                    }
-                  })
-                }
-              )
-            });
-        });
+          bcrypt.hash(password, salt, function(err, hash) {
+            if (err) {
+              throw err;
+            }
+            addUser(fName, lName, email, hash)
+              .then(user =>  {
+  
+                jwt.sign(
+                  { id: user.id },
+                  process.env.JWT_SECRET,
+                  (err, token) => {
+                    if (err) {
+                      throw err;
+                    } 
+                    res.json({
+                      token,
+                      user: {
+                        id: user.id,
+                        firstName: user.first_name,
+                        lastName: user.last_name,
+                        email: user.email
+                      }
+                    })
+                  }
+                )
+              });
+          });
+        })
+        
       });
   })
   return router;
