@@ -2,32 +2,28 @@ import React from "react";
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import axios from "axios";
+import { useState } from "react";
 
 import "./SmallRecipeCard.scss";
 
-export default function LocalRecipeCard (props) {
+export default function SmallRecipeCard (props) {
+  const [removed, setRemoved ] = useState({})
+  function handleClickRemove(event){
+    event.preventDefault();
+    axios({
+      method: 'POST',
+      url:`/recipes/${props.recipeId}/user/${props.userId}/remove`,
+      data:{ }
+    })
+      .then(({
+       data
+      }) => {
+          console.log("handleClick data: ", data)
+          // setRemoved((prev) => {...prev, ...data});
+      })
+      .catch((err) => console.log(err));
   
-  // function handleClick(event){
-  //   event.preventDefault();
-  //   axios({
-  //     method: 'POST',
-  //     url:`/recipe/${props.recipe.id}/user/${props.userId}`,
-  //     data:{
-  //       name:props.title,
-  //       image:props.image,
-  //       ingredients,
-  //       instructions,
-  //      userFav
-  //     }
-  //   })
-  //     .then(({
-  //      data
-  //     }) => {
-  //         console.log(data)
-  //     })
-  //     .catch((err) => console.log(err));
-  //   setUserFav(!userFav)
-  // }
+  }
   
   return (
     <Card>
@@ -42,9 +38,9 @@ export default function LocalRecipeCard (props) {
             <Button variant="primary">View Recipe</Button>
           </div>
           <div class="minus-circle-container">
-            {/* <button type="submit" onClick={handleClick} style={{ border: "none",backgroundColor: "Transparent"}}> */}
+            <button type="submit" onClick={handleClickRemove} style={{ border: "none",backgroundColor: "Transparent"}}>
               <i class="fas fa-minus-circle"></i>
-            {/* </button> */}
+            </button>
           </div>
         </div>
       </Card.Body>

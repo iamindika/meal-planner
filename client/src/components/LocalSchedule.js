@@ -50,9 +50,11 @@ export default function LocalSchedule (props) {
     // console.log("*** fixedArray after fixing: ", fixedArray)
     return (
     fixedArray.map((recipe) => {
-      if (recipe) { return (
+      if (recipe) { 
+        console.log("recipe.recipe_id:", recipe.recipe_id)
+        return (
       <td>
-        <SmallRecipeCard key={recipe.id}  name={recipe.name} image={recipe.image} description={recipe.instructions} userId={id}/>
+        <SmallRecipeCard key={recipe.recipe_id} recipeId={recipe.recipe_id} name={recipe.name} image={recipe.image} description={recipe.instructions} userId={id}/>
       </td>
           )
       } else {
