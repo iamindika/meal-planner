@@ -5,12 +5,10 @@ import LocalRecipeCard from "./LocalRecipeCard";
 import "./Favourites.scss";
 
 
-export default function Favourites(props) {
+export default function Favourites() {
 
-  const [showInstructions,setShowInstructions] = useState(false);
-  const [userFav,setUserFav] = useState(false)
-  
   const [favs, setFavs] = useState([]);
+  const[state,setState] = useState({})
 
   useEffect(() => {
     axios({
@@ -24,14 +22,8 @@ export default function Favourites(props) {
         setFavs(response.data)
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [state]);
 
-  function handleClick(event) {
-    event.preventDefault();
-    setShowInstructions(!showInstructions);
-    // console.log("clickee")
-
-  }
 
   function handleSubmit(id) {
     axios({
@@ -41,17 +33,16 @@ export default function Favourites(props) {
         id
       }
     })
-      .then(({
-        data
-      }) => {
-        console.log(data)
+      .then((
+       response
+      ) => {
+      setState({...response.data})
       })
       .catch((err) => console.log(err));
   }
 
-  const favourites = favs.map((recipe) =><LocalRecipeCard name={recipe.recipe.recipeName} image={recipe.recipe.recipeImage} instructions={recipe.recipe.recipeInstructions} ingredients={recipe.ingredients} onClick={handleClick} onSubmit={handleSubmit} value={recipe.recipe.recipeId} />
+  const favourites = favs.map((recipe) =><LocalRecipeCard name={recipe.recipe.recipeName} image={recipe.recipe.recipeImage} instructions={recipe.recipe.recipeInstructions} ingredients={recipe.ingredients} onSubmit={handleSubmit} value={recipe.recipe.recipeId} />
   )
-
 
   return (
     <section>

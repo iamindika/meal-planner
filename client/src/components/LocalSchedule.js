@@ -38,6 +38,7 @@ export default function LocalSchedule (props) {
       }))
       .catch((err) => console.log(err));
   }, []);
+    
 
 
   const getSpotRecipes = (array) => { 
