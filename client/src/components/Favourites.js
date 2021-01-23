@@ -8,7 +8,7 @@ import "./Favourites.scss";
 export default function Favourites() {
 
   const [favs, setFavs] = useState([]);
-  const[state,setState] = useState({})
+  const[removedFav,setRemovedFav] = useState({})
 
   useEffect(() => {
     axios({
@@ -22,7 +22,7 @@ export default function Favourites() {
         setFavs(response.data)
       })
       .catch((err) => console.log(err));
-  }, [state]);
+  }, [removedFav]);
 
 
   function handleSubmit(id) {
@@ -36,7 +36,7 @@ export default function Favourites() {
       .then((
        response
       ) => {
-      setState({...response.data})
+      setRemovedFav({...response.data})
       })
       .catch((err) => console.log(err));
   }
