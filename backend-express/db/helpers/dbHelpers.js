@@ -162,13 +162,22 @@ module.exports = (db) => {
   .then(result => result.rows[0])
   .catch(err => err);  
   }
-  const deleteUserFavRecipe = (favourites=false,recipeId,userId) => {
+  const updateUserFavRecipe = (favourites,recipeId,userId) => {
     const query = {
       text:`UPDATE user_recipes SET favourites = $1 WHERE recipe_id =$2 AND user_id = $3 RETURNING *`,
       values:[favourites,recipeId,userId]
   }
   return db.query(query)
   .then(result => result.rows[0])
+  .catch(err => err);  
+  }
+  const GetUserFavFlag = (recipeId,userId) => {
+    const query = {
+      text:`SELECT favourites FROM user_recipes WHERE recipe_id = $1 AND user_id = $2 `,
+      values:[recipeId,userId]
+  }
+  return db.query(query)
+  .then(result => result.rows[0].favourites)
   .catch(err => err);  
   }
 
@@ -209,7 +218,7 @@ module.exports = (db) => {
 
     const recipeInfo = {
       text: `
-      SELECT recipes.id as recipe_id, recipes.name as recipe_name, recipes.image as recipe_image, recipes.instructions as recipe_intructions
+      SELECT recipes.id as recipe_id, recipes.name as recipe_name, recipes.image as recipe_image, recipes.instructions as recipe_intructions 
       FROM recipes
       JOIN
       user_recipes
@@ -232,6 +241,7 @@ module.exports = (db) => {
               recipeName: recipe.recipe_name,
               recipeImage: recipe.recipe_image,
               recipeInstructions: recipe.recipe_intructions
+        
             },
             ingredients: []
           })
@@ -269,34 +279,11 @@ module.exports = (db) => {
            return favoriteRecipes;
         })
 
-
       .catch(err => {
         console.log(err.message);
-
       })
-
-
-
-
-
-  //   const query = {
-  //      text:`select ingredients.name as ingredients,ingredients.image,recipe_ingredients.quantity,recipe_ingredients.unit,recipe_ingredients.recipe_id from user_recipes join recipe_ingredients on user_recipes.recipe_id = recipe_ingredients.recipe_id join ingredients on recipe_ingredients.ingredient_id = ingredients.id where user_id = $1 and favourites = $2`
-  //     ,
-  //     values:[userId,favourites]
-  //   }
-  //   return db.query(query)
-  // .then(result => result.rows)
-  // .catch(err => err); 
-  // }
-  // const getRecipeName  = (recipeId) =>{
-  //   const query = {
-  //     text:`SELECT * from recipes WHERE id =$1`,
-  //     values:[recipeId]
-  //   }
-  //   return db.query(query)
-  //   .then(result => result.rows)
-  //   .catch(err => err); 
   }
+
     return {
         getUsers,
         getUserByEmail,
@@ -311,11 +298,12 @@ module.exports = (db) => {
         addAvoidances,
         addUserIngredientFav,
         addUserFavRecipe,
-        deleteUserFavRecipe,
+        updateUserFavRecipe,
         getFavRecipe,
         getFavRecipeIngredients,
         getIngredientName,
         getIngredientsName,
+        GetUserFavFlag
         // getRecipeName
         
       

@@ -36,15 +36,26 @@ module.exports = (db) => {
           .catch((err) => err);
   }
 
-  const addRecipe = (name, instructions, image) => {
+  const addRecipe = (name, instructions, image,apiId) => {
       const query = {
-          text: `INSERT INTO recipes (name, instructions, image) VALUES ($1, $2, $3) RETURNING *` ,
-          values: [name, instructions, image]
+          text: `INSERT INTO recipes (name, instructions, image, api_id) VALUES ($1, $2, $3, $4) RETURNING *` ,
+          values: [name, instructions, image, apiId]
       }
 
       return db.query(query)
           .then(result => result.rows[0])
           .catch(err => err);
+  }
+
+  const getRecipeByApiId = (apiId) =>{
+    const query = {
+        text: `SELECT api_id FROM recipes WHERE api_id = $1` ,
+        values: [apiId]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
   }
 
   const getUsersPosts = () => {
@@ -66,6 +77,7 @@ module.exports = (db) => {
       getUserRecipes,
       addRecipe,
       getUsersPosts,
-      getRecipeById
+      getRecipeById,
+      getRecipeByApiId
   };
 };

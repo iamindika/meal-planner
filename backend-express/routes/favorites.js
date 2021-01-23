@@ -6,47 +6,64 @@ require('../db/helpers/dbHelpers');
 
 
 module.exports = (
-  { addRecipe, getRecipeById },
+  { addRecipe, getRecipeById, getRecipeByApiId },
   { addIngredient, addRecipeIngredients },
-  { getIngredientId, addUserFavRecipe, deleteUserFavRecipe }
+  { getIngredientId, addUserFavRecipe, GetUserFavFlag, updateUserFavRecipe }
 ) => {
   router.post('/', (req, res) => {
     // console.log(req.body.name)
-    const { name, image, ingredients, instructions, userFav } = req.body;
-    // console.log(userFav, name, ingredients, image, instructions)
+    const { name, image, ingredients, instructions, userFav, api_id } = req.body;
+    console.log(userFav, name, ingredients, image, instructions, api_id)
     if (!userFav) {
-      addRecipe(name, instructions, image)
-        .then((recipe) => {
-          // console.log(recipe)
-          ingredients.map((ingredient) => {
-            // console.log(ingredient)
-            getIngredientId(ingredient.name)
-              .then((id) => {
-                // console.log(id)
-                if (!id) {
-                  addIngredient(ingredient.name, ingredient.image)
-                    .then((result) => {
-                      // console.log(result)
-                      addRecipeIngredients(recipe.id,result.id , ingredient.amount.us.value, ingredient.amount.us.unit)
-                        .then((result) => {
-                          // console.log(result)
-                        });
-                       })
-                }
+      getRecipeByApiId(api_id)
+        .then((apiId) => {
+          if (!apiId) {
+            addRecipe(name, instructions, image, api_id)
+              .then((recipe) => {
+                // console.log(recipe)
+                ingredients.map((ingredient) => {
+                  // console.log(ingredient)
+                  getIngredientId(ingredient.name)
+                    .then((id) => {
+                      // console.log(id)
+                      if (!id) {
+                        addIngredient(ingredient.name, ingredient.image)
+                          .then((result) => {
+                            // console.log(result)
+                            addRecipeIngredients(recipe.id, result.id, ingredient.amount.us.value, ingredient.amount.us.unit)
+                              .then((result) => {
+                                // console.log(result)
+                              });
+                          })
+                      }
+                    });
+                });
+                addUserFavRecipe(4, recipe.id, !userFav)
+                  .then(result => res.json(result));
               });
-          });
-          addUserFavRecipe(4, recipe.id, true)
-                            .then(result => res.json(result));
-        });
+          } else {
+            getRecipeById(name)
+              .then((recipeId) => {
+                GetUserFavFlag(recipeId, 4)
+                  .then((favouriteFlag) => {
+                    updateUserFavRecipe(!favouriteFlag, recipeId, 4)
+                      .then((result) => console.log(result))
+                  })
+
+              })
+          }
+        })
     } else {
       getRecipeById(name)
-        .then((id) => {
-          deleteUserFavRecipe(false,id,4)
-            .then((result) =>
-              res.json(result))
-            .catch(err => console.log(err))
+        .then((recipeId) => {
+          GetUserFavFlag(recipeId, 4)
+            .then((favouriteFlag) => {
+              updateUserFavRecipe(!favouriteFlag, recipeId, 4)
+                .then((result) => console.log(result))
+            })
+
         })
     }
   });
-   return router;
+  return router;
 };

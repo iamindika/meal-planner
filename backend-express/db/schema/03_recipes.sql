@@ -3,5 +3,6 @@ CREATE TABLE recipes(
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     image VARCHAR(255),
-    instructions TEXT
+    instructions TEXT,
+    api_id INTEGER
 );

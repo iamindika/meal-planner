@@ -10,7 +10,8 @@ import "./RecipeCard.scss";
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);
   const [userFav,setUserFav] = useState(false)
-
+  
+// to get instructions and ingredients from api
   function handleSubmit(event){
     event.preventDefault();
     if(!showInstructions){
@@ -47,6 +48,7 @@ import "./RecipeCard.scss";
         image:props.image,
         ingredients,
         instructions,
+        api_id:props.id,
        userFav
       }
     })
