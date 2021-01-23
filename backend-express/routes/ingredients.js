@@ -10,6 +10,7 @@
 // **
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 // const {
 //     getRecipesByUsers
 // } = require('../db/helpers/dbIngredientHelpers');
@@ -56,7 +57,7 @@ module.exports = ({
 
     })
 
-    router.post('/recipe/new', (req, res) => {
+    router.post('/recipe/new',  (req, res) => {
 
         const {
             recipeId,

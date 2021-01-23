@@ -8,11 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Search from "./components/Search"
 import LocalRecipes from "./components/LocalRecipes"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return(

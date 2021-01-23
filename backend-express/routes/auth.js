@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
+const auth = require('../middleware/auth');
 
-module.exports = ({getUserByEmail}) => {
+module.exports = ({getUserByEmail, getUserById}) => {
   
-  router.post("/",(req,res)=>{
+  router.post("/", (req,res)=>{
     const { email, password } = req.body;
 
     //Validation
@@ -30,7 +31,6 @@ module.exports = ({getUserByEmail}) => {
             jwt.sign(
               { id: user.id },
               process.env.JWT_SECRET,
-              { expiresIn: 3600 },
               (err, token) => {
                 if (err) {
                   throw err;
@@ -41,7 +41,6 @@ module.exports = ({getUserByEmail}) => {
                     id: user.id,
                     firstName: user.first_name,
                     lastName: user.last_name,
-                    email: user.email
                   }
                 })
               }
@@ -49,5 +48,21 @@ module.exports = ({getUserByEmail}) => {
           })
       });
   })
+
+  router.get("/user", auth, (req, res) => {
+    getUserById(req.user.id)
+      .then(user => {
+        res.json({
+          id: user.id,
+          fName: user.first_name,
+          lName: user.last_name
+        })
+      })
+      .catch(err => {
+        res.status(401).send({
+          msg: 'Invalid Credentials'
+        })
+      })
+  });
   return router;
 }
