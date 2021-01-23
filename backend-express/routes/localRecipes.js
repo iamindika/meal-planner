@@ -20,7 +20,8 @@ module.exports = ({
     getRecipeById,
     getUserRecipes,
     getUserRecipesBySlot,
-    addRecipe
+    addRecipe,
+    removeRecipeFromSchedule
 }) => {
     
     router.get('/', (req, res) => {
@@ -48,6 +49,8 @@ module.exports = ({
                 error: err.message
             }));
     });
+
+    
 // **
     router.post('/new', (req, res) => {
 
@@ -65,7 +68,16 @@ module.exports = ({
                 error: err.message
             }));
 
-    })
+    });
+
+    router.post('/:id/user/:userId/remove', (req, res) => {
+        removeRecipeFromSchedule(req.params.id, req.params.userId)
+            .then(newRecipe => res.json(newRecipe))
+            .catch(err => res.json({
+                error: err.message
+            }));
+
+    });
 
     return router;
 };

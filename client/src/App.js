@@ -16,7 +16,6 @@ import {
 } from "react-router-dom";
 import ViewProfile from './components/ViewProfile';
 
-
 const App = () => {
   return(
  <div className="App">
