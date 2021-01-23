@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cookieSession = require('cookie-session');
-
 
 const db = require('./db');
 const dbHelpers = require('./db/helpers/dbHelpers')(db);
@@ -17,7 +15,7 @@ const searchRouter =  require('./routes/search');
 const recipeRouter =  require('./routes/view_recipe');
 const localRecipesRouter = require('./routes/localRecipes');
 const registerRouter = require('./routes/register');
-const loginRouter = require('./routes/login');
+const authRouter = require('./routes/auth');
 const newProfileRouter = require('./routes/profile_new');
 const ingredientsRouter = require('./routes/ingredients');
 const favoritesRouter = require('./routes/favorites')
@@ -39,7 +37,7 @@ app.use('/api/recipe/:id', recipeRouter(dbHelpers));
 app.use('/recipes', localRecipesRouter(dbRecipeHelpers));
 app.use('/recipes/user', localRecipesRouter(dbRecipeHelpers));
 app.use('/register', registerRouter(dbHelpers));
-app.use('/login', loginRouter(dbHelpers));
+app.use('/auth', authRouter(dbHelpers));
 app.use('/profile/new', newProfileRouter(dbHelpers));
 app.use('/ingredients', ingredientsRouter(dbIngredientsHelpers));
 app.use('/api/favorites', favoritesRouter(dbRecipeHelpers,dbIngredientsHelpers,dbHelpers));

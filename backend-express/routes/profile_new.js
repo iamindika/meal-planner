@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
  require('../db/helpers/dbHelpers');
 
 module.exports = ({
@@ -9,7 +10,7 @@ module.exports = ({
   addAvoidances,
   addUserIngredientFav
 }) => {
-  router.post("/",(req,res)=>{
+  router.post("/", auth, (req,res)=>{
   const {diet,avoidances,favorites} = req.body;
    console.log(diet,avoidances,favorites);
   getDietId(diet)

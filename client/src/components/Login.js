@@ -5,6 +5,7 @@ import axios from "axios";
 export default function Login(){
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  // const [loginStatus, setLoginStatus] = useState(false)
 
   function handleSubmit(event){
   
@@ -12,15 +13,18 @@ export default function Login(){
     
     axios({
       method: 'POST',
-      url: '/login',
+      url: '/auth',
       data:{
         email, password
       }
     })
       .then(res => {
         console.log(res.data);
+        localStorage.setItem('token', res.data.token);
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   function handleEmailChange(event) {
