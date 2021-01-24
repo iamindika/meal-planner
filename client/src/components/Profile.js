@@ -13,18 +13,10 @@ const history = useHistory();
 function handleSubmit(event){
  
 event.preventDefault();
-axios({
-  method: 'POST',
-  url:'/profile/new',
-  data:{
-   diet,
-   avoidances,
-   favorites,
-   headers: {
-    "X-Auth-Token": localStorage.getItem("token")
-   }
-  },
-})
+axios.post('/profile/new',
+  {diet, avoidances, favorites},
+  {headers: {"x-auth-token": localStorage.getItem("token")}}
+)
   .then(({
    data
   }) => {

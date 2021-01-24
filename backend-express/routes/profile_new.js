@@ -10,11 +10,11 @@ module.exports = ({
   addAvoidances,
   addUserIngredientFav
 }) => {
-  router.post("/", auth, (req,res)=>{
+  router.post("/", auth, (req,res, err)=>{
   const {diet,avoidances,favorites} = req.body;
    console.log(diet,avoidances,favorites);
   getDietId(diet)
-  .then((dietId)=>{
+  .then((dietId)=>{s
     addUserDiet(2,dietId)
     .then((result)=>console.log(result))
   });
