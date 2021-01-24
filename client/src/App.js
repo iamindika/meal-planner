@@ -9,11 +9,7 @@ import Register from "./components/Register";
 import Search from "./components/Search"
 import LocalRecipes from "./components/LocalRecipes"
 import LocalSchedule  from "./components/LocalSchedule"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ViewProfile from './components/ViewProfile';
 
 const App = () => {
