@@ -105,6 +105,22 @@ module.exports = (db) => {
 
   }
 
+  const getFreeUserRecipes = userId => {
+
+    const query = {
+        text: `SELECT recipe_id, name
+              FROM recipes 
+              JOIN user_recipes on recipes.id = recipe_id
+              WHERE user_id = $1; AND day = NULL AND time_slot = NULL` ,
+        values: [userId]
+    }
+
+    return db
+        .query(query)
+        .then(result => result.rows)
+        .catch((err) => err);
+} 
+
   return {
       getRecipes,
       getUserRecipes,
@@ -113,6 +129,7 @@ module.exports = (db) => {
       removeRecipeFromSchedule,
       getUsersPosts,
       getRecipeById,
-      getRecipeByApiId
+      getRecipeByApiId,
+      getFreeUserRecipes
   };
 };
