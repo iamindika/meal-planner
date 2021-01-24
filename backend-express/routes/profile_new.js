@@ -16,7 +16,7 @@ module.exports = ({
   getDietId(diet)
   .then((dietId)=>{
     addUserDiet(2,dietId)
-    .then((result)=>console.log(result))
+    .then((result1)=>res.write(result1))
   });
   
   avoidances.forEach((avoidance)=>{
@@ -25,7 +25,7 @@ module.exports = ({
     .then((ingredientId)=>{
         // console.log(ingredientId)
       addAvoidances(2,ingredientId,false)
-      .then(res=>console.log(res))
+      .then(result2=>res.write(result2))
      })
    });
 
@@ -34,13 +34,12 @@ module.exports = ({
     .then((ingredientId)=>{
       // console.log(ingredientId)
       addUserIngredientFav(4,ingredientId,true)
-      .then(res=>{
-        console.log(res)
+      .then(result3=>{
+        res.write(result3)
       })
        })
    });
-  
-  
+   res.json();
   });
   return router;
   }

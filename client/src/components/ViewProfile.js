@@ -1,6 +1,8 @@
 import {Image,Col,Button} from "react-bootstrap"
 
 export default function ViewProfile(){
+
+  
   return <Col md={{ span: 3, offset: 4 }}><section><h3>PROFILE</h3>
       <Image style={{textAlign:"center"}} src="https://cdn.dribbble.com/users/1070859/screenshots/5869416/gal-_dribbble__still_2x.gif?compress=1&resize=200x200" roundedCircle />
 

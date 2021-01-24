@@ -9,9 +9,7 @@ const [avoidances,setAvoidances] = useState([]);
 const [favorites,setFavorites] = useState("");
 
 const history = useHistory();
-
 function handleSubmit(event){
- 
 event.preventDefault();
 axios({
   method: 'POST',
@@ -22,19 +20,19 @@ axios({
    favorites,
    headers: {
     "X-Auth-Token": localStorage.getItem("token")
-   }
-  },
+    }
+  }
 })
-  .then(({
+  .then((
    data
-  }) => {
+  ) => {
      console.log(data)
   })
   .catch((err) => console.log(err));
   setDiet("");
   setAvoidances([]);
   setFavorites("");
-  history.push("/profile");
+   history.push("/profile");
 }
 
   return <section>
