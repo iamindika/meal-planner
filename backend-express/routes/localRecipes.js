@@ -50,7 +50,17 @@ module.exports = ({
             }));
     });
 
-    
+    // /recipes/user/${id}/free
+    router.get('/:id/free', (req, res) => {
+        getUserRecipesBySlot(req.params.id)
+            .then((userRecipes) => res.json(userRecipes)
+            )
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
+
 // **
     router.post('/new', (req, res) => {
 
@@ -78,6 +88,7 @@ module.exports = ({
             }));
 
     });
+
 
     return router;
 };
