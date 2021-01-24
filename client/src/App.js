@@ -19,9 +19,9 @@ const App = () => {
    <Router>
   <Heading />
   <Switch>
-         <Route path="/" exact  component={Favourites} />
+         <Route path="/favorites" exact  component={Favourites} />
           <Route path="/register" component={Register} />
-          <Route path="/login"  component={Login} />
+          <Route path="/"  component={Login} />
           <Route path="/new/profile" component={Profile} />
           <Route path="/new" component={RecipeForm} />
           <Route path="/search" component={Search} />

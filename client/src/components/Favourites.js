@@ -1,22 +1,23 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import CardGroup from 'react-bootstrap/CardGroup';
 import LocalRecipeCard from "./LocalRecipeCard";
-import {AuthContext} from "../context/authContext";
 import "./Favourites.scss";
-
+import {AuthContext} from "../context/authContext";
 
 export default function Favourites() {
 
+  const { user } = useContext(AuthContext);
+  
   const [favs, setFavs] = useState([]);
   const[removedFav,setRemovedFav] = useState({});
-  const {user} = useContext(AuthContext);
+ 
 // getting favs of a particular user
     // console.log(`user id: ${user.id}`)
   useEffect(() => {
-    axios.get(`/api/recipes`,
-  {headers: {"x-auth-token": localStorage.getItem("token")}}
-)
+    axios.get(`/api/recipes/${user.id}`, 
+      {headers: {"x-auth-token": localStorage.getItem("token")}}
+    )
       .then((
         response
       ) => {

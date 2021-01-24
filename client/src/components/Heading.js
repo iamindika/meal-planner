@@ -23,10 +23,11 @@ export default function Heading(){
               { !user ?
                 <>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/register">Register</NavLink>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/login">Login</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/">Login</NavLink>
                 </> :
                 <>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/new/profile">Profile</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/favorites">Favourites</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white"}} to="/new"><Button variant="secondary">Create New Recipe</Button>{' '}</NavLink>
                   <Button variant="primary" onClick={handleLogOut}>Log Out</Button>
                 </>
