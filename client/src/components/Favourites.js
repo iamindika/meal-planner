@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import CardGroup from 'react-bootstrap/CardGroup';
 import LocalRecipeCard from "./LocalRecipeCard";
+import {AuthContext} from "../context/authContext";
 import "./Favourites.scss";
 
 
 export default function Favourites() {
 
   const [favs, setFavs] = useState([]);
-  const[removedFav,setRemovedFav] = useState({})
-
+  const[removedFav,setRemovedFav] = useState({});
+  const {user} = useContext(AuthContext);
+// getting favs of a particular user
+    // console.log(`user id: ${user.id}`)
   useEffect(() => {
-    axios({
-      method: 'GET',
-      url: '/api/recipes',
-    })
+    axios.get(`/api/recipes`,
+  {headers: {"x-auth-token": localStorage.getItem("token")}}
+)
       .then((
         response
       ) => {
@@ -24,15 +26,12 @@ export default function Favourites() {
       .catch((err) => console.log(err));
   }, [removedFav]);
 
-
+// removing favs of a particular user
   function handleSubmit(id) {
-    axios({
-      method: 'POST',
-      url: `api/favorites/remove`,
-      data: {
-        id
-      }
-    })
+    axios.post('/api/favorites/remove',
+    {id},
+    {headers: {"x-auth-token": localStorage.getItem("token")}}
+  )
       .then((
        response
       ) => {

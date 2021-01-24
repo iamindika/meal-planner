@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-require('../db/helpers/dbHelpers')
-
+require('../db/helpers/dbHelpers');
 module.exports = (
   { getIngredientsName }
 
 ) => {
-  router.get("/", (req, res) => {
+  router.get(`/:id`,(req, res) => {
+    console.log(req.params);
     getIngredientsName(true,4)
     .then((result)=>res.json(result))
     .catch((err)=>console.log(err))

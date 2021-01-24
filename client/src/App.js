@@ -12,13 +12,14 @@ import LocalSchedule  from "./components/LocalSchedule"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ViewProfile from './components/ViewProfile';
 
+
 const App = () => {
   return(
  <div className="App">
    <Router>
   <Heading />
   <Switch>
-          <Route path="/"  exact component={Favourites} />
+         <Route path="/" exact  component={Favourites} />
           <Route path="/register" component={Register} />
           <Route path="/login"  component={Login} />
           <Route path="/new/profile" component={Profile} />
