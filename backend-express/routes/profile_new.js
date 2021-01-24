@@ -11,12 +11,16 @@ module.exports = ({
   addUserIngredientFav
 }) => {
   router.post("/", auth, (req,res, err)=>{
+  let dbResult = [];
   const {diet,avoidances,favorites} = req.body;
    console.log(diet,avoidances,favorites);
   getDietId(diet)
   .then((dietId)=>{s
     addUserDiet(2,dietId)
-    .then((result)=>console.log(result))
+    .then((result)=> {
+      dbResult.push(result)
+      console.log("Diet Array:", dbResult);
+    })
   });
   
   avoidances.forEach((avoidance)=>{

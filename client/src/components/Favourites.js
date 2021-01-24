@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import CardGroup from 'react-bootstrap/CardGroup';
 import LocalRecipeCard from "./LocalRecipeCard";
 import "./Favourites.scss";
-
+import {AuthContext} from "../context/authContext";
 
 export default function Favourites(props) {
 
   const [showInstructions,setShowInstructions] = useState(false);
-  const [userFav,setUserFav] = useState(false)
+  const [userFav,setUserFav] = useState(false);
+  const { user } = useContext(AuthContext);
   
   const [favs, setFavs] = useState([]);
 
   useEffect(() => {
-    axios({
-      method: 'GET',
-      url: '/api/recipes',
-    })
+    axios.get(`/api/recipes/${user.id}`, 
+      {headers: {"x-auth-token": localStorage.getItem("token")}}
+    )
       .then((
         response
       ) => {
