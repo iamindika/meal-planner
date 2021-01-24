@@ -7,9 +7,11 @@ import { useState } from "react";
 import "./SmallRecipeCard.scss";
 
 export default function SmallRecipeCard (props) {
-  const [removed, setRemoved ] = useState({})
+  const [removed, setRemoved ] = useState([props.time_slot, props.day])
   function handleClickRemove(event){
     event.preventDefault();
+    // setRemoved(prev => props.recipeId);
+    console.log("removed: ", removed)
     axios({
       method: 'POST',
       url:`/recipes/${props.recipeId}/user/${props.userId}/remove`,
@@ -19,8 +21,10 @@ export default function SmallRecipeCard (props) {
        data
       ) => {
           console.log("handleClick data: ", data)
-
-          // setRemoved((prev) => {...prev, ...data});
+          
+          if(props.onSuccess) {
+            props.onSuccess(removed);
+          };
       })
       .catch((err) => console.log(err));
   

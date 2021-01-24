@@ -11,21 +11,13 @@ const [favorites,setFavorites] = useState("");
 const history = useHistory();
 function handleSubmit(event){
 event.preventDefault();
-axios({
-  method: 'POST',
-  url:'/profile/new',
-  data:{
-   diet,
-   avoidances,
-   favorites,
-   headers: {
-    "X-Auth-Token": localStorage.getItem("token")
-    }
-  }
-})
-  .then((
+axios.post('/profile/new',
+  {diet, avoidances, favorites},
+  {headers: {"x-auth-token": localStorage.getItem("token")}}
+)
+  .then(({
    data
-  ) => {
+  }) => {
      console.log(data)
   })
   .catch((err) => console.log(err));
