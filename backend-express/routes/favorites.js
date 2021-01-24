@@ -1,8 +1,10 @@
 const express = require('express');
+const { use } = require('.');
 const router = express.Router();
 require('../db/helpers/dbRecipeHelpers');
 require('../db/helpers/dbIngredientHelpers');
 require('../db/helpers/dbHelpers');
+const auth = require("../middleware/auth")
 
 
 module.exports = (
@@ -10,9 +12,9 @@ module.exports = (
   { addIngredient, addRecipeIngredients },
   { getIngredientId, addUserFavRecipe, GetUserFavFlag, updateUserFavRecipe }
 ) => {
-  router.post('/', (req, res) => {
-    // console.log(req.body.name)
-    const { name, image, ingredients, instructions, userFav, api_id } = req.body;
+  router.post('/',auth, (req, res) => {
+     console.log(req.body)
+    const { name, image, ingredients, instructions, userFav, api_id,userId } = req.body;
     console.log(userFav, name, ingredients, image, instructions, api_id)
     if (!userFav) {
       getRecipeByApiId(api_id)
@@ -38,16 +40,16 @@ module.exports = (
                       }
                     });
                 });
-                addUserFavRecipe(4, recipe.id, !userFav)
+                addUserFavRecipe(userId, recipe.id, !userFav)
                   .then(result => res.json(result));
               });
           } else {
             getRecipeById(name)
               .then((recipeId) => {
-                GetUserFavFlag(recipeId, 4)
+                GetUserFavFlag(recipeId, userId)
                   .then((favouriteFlag) => {
-                    updateUserFavRecipe(!favouriteFlag, recipeId, 4)
-                      .then((result) => console.log(result))
+                    updateUserFavRecipe(!favouriteFlag, recipeId, userId)
+                      .then((result) => res.json(result))
                   })
 
               })
@@ -56,10 +58,10 @@ module.exports = (
     } else {
       getRecipeById(name)
         .then((recipeId) => {
-          GetUserFavFlag(recipeId, 4)
+          GetUserFavFlag(recipeId,userId)
             .then((favouriteFlag) => {
-              updateUserFavRecipe(!favouriteFlag, recipeId, 4)
-                .then((result) => console.log(result))
+              updateUserFavRecipe(!favouriteFlag, recipeId, userId)
+                .then((result) => res.json(result))
             })
 
         })

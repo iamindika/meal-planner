@@ -8,7 +8,7 @@ module.exports = (
 ) => {
   router.post('/', (req, res) => {
     console.log(req.body)
-  const {id} = req.body;
+  const {userId,id} = req.body;
    GetUserFavFlag(id,4)
    .then((favFlag)=>{
      updateUserFavRecipe(!favFlag,id,4)

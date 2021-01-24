@@ -25,12 +25,12 @@ export default function Favourites() {
         setFavs(response.data)
       })
       .catch((err) => console.log(err));
-  }, [removedFav]);
+  },[]);
 
 // removing favs of a particular user
   function handleSubmit(id) {
-    axios.post('/api/favorites/remove',
-    {id},
+    axios.post(`/api/favorites/remove/`,
+    {userId:user.id,id},
     {headers: {"x-auth-token": localStorage.getItem("token")}}
   )
       .then((

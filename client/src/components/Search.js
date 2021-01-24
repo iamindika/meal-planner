@@ -1,23 +1,22 @@
-import {useState} from "react";
+import {useState,useContext} from "react";
 import axios from "axios";
 import {Form,Button,Col,CardGroup} from "react-bootstrap"
 import RecipeCard from "./RecipeCard";
+import {AuthContext} from "../context/authContext";
+
 
 export default function Search(){
   const [value,setValue] = useState();
   const [searchResults,setSearchResults] = useState([])
+  const {user} = useContext(AuthContext);
 
   function handleSubmit(event){
   
     event.preventDefault();
     //  console.log(value)
-    axios({
-      method: 'POST',
-      url: '/api/search',
-      data:{
-        value
-      }
-    })
+    axios.post(`/api/search`,
+    {value},
+    {headers: {"x-auth-token": localStorage.getItem("token")}})
       .then(({
        data
       }) => {
