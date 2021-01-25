@@ -34,7 +34,7 @@ module.exports = (
                 }
               })
             }) 
-            addUserFavRecipe(userId, recipe.id, !userFav)
+            addUserFavRecipe(userId, recipe.id, true)
             .then(result => console.log(result)); 
            })     
           }
