@@ -38,6 +38,17 @@ module.exports = (
             .then(result => console.log(result)); 
            })     
           }
+          else{
+            getRecipeById(name)
+    .then((recipeId) => {
+      GetUserFavFlag(recipeId,userId)
+      .then((favFlag)=>{
+          // console.log(favFlag.favourites)
+         updateUserFavRecipe(true,recipeId,userId)
+         .then((result)=>console.log(result))
+      })
+    })   
+          }
         })     
      }
     else{
