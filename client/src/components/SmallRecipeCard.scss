@@ -1,7 +1,7 @@
-$card-min-width: 10rem;
-$card-max-width: 10rem;
+$card-min-width: 15rem;
+$card-max-width: 15rem;
 
-.card {
+.card.small {
   // padding: 1rem;
   min-width: $card-min-width;
   max-width: $card-max-width;
