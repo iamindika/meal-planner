@@ -20,6 +20,7 @@ const newProfileRouter = require('./routes/profile_new');
 const ingredientsRouter = require('./routes/ingredients');
 const favoritesRouter = require('./routes/favorites');
 const unFavoritesRouter = require('./routes/removeFav');
+const viewProfileRouter = require('./routes/view_profile');
 
 const app = express();
 
@@ -43,5 +44,6 @@ app.use('/profile/new', newProfileRouter(dbHelpers));
 app.use('/ingredients', ingredientsRouter(dbIngredientsHelpers));
 app.use('/api/favorites', favoritesRouter(dbRecipeHelpers,dbIngredientsHelpers,dbHelpers));
 app.use('/api/favorites/remove', unFavoritesRouter(dbHelpers));
+ app.use('/profile/view', viewProfileRouter(dbHelpers));
 
 module.exports = app;
