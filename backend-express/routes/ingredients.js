@@ -17,12 +17,21 @@ const auth = require('../middleware/auth');
 
 module.exports = ({
     getIngredients,
+    getIngredientsByRecipe,
     addIngredient,
     addRecipeIngredients
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
         getIngredients()
+            .then((ingredients) => res.json(ingredients))
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
+    router.get('/recipe/:id', (req, res) => {
+        getIngredientsByRecipe(req.params.id)
             .then((ingredients) => res.json(ingredients))
             .catch((err) => res.json({
                 error: err.message

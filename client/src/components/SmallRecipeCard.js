@@ -2,12 +2,13 @@ import React from "react";
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./SmallRecipeCard.scss";
 
 export default function SmallRecipeCard (props) {
-  const [showInstructions, setShowInstructions] = useState(true);
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [ingredients, setIngredients] = useState([]);
   console.log("SmallRecipeCard props:", props);
   
   const [removed, setRemoved ] = useState({ 
@@ -17,11 +18,30 @@ export default function SmallRecipeCard (props) {
     recipeId: props.recipeId,
     userId: props.userId
   })
-  // const ingredientsWithAmount= props.ingredients.map((ingredient)=>{
-  //   return<div><p>
-  //    {ingredient.name} - {ingredient.quantity}: {ingredient.unit}</p></div> 
-  // })
-  const ingredientsWithAmount=[]
+
+  useEffect(() => {
+    axios({
+      method: 'GET',
+      url: `/ingredients/recipe/${props.recipeId}`,
+    })
+      .then((
+        response
+      ) => {
+        console.log(response.data)
+        setIngredients([...response.data])
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  let ingredientsWithAmount=[]
+  if(ingredients.length) {
+    console.log("**** ingredients: ", ingredients)
+    ingredientsWithAmount = ingredients.map((ingredient)=>{
+      return<Card.Text key={ingredient.id} >
+       {ingredient.name} - {ingredient.quantity} {ingredient.unit}</Card.Text>
+    })
+  }
+  console.log("ingredientsWithAmount: ", ingredientsWithAmount);
 
   function handleClick(){
     setShowInstructions(!showInstructions)
@@ -29,7 +49,6 @@ export default function SmallRecipeCard (props) {
 
   function handleClickRemove(event){
     event.preventDefault();
-    // setRemoved(prev => props.recipeId);
     console.log("removed: ", removed)
     axios({
       method: 'POST',
@@ -50,26 +69,24 @@ export default function SmallRecipeCard (props) {
   }
   
   return (
-    <Card>
+    <Card className="small">
       <Card.Img variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         {showInstructions &&
         <div>
-        <Card.Text>
           {ingredientsWithAmount}
-        </Card.Text>
         <Card.Text>
           {props.instructions}
         </Card.Text>
         </div>}
-        <div class="card-bottom">
-          <div class="button-container">
-            <Button variant="primary" onClick={handleClick}>View Recipe</Button>
+        <div className="card-bottom">
+          <div className="button-container">
+            <Button variant="primary" onClick={handleClick}>{!showInstructions? "View Recipe" : "Colapse"}</Button>
           </div>
-          <div class="minus-circle-container">
+          <div className="minus-circle-container">
             <button type="submit" onClick={handleClickRemove} style={{ border: "none",backgroundColor: "Transparent"}}>
-              <i class="fas fa-minus-circle"></i>
+              <i className="fas fa-minus-circle" style={{color:"red"}}></i>
             </button>
           </div>
         </div>

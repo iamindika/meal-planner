@@ -9,6 +9,20 @@ module.exports = (db) => {
           .catch((err) => err);
   };
 
+  const getIngredientsByRecipe = (recipeId) => {
+      const query = {
+          text: `SELECT ri.*, i.name, i.image  
+                 FROM recipe_ingredients AS ri
+                 JOIN ingredients AS i ON ri.ingredient_id = i.id
+                 WHERE ri.recipe_id = $1;`,
+          values: [recipeId]
+      };
+      return db
+          .query(query)
+          .then((result) => result.rows)
+          .catch((err) => err);
+  };
+
 //   const getUserByEmail = email => {
 
 //       const query = {
@@ -60,6 +74,7 @@ module.exports = (db) => {
 
   return {
       getIngredients,
+      getIngredientsByRecipe,
       addIngredient,
       addRecipeIngredients
   };

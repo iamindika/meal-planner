@@ -3,7 +3,7 @@ import { Table, Form  } from "react-bootstrap";
 import axios from "axios";
 import SmallRecipeCard from './SmallRecipeCard'
 
-import "./Favourites.scss";
+import "./LocalSchedule.scss";
 import { Prev } from "react-bootstrap/esm/PageItem";
 
 
@@ -90,9 +90,9 @@ export default function LocalSchedule (props) {
 
   function handleClickAdd(day, timeSlot){
     // event.preventDefault();
-    console.log('handleClickAdd selRecipe: ', selRecipe)
+    // console.log('handleClickAdd selRecipe: ', selRecipe)
     if(selRecipe) {
-      console.log("you called axios in handleClickAdd")
+      // console.log("you called axios in handleClickAdd")
       axios({
         method: 'POST',
         url:`/recipes/${selRecipe}/user/${id}/add`,
@@ -101,27 +101,13 @@ export default function LocalSchedule (props) {
         .then(({
          data
         }) => {
-            console.log("handleClickAdd data: ", data)
+            // console.log("handleClickAdd data: ", data)
         })
         .catch((err) => console.log(err));
     }
   
   }
   
-  // console.log(WEEKDAYS.map((day, index) => {
-  //   if (breakfast[index] && index === breakfast[index].day ) {
-  //     return breakfast[index]
-  //   }
-      
-  //   // return breakfast.forEach(item => {
-  //   //   // console.log("item", item)
-  //   //    if (item.day === index) {
-  //   //     return item
-  //   //   }
-  //   //   return "hello"
-  //   // })  
-  // }))
-
   const handleRemove = position => {
     // take item and find it on state and remove it from state (a copy of state remove that item from copy set state to that copy)
     // console.log("---position.day: ", position.day);
@@ -147,36 +133,23 @@ export default function LocalSchedule (props) {
   const updateVal = (e) => {
     selRecipe = e.target.value;
     // setSelectedRecipe(e.target.value); 
-    console.log('vvvv updateVal selRecipe', selRecipe);
+    // console.log('vvvv updateVal selRecipe', selRecipe);
     return selRecipe;
     // console.log('vvvv setSelectedRecipe', selectedRecipe); 
-    
-  
 };
   
   const getSpotRecipes = (array, timeSlot) => { 
-    // const arrayCopy = [...array];
-    // const fixedArray = Array.from({ length: 7 });
-    // // console.log("*** fixedArray inital: ", fixedArray);
-    // arrayCopy.forEach( (recipe, index) => {
-      //   fixedArray[recipe.day-1] = recipe;
-      // })
-      
-      // console.log("*** fixedArray after fixing: ", fixedArray)
-      // console.log("*** freeRecipeNames: ", freeRecipeNames)
-      // console.log("@@@ freeRecipes: ", freeRecipes)
-    
     return (
     array.map((day, index) => {
       if(day) {
           return (
-              <td key={index}>
-                <SmallRecipeCard key={index} recipeId={array[index].recipe_id} name={array[index].name} image={array[index].image} description={array[index].instructions} userId={id} onSuccess={handleRemove} day={array[index].day} time_slot={array[index].time_slot}/>
+              <td key={index} className="recipe-slot">
+                <SmallRecipeCard key={index} recipeId={array[index].recipe_id} name={array[index].name} image={array[index].image} instructions={array[index].instructions} userId={id} onSuccess={handleRemove} day={array[index].day} time_slot={array[index].time_slot}/>
               </td>
           )
           } else {
             return (
-                    <td key={index}>
+                    <td key={index} className="recipe-slot">
                       
                       <Form key={index}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
@@ -187,12 +160,14 @@ export default function LocalSchedule (props) {
                             })
                           }
                       </Form.Control>
-                      <button key={index} type="submit" onClick={() => handleClickAdd((index + 1), timeSlot)} style={{ border: "none",backgroundColor: "Transparent"}}>
-                          <i class="fas fa-plus-circle"></i>
+                      <button key={index} type="submit" onClick={() => handleClickAdd((index + 1), timeSlot)} style={{ border: "none",backgroundColor: "Transparent",color: "green",fontSize: "2rem"}}>
+                      {/* <span style="font-size: 3rem;"> */}
+                          <i className="fas fa-plus-circle" ></i>
+                      {/* </span> */}
                       </button>
                       </Form.Group>
                       </Form>
-          
+
                     </td>
                     
                     )
@@ -200,38 +175,6 @@ export default function LocalSchedule (props) {
           }
       }
       ))
-    //   if (recipe) { 
-    //     console.log("recipe.recipe_id, index:", recipe.recipe_id, index)
-    //     return (
-    //   <td>
-    //     <SmallRecipeCard key={recipe.recipe_id} recipeId={recipe.recipe_id} name={recipe.name} image={recipe.image} description={recipe.instructions} userId={id}/>
-    //   </td>
-    //       )
-    //   } else {
-    //     return (
-    //       <td>
-    //         <button type="submit" onClick={handleClickAdd()} style={{ border: "none",backgroundColor: "Transparent"}}>
-    //             <i class="fas fa-plus-circle"></i>
-    //         </button>
-    //         <form>
-    //         <Form.Group controlId="exampleForm.ControlSelect1">
-    //         <Form.Label>Select recipe</Form.Label>
-    //         <Form.Control as="select">
-    //           {[<option>1</option>,
-    //           <option>2</option>,
-    //           <option>3</option>,
-    //           <option>4</option>,
-    //           <option>5</option>]}
-    //         </Form.Control>
-    //         </Form.Group>
-    //         </form>
-
-    //       </td>
-          
-    //       )
-    //   }
-    // } 
-    //  ))
   };
 
   return (
@@ -250,7 +193,7 @@ export default function LocalSchedule (props) {
       </thead>
       <tbody>
         <tr>
-          <td>Breakfast</td>
+          <td><strong>Breakfast</strong></td>
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
@@ -258,7 +201,7 @@ export default function LocalSchedule (props) {
 
         </tr>
         <tr>
-          <td>Lunch</td>
+          <td><strong>Lunch</strong></td>
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
@@ -266,7 +209,7 @@ export default function LocalSchedule (props) {
 
         </tr>
         <tr>
-          <td>Dinner</td>
+          <td><strong>Dinner</strong></td>
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
