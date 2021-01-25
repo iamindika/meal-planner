@@ -31,7 +31,7 @@ export default function LocalRecipeCard (props) {
           {props.instructions}
         </Card.Text></div>}
         <div class="card-bottom">
-          <Button variant="primary" onClick={handleClick}>View Recipe</Button>
+          <Button variant="primary" onClick={handleClick}>{!showInstructions?"View Recipe":"Collapse"}</Button>
           <div class="heart-container">
             <button type="submit" value={props.value} onClick={()=>{
               props.onSubmit(props.value)
