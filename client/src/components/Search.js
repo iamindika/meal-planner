@@ -21,7 +21,8 @@ export default function Search(){
        data
       }) => {
         var json = JSON.parse(data);
-        setSearchResults(json.results)
+      //  console.log(json.results)
+       setSearchResults(json.results)
       })
       .catch((err) => console.log(err));
   }
@@ -50,7 +51,7 @@ export default function Search(){
   </Form>
   <h1>Search results</h1>
       <CardGroup>
-        {finalResults} 
+         {finalResults}  
       </CardGroup>
   </Col>
 </div>
