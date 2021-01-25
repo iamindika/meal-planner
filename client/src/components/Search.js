@@ -15,7 +15,7 @@ export default function Search(){
     event.preventDefault();
     //  console.log(value)
     axios.post(`/api/search`,
-    {value},
+    {value,userId:user.id},
     {headers: {"x-auth-token": localStorage.getItem("token")}})
       .then(({
        data

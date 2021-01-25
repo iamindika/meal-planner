@@ -42,7 +42,7 @@ export default function Favourites() {
       .catch((err) => console.log(err));
   }
 
-   const favourites = favs.map((recipe) =><LocalRecipeCard name={recipe.recipe.recipeName} image={recipe.recipe.recipeImage} instructions={recipe.recipe.recipeInstructions} ingredients={recipe.ingredients} onSubmit={handleSubmit} value={recipe.recipe.recipeId} />
+   const favourites = favs.map((recipe) =><LocalRecipeCard key={recipe.recipe.recipeId} name={recipe.recipe.recipeName} image={recipe.recipe.recipeImage} instructions={recipe.recipe.recipeInstructions} ingredients={recipe.ingredients} onSubmit={handleSubmit} value={recipe.recipe.recipeId} />
   )
 
   return (
