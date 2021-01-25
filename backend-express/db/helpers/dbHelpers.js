@@ -1,4 +1,4 @@
-const { connect } = require("..");
+const { connect, user } = require("..");
 
 module.exports = (db) => {
     const getUsers = () => {
@@ -90,9 +90,21 @@ module.exports = (db) => {
       return db.query(query)
             .then(result => result.rows)
             .catch(err => err);
+    } 
+    
+    const addUserDiet = (userId, dietId) => {
+      const query = {
+        text: `INSERT INTO user_diets (user_id, diet_id)
+              VALUES ($1, $2) RETURNING *`,
+        values: [userId, dietId]
+      }
+
+      return db.query(query)
+            .then(result => result.rows[0])
+            .catch(err => err);      
     }    
 
-    const getDietId = (dietName) => {
+    const getDietId = (userId,dietName) => {
       const query = {
         text: `SELECT diets.id
               FROM diets
@@ -100,8 +112,13 @@ module.exports = (db) => {
         values: [dietName]
       }
 
-      return db.query(query)
-            .then(result => result.rows[0].id)
+       db.query(query)
+            .then(result => {
+              // console.log(result.rows)
+              addUserDiet(userId,result.rows[0].id)
+            .then(result1=>result1)
+            })
+           return Promise.all([db.query(query)])
             .catch(err => err);
     }
 
@@ -117,47 +134,53 @@ module.exports = (db) => {
             .then(result => result.rows[0])
             .catch(err => err);      
     }
-
-    const addUserDiet = (userId, dietId) => {
-      const query = {
-        text: `INSERT INTO user_diets (user_id, diet_id)
-              VALUES ($1, $2) RETURNING *`,
-        values: [userId, dietId]
-      }
-
-      return db.query(query)
-            .then(result => result.rows[0])
-            .catch(err => err);      
-    } 
-
-    const getIngredientId = (ingredientName) =>{
-        const query = {
-            text:`SELECT ingredients.id
-            FROM ingredients
-            WHERE ingredients.name LIKE $1`,
-            values: [ingredientName]
-        }
-        return db.query(query)
-            .then(result => {
-              if(result.rows[0]){
-                // console.log(result.rows)
-                return result.rows[0].id
-               }
-            })
-            .catch(err => err);      
-    } 
-   
-
     const addAvoidances = (userId,ingredientId,avoidIngredients = false) =>{
       const query = {
           text:`INSERT INTO user_ingredients (user_id,ingredient_id,include_ingredient) VALUES ($1,$2,$3) RETURNING *`,
           values:[userId,ingredientId,avoidIngredients]
       }
       return db.query(query)
-      .then(result => result.rows[0])
+      .then(result => result.rows)
       .catch(err => err);      
     }
 
+
+
+    const getIngredientIdAvoidance = (userId,ingredientName,avoidIngredients = false) =>{
+        const query = {
+            text:`SELECT ingredients.id
+            FROM ingredients
+            WHERE ingredients.name LIKE $1`,
+            values: [ingredientName]
+        }
+         db.query(query)
+            .then(result => {
+              if(result.rows[0]){
+                //  console.log(result.rows)
+                // return result.rows[0].id
+                addAvoidances(userId,result.rows[0].id,avoidIngredients)
+                .then(result1=>result1)
+               }
+            })
+            return Promise.all([db.query(query)])
+            .catch(err => err);      
+    } 
+   
+const getIngredientId = (ingredientName) =>{
+  const query = {
+    text:`SELECT ingredients.id
+    FROM ingredients
+    WHERE ingredients.name LIKE $1`,
+    values: [ingredientName]
+}
+return db.query(query)
+            .then(result => {
+              if(result.rows[0]){
+                return result.rows[0].id 
+              } 
+            });
+}
+    
     const addUserIngredientFav = (userId,ingredientId,FavIngredients = true)=>{
         const query = {
             text:`INSERT INTO user_ingredients (user_id,ingredient_id,include_ingredient) VALUES ($1,$2,$3) RETURNING *`,
@@ -167,6 +190,26 @@ module.exports = (db) => {
         .then(result => result.rows[0])
         .catch(err => err);      
       }
+
+      const getIngredientIdFavs = (userId,ingredientName,avoidIngredients = true) =>{
+        const query = {
+            text:`SELECT ingredients.id
+            FROM ingredients
+            WHERE ingredients.name LIKE $1`,
+            values: [ingredientName]
+        }
+         db.query(query)
+            .then(result => {
+              if(result.rows[0]){
+                addUserIngredientFav(userId,result.rows[0].id,avoidIngredients)
+                .then(result1=>result1)
+               }
+            })
+            return Promise.all([db.query(query)])
+            .catch(err => err);      
+    } 
+   
+
   const addUserFavRecipe = (userId,recipeId,favourites=true) => {
     const query = {
       text:`INSERT INTO user_recipes (user_id,recipe_id,favourites) VALUES ($1,$2,$3) RETURNING *`,
@@ -191,7 +234,7 @@ module.exports = (db) => {
       values:[recipeId,userId]
   }
   return db.query(query)
-  .then(result => result.rows[0].favourites)
+  .then(result => result.rows[0])
   .catch(err => err);  
   }
 
@@ -298,6 +341,27 @@ module.exports = (db) => {
       })
   }
 
+  const getDiet = (userId) =>{
+    const query = {
+      text:`SELECT diets.name FROM diets JOIN user_diets ON diets.id = user_diets.diet_id WHERE user_id = $1`,
+      values:[userId]
+    }
+    return db.query(query)
+  .then(result => result.rows[0])
+  .catch(err => err); 
+
+  }
+
+  const getUserIngredientPref = (userId,includeIngredient) =>{
+    const query = {
+      text:`SELECT ingredients.name FROM ingredients JOIN user_ingredients ON ingredients.id = user_ingredients.ingredient_id WHERE user_ingredients.user_id = $1 AND user_ingredients.include_ingredient = $2`,
+      values:[userId,includeIngredient]
+    }
+    return db.query(query)
+    .then(result => result.rows)
+    .catch(err => err); 
+  }
+
     return {
         getUsers,
         getUserByEmail,
@@ -309,7 +373,7 @@ module.exports = (db) => {
         getDietId,
         editUserDiet,
         addUserDiet,
-        getIngredientId,
+        getIngredientIdAvoidance,
         addAvoidances,
         addUserIngredientFav,
         addUserFavRecipe,
@@ -318,8 +382,11 @@ module.exports = (db) => {
         getFavRecipeIngredients,
         getIngredientName,
         getIngredientsName,
-        GetUserFavFlag
-        // getRecipeName
+        GetUserFavFlag,
+        getDiet,
+        getUserIngredientPref,
+        getIngredientIdFavs,
+        getIngredientId
         
       
     };

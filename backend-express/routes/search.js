@@ -3,9 +3,10 @@ const router = express.Router();
 const response = require("../responseData.json");
 const https = require("https");
 require('dotenv').config();
+const auth = require("../middleware/auth");
 
 module.exports = (db) => {
-  router.post("/",(req,res)=>{
+  router.post("/",auth,(req,res)=>{
      const search = req.body.value;
   https.get(`https://api.spoonacular.com/recipes/search?apiKey=${process.env.APIKEY}&query=${search}&number=2&instructionsRequired=true`,(response)=>{
     let body = "";

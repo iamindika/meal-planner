@@ -1,13 +1,14 @@
-import {useState} from "react"
+import { useState, useContext } from "react"
 import {Form,Button,Col} from "react-bootstrap"
 import axios from "axios";
+import { AuthContext } from "../context/authContext"
 
 export default function Register(props){
   const [fName, setFirstName] = useState();
   const [lName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  //const [error, setError] = useState({});
+  const { user, setUser } = useContext(AuthContext);
 
   function handleSubmit(event){
   
@@ -25,7 +26,8 @@ export default function Register(props){
       
     })
       .then(res => {
-        console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+        setUser({...res.data.user});
       })
       .catch((err) => {
         console.log(err.response.data)

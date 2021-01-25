@@ -55,9 +55,9 @@ export default function SmallRecipeCard (props) {
       url:`/recipes/${props.recipeId}/user/${props.userId}/remove`,
       data:{ }
     })
-      .then(({
+      .then((
        data
-      }) => {
+      ) => {
           console.log("handleClick data: ", data)
           
           if(props.onSuccess) {

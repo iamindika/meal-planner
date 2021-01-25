@@ -4,43 +4,24 @@ const auth = require('../middleware/auth');
  require('../db/helpers/dbHelpers');
 
 module.exports = ({
-  addUserDiet,
   getDietId,
-  getIngredientId,
-  addAvoidances,
-  addUserIngredientFav
+  getIngredientIdAvoidance,
+  getIngredientIdFavs
 }) => {
-  router.post("/", auth, (req,res)=>{
-  const {diet,avoidances,favorites} = req.body;
-   console.log(diet,avoidances,favorites);
-  getDietId(diet)
-  .then((dietId)=>{
-    addUserDiet(2,dietId)
-    .then((result)=>console.log(result))
-  });
+  router.post("/", auth, (req,res, err)=>{ 
+  const {diet,avoidances,favorites,id} = req.body;
   
-  avoidances.forEach((avoidance)=>{
-     console.log(avoidance)
-     getIngredientId(avoidance)
-    .then((ingredientId)=>{
-        // console.log(ingredientId)
-      addAvoidances(2,ingredientId,false)
-      .then(res=>console.log(res))
-     })
-   });
-
-   favorites.forEach((favorite)=>{
-    getIngredientId(favorite)
-    .then((ingredientId)=>{
-      // console.log(ingredientId)
-      addUserIngredientFav(4,ingredientId,true)
-      .then(res=>{
-        console.log(res)
-      })
-       })
-   });
+  const userDiet = getDietId(id,diet)
   
+   const userAvoidances = avoidances.forEach((avoidance)=>{
+    getIngredientIdAvoidance(id,avoidance,false)
+    });
   
+  const userFavs = favorites.forEach((favorite)=>{
+     getIngredientIdFavs(id,favorite,true)
+   })
+  Promise.all([userDiet,userAvoidances,userFavs])
+  .then((all)=>res.json(all))
   });
   return router;
   }

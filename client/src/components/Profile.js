@@ -1,30 +1,21 @@
 import {Form,Button,Col,Image} from 'react-bootstrap';
 import axios from "axios";
-import { useState } from 'react';
-import {useHistory} from "react-router-dom"
+import { useState,useContext } from 'react';
+import {useHistory} from "react-router-dom";
+import {AuthContext} from "../context/authContext";
 
 export default function Profile(){
 const [diet,setDiet] = useState("");
 const [avoidances,setAvoidances] = useState([]);
 const [favorites,setFavorites] = useState("");
-
+const {user} = useContext(AuthContext);
 const history = useHistory();
-
 function handleSubmit(event){
- 
 event.preventDefault();
-axios({
-  method: 'POST',
-  url:'/profile/new',
-  data:{
-   diet,
-   avoidances,
-   favorites,
-   headers: {
-    "X-Auth-Token": localStorage.getItem("token")
-   }
-  },
-})
+axios.post('/profile/new',
+  {diet, avoidances, favorites,id:user.id},
+  {headers: {"x-auth-token": localStorage.getItem("token")}}
+)
   .then(({
    data
   }) => {
@@ -34,7 +25,7 @@ axios({
   setDiet("");
   setAvoidances([]);
   setFavorites("");
-  history.push("/profile");
+   history.push("/profile");
 }
 
   return <section>
