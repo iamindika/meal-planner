@@ -1,28 +1,28 @@
-import {useState} from "react";
+import {useState,useContext} from "react";
 import axios from "axios";
 import {Form,Button,Col,CardGroup} from "react-bootstrap"
 import RecipeCard from "./RecipeCard";
+import {AuthContext} from "../context/authContext";
+
 
 export default function Search(){
   const [value,setValue] = useState();
   const [searchResults,setSearchResults] = useState([])
+  const {user} = useContext(AuthContext);
 
   function handleSubmit(event){
   
     event.preventDefault();
     //  console.log(value)
-    axios({
-      method: 'POST',
-      url: '/api/search',
-      data:{
-        value
-      }
-    })
+    axios.post(`/api/search`,
+    {value},
+    {headers: {"x-auth-token": localStorage.getItem("token")}})
       .then(({
        data
       }) => {
         var json = JSON.parse(data);
-        setSearchResults(json.results)
+      //  console.log(json.results)
+       setSearchResults(json.results)
       })
       .catch((err) => console.log(err));
   }
@@ -51,7 +51,7 @@ export default function Search(){
   </Form>
   <h1>Search results</h1>
       <CardGroup>
-        {finalResults} 
+         {finalResults}  
       </CardGroup>
   </Col>
 </div>

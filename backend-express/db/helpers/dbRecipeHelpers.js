@@ -71,10 +71,14 @@ module.exports = (db) => {
         text: `SELECT api_id FROM recipes WHERE api_id = $1` ,
         values: [apiId]
     }
-        return db.query(query)
-        .then(result => result.rows[0])
-        .catch(err => err);   
-
+    return db.query(query)
+            .then(result => {
+              if(result.rows[0]){
+                // console.log(result.rows)
+                return result.rows[0].api_id
+               }
+            })
+            .catch(err => err);   
   }
 
   const removeRecipeFromSchedule = (recipeId, userId) => {

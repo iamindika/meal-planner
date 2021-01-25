@@ -1,7 +1,8 @@
 import {Card,Button} from "react-bootstrap"
 import axios from "axios"
-import {useState} from "react";
+import {useState,useContext} from "react";
 import "./RecipeCard.scss";
+import {AuthContext} from "../context/authContext";
 
 
  export default function RecipeCard (props) {
@@ -9,7 +10,8 @@ import "./RecipeCard.scss";
   const [instructions,setInstructions] = useState("");
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);
-  const [userFav,setUserFav] = useState(false)
+  const [userFav,setUserFav] = useState(false);
+  const {user} = useContext(AuthContext)
   
 // to get instructions and ingredients from api
   function handleSubmit(event){
@@ -40,18 +42,16 @@ import "./RecipeCard.scss";
  
   function handleClick(event){
     event.preventDefault();
-    axios({
-      method: 'POST',
-      url:`api/favorites`,
-      data:{
-        name:props.title,
-        image:props.image,
-        ingredients,
-        instructions,
-        api_id:props.id,
-       userFav
-      }
-    })
+    axios.post(`/api/favorites`,
+    {name:props.title,
+      image:props.image,
+      ingredients,
+      instructions,
+      api_id:props.id,
+     userFav,
+     userId:user.id},
+    {headers: {"x-auth-token": localStorage.getItem("token")}})
+    
       .then(({
        data
       }) => {

@@ -19,12 +19,12 @@ const App = () => {
    <Router>
   <Heading />
   <Switch>
-         <Route path="/favorites" exact  component={Favourites} />
-          <Route path="/register" component={Register} />
-          <Route path="/"  component={Login} />
+          <Route path="/" exact component={Login} />
           <Route path="/new/profile" component={Profile} />
-          <Route path="/new" component={RecipeForm} />
           <Route path="/search" component={Search} />
+          <Route path="/favorites"  component={Favourites} />
+          <Route path="/register" component={Register} />
+          <Route path="/new" component={RecipeForm} />
           <Route path="/recipes" component={LocalRecipes} />
           <Route path="/profile" component={ViewProfile} />
           <Route path="/schedule" component={LocalSchedule} />

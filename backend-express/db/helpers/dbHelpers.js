@@ -191,7 +191,7 @@ module.exports = (db) => {
       values:[recipeId,userId]
   }
   return db.query(query)
-  .then(result => result.rows[0].favourites)
+  .then(result => result.rows[0])
   .catch(err => err);  
   }
 

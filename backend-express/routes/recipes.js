@@ -8,8 +8,9 @@ module.exports = (
 
 ) => {
   router.get("/:id", auth, (req, res) => {
-    console.log("User ID:", req.params);
-    getIngredientsName(true,4)
+     const userId = req.params.id;
+     console.log("User ID:", userId);
+    getIngredientsName(true,userId)
     .then((result)=>res.json(result))
     .catch((err)=>console.log(err))
       
