@@ -166,7 +166,20 @@ module.exports = (db) => {
             .catch(err => err);      
     } 
    
-
+const getIngredientId = (ingredientName) =>{
+  const query = {
+    text:`SELECT ingredients.id
+    FROM ingredients
+    WHERE ingredients.name LIKE $1`,
+    values: [ingredientName]
+}
+return db.query(query)
+            .then(result => {
+              if(result.rows[0]){
+                return result.rows[0].id 
+              } 
+            });
+}
     
     const addUserIngredientFav = (userId,ingredientId,FavIngredients = true)=>{
         const query = {
@@ -372,7 +385,8 @@ module.exports = (db) => {
         GetUserFavFlag,
         getDiet,
         getUserIngredientPref,
-        getIngredientIdFavs
+        getIngredientIdFavs,
+        getIngredientId
         
       
     };
