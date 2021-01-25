@@ -21,7 +21,9 @@ module.exports = ({
     getUserRecipes,
     getUserRecipesBySlot,
     addRecipe,
-    removeRecipeFromSchedule
+    removeRecipeFromSchedule,
+    getFreeUserRecipes,
+    addRecipeToSchedule
 }) => {
     
     router.get('/', (req, res) => {
@@ -52,7 +54,7 @@ module.exports = ({
 
     // /recipes/user/${id}/free
     router.get('/:id/free', (req, res) => {
-        getUserRecipesBySlot(req.params.id)
+        getFreeUserRecipes(req.params.id)
             .then((userRecipes) => res.json(userRecipes)
             )
             .catch((err) => res.json({
@@ -89,6 +91,18 @@ module.exports = ({
 
     });
 
-
+    // /recipes/${selectedRecipe}/user/${id}/add
+    router.post('/:id/user/:userId/add', (req, res) => {
+        const {
+            day,
+            timeSlot
+        } = req.body;
+        addRecipeToSchedule(day, timeSlot, req.params.id, req.params.userId)
+            .then(newRecipe => res.json(newRecipe))
+            .catch(err => res.json({
+                error: err.message
+            }));
+    });
+    
     return router;
 };
