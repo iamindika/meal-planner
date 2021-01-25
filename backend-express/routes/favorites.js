@@ -57,7 +57,7 @@ module.exports = (
       GetUserFavFlag(recipeId,userId)
       .then((favFlag)=>{
           // console.log(favFlag.favourites)
-         updateUserFavRecipe(!favFlag.favourites,recipeId,userId)
+         updateUserFavRecipe(false,recipeId,userId)
          .then((result)=>console.log(result))
       })
     })  
