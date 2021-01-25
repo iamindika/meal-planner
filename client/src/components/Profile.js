@@ -22,9 +22,6 @@ axios.post('/profile/new',
      console.log(data)
   })
   .catch((err) => console.log(err));
-  setDiet("");
-  setAvoidances([]);
-  setFavorites("");
    history.push("/profile");
 }
 

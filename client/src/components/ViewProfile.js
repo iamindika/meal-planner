@@ -17,7 +17,7 @@ const [favs,setFavs] = useState([]);
      data
     }) => {
        setDiet(data[0].name);
-       console.log(data[1].name,data[2])
+      //  console.log(data[1].name,data[2])
        setAvoidances(data[1]);
        setFavs(data[2]);
     })

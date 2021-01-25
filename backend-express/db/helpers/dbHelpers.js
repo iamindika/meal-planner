@@ -1,5 +1,3 @@
-const { connect, user } = require("..");
-
 module.exports = (db) => {
     const getUsers = () => {
         const query = {
@@ -98,7 +96,6 @@ module.exports = (db) => {
               VALUES ($1, $2) RETURNING *`,
         values: [userId, dietId]
       }
-
       return db.query(query)
             .then(result => result.rows[0])
             .catch(err => err);      

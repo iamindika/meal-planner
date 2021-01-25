@@ -6,7 +6,7 @@ import {AuthContext} from "../context/authContext";
 
 
  export default function RecipeCard (props) {
-   console.log(props)
+  //  console.log(props)
   const [instructions,setInstructions] = useState("");
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);
