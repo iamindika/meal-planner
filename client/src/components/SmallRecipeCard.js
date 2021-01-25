@@ -82,7 +82,7 @@ export default function SmallRecipeCard (props) {
         </div>}
         <div className="card-bottom">
           <div className="button-container">
-            <Button variant="primary" onClick={handleClick}>{!showInstructions? "View Recipe" : "Colapse"}</Button>
+            <Button variant="primary" onClick={handleClick}>{!showInstructions? "View Recipe" : "Collapse"}</Button>
           </div>
           <div className="minus-circle-container">
             <button type="submit" onClick={handleClickRemove} style={{ border: "none",backgroundColor: "Transparent"}}>
