@@ -238,7 +238,7 @@ export default function LocalSchedule (props) {
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
-          { getSpotRecipes(breakfast, 1) }
+          { user && getSpotRecipes(breakfast, 1) }
 
         </tr>
         <tr>
@@ -246,7 +246,7 @@ export default function LocalSchedule (props) {
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
-          { getSpotRecipes(lunch, 2) }
+          { user && getSpotRecipes(lunch, 2) }
 
         </tr>
         <tr>
@@ -254,7 +254,7 @@ export default function LocalSchedule (props) {
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
-          { getSpotRecipes(dinner, 3) }
+          { user && getSpotRecipes(dinner, 3) }
         </tr>
       </tbody>
     </Table>

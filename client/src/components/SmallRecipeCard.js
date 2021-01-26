@@ -40,7 +40,7 @@ export default function SmallRecipeCard (props) {
     // console.log("**** ingredients: ", ingredients)
     ingredientsWithAmount = ingredients.map((ingredient)=>{
       return<Card.Text key={ingredient.id} >
-       {ingredient.name} - {ingredient.quantity} {ingredient.unit}</Card.Text>
+       {ingredient.name} - {Math.round(ingredient.quantity * 100) / 100} {ingredient.unit}</Card.Text>
     })
   }
   // console.log("ingredientsWithAmount: ", ingredientsWithAmount);
