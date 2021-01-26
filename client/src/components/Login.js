@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import {Form,Button,Col} from "react-bootstrap";
 import axios from "axios";
-import { AuthContext } from "../context/authContext"
+import { AuthContext } from "../context/authContext";
+import "./Login.scss";
 
 export default function Login(){
   const [email, setEmail] = useState();
@@ -38,7 +39,7 @@ export default function Login(){
   }
 
   return (
-    <section>
+    <section id="login">
       <Col md={{ span: 3, offset: 4 }} xs={2}>
         <Form>
         <h1>Login</h1>

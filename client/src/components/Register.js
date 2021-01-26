@@ -1,7 +1,8 @@
 import { useState, useContext } from "react"
 import {Form,Button,Col} from "react-bootstrap"
 import axios from "axios";
-import { AuthContext } from "../context/authContext"
+import { AuthContext } from "../context/authContext";
+import "./Register.scss";
 
 export default function Register(props){
   const [fName, setFirstName] = useState();
@@ -51,7 +52,7 @@ export default function Register(props){
   }
 
   return  (
-    <section>
+    <section id="register">
       <Col md={{ span: 3, offset: 4 }} xs={2}>
         <Form>
           <h1>Register</h1>

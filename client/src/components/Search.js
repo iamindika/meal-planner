@@ -7,7 +7,8 @@ import {AuthContext} from "../context/authContext";
 
 export default function Search(){
   const [value,setValue] = useState();
-  const [searchResults,setSearchResults] = useState([])
+  const [searchResults,setSearchResults] = useState([]);
+  const [showSearch, setShowSearch] = useState(false)
   const {user} = useContext(AuthContext);
 
   function handleSubmit(event){
@@ -15,7 +16,7 @@ export default function Search(){
     event.preventDefault();
     //  console.log(value)
     axios.post(`/api/search`,
-    {value},
+    {value,userId:user.id},
     {headers: {"x-auth-token": localStorage.getItem("token")}})
       .then(({
        data
@@ -25,6 +26,7 @@ export default function Search(){
        setSearchResults(json.results)
       })
       .catch((err) => console.log(err));
+      setShowSearch(true)
   }
 
   function handleChange(event) {
@@ -40,19 +42,22 @@ export default function Search(){
   return <div>
    <Col md={{ span: 4, offset: 4 }} xs={2}>
   <Form onSubmit={handleSubmit} role="form" style={{paddingTop:"40px"}}>
-  <Form.Control  style={{paddingTop:"10px"}}
+  <Form.Control style={{paddingTop:"10px"}}
+                placeholder="Search"
                 type="text"
                 name="search"
                 value={value}
                 onChange={handleChange}
               />
     <br />
-    <Button type="submit">Search</Button>
+    <Button type="submit" size="lg" style={{backgroundColor:'#4B7DFE'}}><i class="fas fa-hamburger" style={{color:'#e6af5d'}}></i> Search</Button>
   </Form>
+  {showSearch &&
+  <div>
   <h1>Search results</h1>
       <CardGroup>
          {finalResults}  
-      </CardGroup>
+      </CardGroup></div>}
   </Col>
 </div>
 }

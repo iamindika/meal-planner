@@ -6,7 +6,7 @@ import {AuthContext} from "../context/authContext";
 
 
  export default function RecipeCard (props) {
-   console.log(props)
+  //  console.log(props)
   const [instructions,setInstructions] = useState("");
   const [ingredients,setIngredients] = useState([]);
   const [showInstructions,setShowInstructions] = useState(false);
@@ -28,8 +28,8 @@ import {AuthContext} from "../context/authContext";
       .then(({
        data
       }) => {
-
-         setInstructions(data.instructions.instructions)
+        const regex = /(<([^>]+)>)/ig;
+         setInstructions(data.instructions.instructions.replace(regex, ''))
          setIngredients(data.ingredients.ingredients)
         //  console.log(data)
       })
@@ -84,7 +84,7 @@ import {AuthContext} from "../context/authContext";
         </Card.Text>
         </div>}
         <div className="card-bottom">
-          <Button variant="primary" type="submit" onClick={handleSubmit} value={props.id} >View Recipe</Button>
+          <Button variant="primary" type="submit" onClick={handleSubmit} value={props.id} >{!showInstructions?"View Recipe":"Collapse"}</Button>
           {showInstructions && 
           <div className="heart-container">
             <button type="submit" onClick={handleClick} style={{ border: "none",backgroundColor: "Transparent"}}>{userFav?<i class="fas fa-heart" style={{color:"red"}}></i>:<i class="far fa-heart" style={{color:"red"}}></i>}</button>
