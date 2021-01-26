@@ -112,7 +112,7 @@ module.exports = (db) => {
   const getFreeUserRecipes = userId => {
 
     const query = {
-        text: `SELECT recipe_id, name, user_id
+        text: `SELECT user_id, recipe_id, name, image, instructions, day, time_slot
               FROM recipes 
               JOIN user_recipes on recipes.id = recipe_id
               WHERE user_id = $1 AND day IS NULL AND time_slot IS NULL

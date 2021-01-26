@@ -29,6 +29,7 @@ export default function Heading(){
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/new/profile">Profile</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/search">Search</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/favorites">Favourites</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/schedule">Schedule</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white"}} to="/new"><Button variant="secondary">Create New Recipe</Button>{' '}</NavLink>
                   <Button variant="primary" onClick={handleLogOut}>Log Out</Button>
                 </>

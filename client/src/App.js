@@ -20,6 +20,7 @@ const App = () => {
   <Heading />
   <Switch>
           <Route path="/" exact component={Login} />
+          <Route path="/schedule" component={LocalSchedule} />
           <Route path="/new/profile" component={Profile} />
           <Route path="/search" component={Search} />
           <Route path="/favorites"  component={Favourites} />
@@ -27,7 +28,6 @@ const App = () => {
           <Route path="/new" component={RecipeForm} />
           <Route path="/recipes" component={LocalRecipes} />
           <Route path="/profile" component={ViewProfile} />
-          <Route path="/schedule" component={LocalSchedule} />
           </Switch>
           </Router>
           
