@@ -103,13 +103,14 @@ export default function IngredientsForm(props){
           )}
         </div>
         <div className="mb-2">
-          <Button variant="primary" size="lg" onClick={appendFormRow}>
+          <Button variant="primary" style={{backgroundColor:'#4B7DFE',margin:"10px"}} size="lg" onClick={appendFormRow}>
             +
           </Button>{' '}
         </div>
         <div className="mb-2">
           <Button 
-            variant="primary"  
+            variant="primary" 
+            style={{backgroundColor:'#4B7DFE',margin:"10px"}} 
             size="lg" 
             onClick={handleSubmit}
           >

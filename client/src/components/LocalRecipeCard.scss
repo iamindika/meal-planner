@@ -1,11 +1,33 @@
-$card-min-width: 30rem;
-$card-max-width: 30rem;
 
 .card {
   // padding: 1rem;
-  min-width: $card-min-width;
-  max-width: $card-max-width;
+  width: 300px;
+  padding-left: 30px;
+  border:none;
+  border-radius: 50px;
   // width: 30rem;
+  .card-img-top.local{
+    border-radius: 50px;
+    width: 300px;
+    height:200px;
+    text-align: center;
+    margin-left: 80px;
+  }
+  .ing-inst{
+    display: flex;
+    flex-direction: column;
+    border: solid #E5F1FF	;
+    border-radius: 50px;
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+  .card-text{
+    color:#506987;
+    font-family: 'Oxygen', sans-serif;
+  }
+  .card-title{
+    color:#26466D
+  }
   .card-bottom {
     display: flex;
     flex-direction: row;

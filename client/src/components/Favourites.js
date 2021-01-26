@@ -2,7 +2,6 @@ import { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import CardGroup from 'react-bootstrap/CardGroup';
 import LocalRecipeCard from "./LocalRecipeCard";
-import "./Favourites.scss";
 import {AuthContext} from "../context/authContext";
 
 export default function Favourites() {
@@ -46,9 +45,9 @@ export default function Favourites() {
   )
 
   return (
-    <section>
-      <h1>Favourites<i class="fas fa-heart" style={{color:"red"}}></i></h1>
-          <CardGroup >
+    <section >
+      <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px"}}>Favourites</h1>
+          <CardGroup>
          {favourites} 
       </CardGroup>    
     </section>

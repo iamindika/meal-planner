@@ -31,16 +31,17 @@ const [favs,setFavs] = useState([]);
     return fav.name
   })
 
-  return <Col md={{ span: 3, offset: 4 }}><section><h3>PROFILE</h3>
+  return <Col md={{ span: 3, offset: 4 }}><section><h3 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px"}}><strong>Profile</strong></h3>
       <Image style={{textAlign:"center"}} src="https://cdn.dribbble.com/users/1070859/screenshots/5869416/gal-_dribbble__still_2x.gif?compress=1&resize=200x200" roundedCircle />
-       <h3>Welcome <strong>{user.firstName +" "+ user.lastName}!</strong> </h3> 
+      <div style={{border:"solid #E5F1FF", borderRadius: "50px"}}>
+       <h3 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px"}}>Welcome <strong>{user.firstName +" "+ user.lastName}!</strong> </h3> 
 
-    <p><strong>On this Page you find your information about your prefernces</strong></p>
-    <h5><strong>Diet</strong>: {diet}</h5>
-   <h5><strong>Favorite Ingredients</strong>:{userFavs.join(", ") }</h5>
-   <h5><strong>Avoidances</strong>:{userAvoidances.join(", ")}</h5>  
-   <Button variant="primary" type="submit">
+    <h5 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px"}}><strong>Diet</strong>: <span> {diet}</span></h5>
+   <h5 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px"}}><strong>Favourite Ingredients</strong>: <span>{userFavs.join(", ") }</span></h5>
+   <h5 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px"}}><strong>Avoidances</strong>:  <span>{userAvoidances.join(", ")}</span></h5>  </div> 
+   <Button variant="primary" size="lg" style={{backgroundColor:'#4B7DFE',margin:"30px"}} type="submit">
          Edit
         </Button>
+       
  </section> </Col>
 }

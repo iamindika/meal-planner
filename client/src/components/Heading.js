@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {Navbar,Nav,Button} from "react-bootstrap";
-import { AuthContext } from "../context/authContext"
+import { AuthContext } from "../context/authContext";
+import "./Heading.scss";
 
 export default function Heading(){
   const { user, setUser } = useContext(AuthContext);
@@ -15,23 +16,23 @@ export default function Heading(){
   return (
     <section>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/"><NavLink style={{color:"white",padding:"10px"}} to="/" /><span>MEE</span> Meal Eat Easy</Navbar.Brand>
+        <Navbar.Brand href="/"><NavLink style={{color:"white",padding:"10px"}} to="/" /><span><i class="fas fa-utensils fa-2x" style={{color:"#FFCC11"}}></i> <strong>M</strong>ake <strong>E</strong>at <strong>E</strong>asy</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto"></Nav>
             <Nav>
               { !user ?
                 <>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/register">Register</NavLink>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/">Login</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/register">Register</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/">Login</NavLink>
                 </> :
                 <>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/new/profile">Profile</NavLink>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/search">Search</NavLink>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/favorites">Favourites</NavLink>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/schedule">Schedule</NavLink>
-                  <NavLink id="RouterNavLink" style={{color:"white"}} to="/new"><Button variant="secondary">Create New Recipe</Button>{' '}</NavLink>
-                  <Button variant="primary" onClick={handleLogOut}>Log Out</Button>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/new/profile">Profile</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/search">Search</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/favorites">Favourites</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/schedule">Schedule</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px",fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} to="/new">Create New Recipe</NavLink>
+                  <Button variant="primary" size="sm" style={{backgroundColor:'#4B7DFE',fontSize:"1.25em",fontFamily: "'Oxygen', sans-serif"}} onClick={handleLogOut}>Log Out</Button>
                 </>
               }
             </Nav>

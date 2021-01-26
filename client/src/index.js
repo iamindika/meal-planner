@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AuthContextProvider from "./context/authContext"
+import AuthContextProvider from "./context/authContext";
+import GoToUpButton from "../src/components/GoToUpButton";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
       <App />
+      <GoToUpButton />
     </ AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
