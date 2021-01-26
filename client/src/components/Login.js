@@ -44,7 +44,7 @@ export default function Login(){
         <Form>
         <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>Login</h1>
         <Form.Group controlId="formBasicEmail">
-          <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
+          <Form.Control type="email" size="lg" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
