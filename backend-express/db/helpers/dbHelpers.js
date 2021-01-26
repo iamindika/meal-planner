@@ -134,9 +134,6 @@ module.exports = (db) => {
       .then(result => result.rows)
       .catch(err => err);      
     }
-
-
-
    
 const getIngredientId = (ingredientName) =>{
   const query = {
@@ -316,6 +313,32 @@ return db.query(query)
     .catch(err => err); 
   }
 
+  const removeUserDietPreferences = (userId) => {
+    const query = {
+      text: `DELETE FROM user_diets
+            WHERE user_id = $1
+            RETURNING *`,
+      values: [userId]
+    }
+
+    return db.query(query)
+      .then(deleted => deleted.rows)
+      .catch(err => err);
+  }
+
+  const removeUserIngredientPreferences = (userId) => {
+    const query = {
+      text: `DELETE FROM user_ingredients
+            WHERE user_id = $1
+            RETURNING *`,
+      values: [userId]
+    }
+
+    return db.query(query)
+      .then(deleted => deleted.rows)
+      .catch(err => err);
+  }
+
     return {
         getUsers,
         getUserByEmail,
@@ -338,9 +361,9 @@ return db.query(query)
         GetUserFavFlag,
         getDiet,
         getUserIngredientPref,
-        getIngredientId
-        
-      
+        getIngredientId,
+        removeUserDietPreferences,
+        removeUserIngredientPreferences
     };
 };
 // Gujarati Dry Mung Bean Curry

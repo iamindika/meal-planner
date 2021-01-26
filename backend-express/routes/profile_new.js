@@ -5,10 +5,7 @@ const auth = require('../middleware/auth');
 
 module.exports = ({
   getDietId,
-  addUserDiet,
-  getIngredientId,
-  addAvoidances,
-  addUserIngredientFav
+  addUserDiet,getIngredientId,addAvoidances,addUserIngredientFav
 }) => {
   router.post("/", auth, (req,res, err)=>{ 
   const {diet,avoidances,favorites,id} = req.body;
