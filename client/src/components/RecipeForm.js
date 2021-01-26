@@ -32,8 +32,8 @@ export default function RecipeForm(){
 
   return <section>
     <Col md={{ span: 3, offset: 4 }} xs={2}>
-<Form>
-    <h1>Create New Recipe</h1>
+<Form style={{marginTop:"30px"}}>
+    <h1 style={{color:"#26466D",margin:"30px"}}>Create New Recipe</h1>
   <Form.Group controlId="exampleForm.ControlInput1">
     <Form.Control 
       type="text" 
@@ -66,7 +66,7 @@ export default function RecipeForm(){
     />
   </Form.Group>
   <div className="mb-2">
-    <Button variant="primary" size="lg" onClick={handleSubmit}>
+    <Button variant="primary" style={{backgroundColor:'#4B7DFE',margin:"10px"}} size="lg" onClick={handleSubmit}>
       CREATE
     </Button>{' '}</div>
 </Form></Col>

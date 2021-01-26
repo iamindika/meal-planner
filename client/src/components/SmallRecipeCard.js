@@ -72,19 +72,19 @@ export default function SmallRecipeCard (props) {
   
   return (
     <Card className="small">
-      <Card.Img variant="top" src={props.image} />
+      <Card.Img className="small" variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         {showInstructions &&
-        <div>
+        <div className="ing-inst">
           {ingredientsWithAmount}
         <Card.Text>
           {props.instructions}
         </Card.Text>
         </div>}
-        <div className="card-bottom">
+        <div className="card-bottom-small">
           <div className="button-container">
-            <Button variant="primary" onClick={handleClick}>{!showInstructions? "View Recipe" : "Collapse"}</Button>
+            <Button variant="primary" style={{backgroundColor:'#4B7DFE'}} onClick={handleClick}>{!showInstructions? "View Recipe" : "Collapse"}</Button>
           </div>
           <div className="minus-circle-container">
             <button type="submit" onClick={handleClickRemove} style={{ border: "none",backgroundColor: "Transparent"}}>

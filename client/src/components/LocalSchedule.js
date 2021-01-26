@@ -194,7 +194,7 @@ export default function LocalSchedule (props) {
                       
                       <Form key={`form-${index}`}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
-                      <Form.Label>Select recipe</Form.Label>
+                      <Form.Label style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>Select recipe</Form.Label>
                       <Form.Control key={`fcontrol-${index}`} as="select" custom onChange={updateVal}>
                           {freeRecipes.map( recipe => {
                             return (<option key={recipe.recipe_id} value={recipe.recipe_id}>{recipe.name}</option>)
@@ -220,12 +220,12 @@ export default function LocalSchedule (props) {
 
   return (
     <section>
-      <h1> Schedule </h1>
+      <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}> Schedule </h1>
       {/* <ul> {JSON.stringify(breakfast)} </ul> */}
       
     <Table responsive>
       <thead>
-        <tr>
+        <tr style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>
           <th></th>
           {WEEKDAYS.map((weekday, index) => (
             <th key={index}>{weekday}</th>
@@ -234,7 +234,7 @@ export default function LocalSchedule (props) {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Breakfast</strong></td>
+          <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}><strong>Breakfast</strong></td>
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
@@ -242,7 +242,7 @@ export default function LocalSchedule (props) {
 
         </tr>
         <tr>
-          <td><strong>Lunch</strong></td>
+          <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}><strong>Lunch</strong></td>
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}
@@ -250,7 +250,7 @@ export default function LocalSchedule (props) {
 
         </tr>
         <tr>
-          <td><strong>Dinner</strong></td>
+          <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}><strong>Dinner</strong></td>
           {/* {Array.from({ length: 7 }).map((_, index) => (
             <td key={index}>Table cell {index}</td>
           ))} */}

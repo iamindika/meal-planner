@@ -55,7 +55,7 @@ export default function Register(props){
     <section id="register">
       <Col md={{ span: 3, offset: 4 }} xs={2}>
         <Form>
-          <h1>Register</h1>
+          <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>Register</h1>
           <Form.Group controlId="formBasicFirstName">
             <Form.Control type="text" placeholder="Enter First Name" value={fName} onChange={handleFirstNameChange}/>
             <p></p>
@@ -74,7 +74,7 @@ export default function Register(props){
             <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
           </Form.Group>
 
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="primary" style={{backgroundColor:'#4B7DFE'}} type="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </Form>

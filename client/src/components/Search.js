@@ -3,6 +3,7 @@ import axios from "axios";
 import {Form,Button,Col,CardGroup} from "react-bootstrap"
 import RecipeCard from "./RecipeCard";
 import {AuthContext} from "../context/authContext";
+import "./Search.scss";
 
 
 export default function Search(){
@@ -53,11 +54,12 @@ export default function Search(){
     <Button type="submit" size="lg" style={{backgroundColor:'#4B7DFE'}}><i class="fas fa-hamburger" style={{color:'#e6af5d'}}></i> Search</Button>
   </Form>
   {showSearch &&
-  <div>
-  <h1>Search results</h1>
-      <CardGroup>
-         {finalResults}  
-      </CardGroup></div>}
+   <section>
+   <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",marginBottom:"30px",marginTop:"30px"}}>Search Results For {"'" + value +"'"}</h1>
+       <CardGroup>
+      {finalResults} 
+   </CardGroup>    
+ </section>}
   </Col>
 </div>
 }

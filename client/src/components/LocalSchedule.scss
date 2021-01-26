@@ -5,6 +5,7 @@
 
 .card-group {
   // margin: 3rem;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
 
 }

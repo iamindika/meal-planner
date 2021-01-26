@@ -63,28 +63,28 @@ import {AuthContext} from "../context/authContext";
       
 
   const ingredientsWithAmount= ingredients.map((ingredient)=>{
-    return<div><p>
-     {ingredient.name} - {(Math.round(ingredient.amount.us.value * 100)/100)}: {ingredient.amount.us.unit}</p></div> 
+    return<div>
+    {(Math.round(ingredient.amount.us.value * 100)/100)} {ingredient.amount.us.unit} - {ingredient.name}</div> 
     
   })
   return (
     <Card>
-      <Card.Img variant="top" src={props.image} />
+      <Card.Img  className="search" variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         {showInstructions && 
-        <div>
+        <div className="ing-inst">
         <Card.Text>
-        <h4>Ingredients</h4>
+        <h3 style={{color:"#26466D"}}><strong>Ingredients</strong></h3>
            {ingredientsWithAmount} 
         </Card.Text>
         <Card.Text>
-          <h4>Cooking Instructions</h4>
+          <h3 style={{color:"#26466D"}}><strong>Cooking Instructions</strong></h3>
          {instructions}  
         </Card.Text>
         </div>}
         <div className="card-bottom">
-          <Button variant="primary" type="submit" onClick={handleSubmit} value={props.id} >{!showInstructions?"View Recipe":"Collapse"}</Button>
+          <Button variant="primary" type="submit" style={{backgroundColor:'#4B7DFE'}} onClick={handleSubmit} value={props.id} >{!showInstructions?"View Recipe":"Collapse"}</Button>
           {showInstructions && 
           <div className="heart-container">
             <button type="submit" onClick={handleClick} style={{ border: "none",backgroundColor: "Transparent"}}>{userFav?<i class="fas fa-heart" style={{color:"red"}}></i>:<i class="far fa-heart" style={{color:"red"}}></i>}</button>
