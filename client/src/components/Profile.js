@@ -38,6 +38,7 @@ axios.post('/profile/new',
 <Form.Group controlId="exampleForm.SelectCustomSizeLg">
 <Form.Label><strong>Diet</strong></Form.Label>
     <Form.Control as="select" size="lg" style={{border:"solid grey"}} custom value={diet} onChange={(e) => setDiet(e.target.value)}>
+    <option>Select your Diet</option>
       <option>Vegetarian</option>
       <option>Gluten Free</option>
       <option>Ketogenic</option>

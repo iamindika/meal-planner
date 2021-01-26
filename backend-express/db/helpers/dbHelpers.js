@@ -101,21 +101,15 @@ module.exports = (db) => {
             .catch(err => err);      
     }    
 
-    const getDietId = (userId,dietName) => {
+    const getDietId = (dietName) => {
       const query = {
         text: `SELECT diets.id
               FROM diets
               WHERE diets.name LIKE $1`,
         values: [dietName]
       }
-
-       db.query(query)
-            .then(result => {
-              // console.log(result.rows)
-              addUserDiet(userId,result.rows[0].id)
-            .then(result1=>result1)
-            })
-           return Promise.all([db.query(query)])
+       return db.query(query)
+            .then(result =>result.rows[0].id)
             .catch(err => err);
     }
 
@@ -143,25 +137,6 @@ module.exports = (db) => {
 
 
 
-    const getIngredientIdAvoidance = (userId,ingredientName,avoidIngredients = false) =>{
-        const query = {
-            text:`SELECT ingredients.id
-            FROM ingredients
-            WHERE ingredients.name LIKE $1`,
-            values: [ingredientName]
-        }
-         db.query(query)
-            .then(result => {
-              if(result.rows[0]){
-                //  console.log(result.rows)
-                // return result.rows[0].id
-                addAvoidances(userId,result.rows[0].id,avoidIngredients)
-                .then(result1=>result1)
-               }
-            })
-            return Promise.all([db.query(query)])
-            .catch(err => err);      
-    } 
    
 const getIngredientId = (ingredientName) =>{
   const query = {
@@ -188,24 +163,6 @@ return db.query(query)
         .catch(err => err);      
       }
 
-      const getIngredientIdFavs = (userId,ingredientName,avoidIngredients = true) =>{
-        const query = {
-            text:`SELECT ingredients.id
-            FROM ingredients
-            WHERE ingredients.name LIKE $1`,
-            values: [ingredientName]
-        }
-         db.query(query)
-            .then(result => {
-              if(result.rows[0]){
-                addUserIngredientFav(userId,result.rows[0].id,avoidIngredients)
-                .then(result1=>result1)
-               }
-            })
-            return Promise.all([db.query(query)])
-            .catch(err => err);      
-    } 
-   
 
   const addUserFavRecipe = (userId,recipeId,favourites=true) => {
     const query = {
@@ -370,7 +327,6 @@ return db.query(query)
         getDietId,
         editUserDiet,
         addUserDiet,
-        getIngredientIdAvoidance,
         addAvoidances,
         addUserIngredientFav,
         addUserFavRecipe,
@@ -382,7 +338,6 @@ return db.query(query)
         GetUserFavFlag,
         getDiet,
         getUserIngredientPref,
-        getIngredientIdFavs,
         getIngredientId
         
       

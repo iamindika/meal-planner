@@ -11,16 +11,22 @@ module.exports = ({
   router.get("/:id", auth, (req,res, err)=>{
   
   const userId = req.params.id;
+  const userPreferences = {diet:undefined,avoidances:undefined,favs:undefined}
 
-  const diet = getDiet(userId)
+  getDiet(userId)
+  .then((result)=>userPreferences.diet = result)
+  .then(()=>{
+    getUserIngredientPref(userId,false)
+    .then((result)=>userPreferences.avoidances = result)
+  })
+  .then(()=>{
+    getUserIngredientPref(userId,true)
+    .then((result)=>{
+      userPreferences.favs = result;
+      res.json(userPreferences)
+    })
+  })
   
-  const userAvoidances=  getUserIngredientPref(userId,false)
-  
-  const favUserIngredients = getUserIngredientPref(userId,true)
-  
-  Promise.all([diet,userAvoidances,favUserIngredients])
-  .then((all)=>res.json(all))
-   
   });
   return router;
   }
