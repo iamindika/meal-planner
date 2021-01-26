@@ -16,10 +16,9 @@ const [favs,setFavs] = useState([]);
     .then(({
      data
     }) => {
-       setDiet(data[0].name);
-      //  console.log(data[1].name,data[2])
-       setAvoidances(data[1]);
-       setFavs(data[2]);
+        setDiet(data.diet.name);
+       setAvoidances(data.avoidances);
+        setFavs(data.favs);
     })
     .catch((err) => console.log(err));
   },[user.id])
@@ -37,9 +36,9 @@ const [favs,setFavs] = useState([]);
        <h3>Welcome <strong>{user.firstName +" "+ user.lastName}!</strong> </h3> 
 
     <p><strong>On this Page you find your information about your prefernces</strong></p>
-    <h5><strong>Diet</strong>:{diet}</h5>
-   <h5><strong>Favorite Ingredients</strong>: {userFavs + ", "}</h5>
-   <h5><strong>Avoidances</strong>:{userAvoidances + ", "}</h5>  
+    <h5><strong>Diet</strong>: {diet}</h5>
+   <h5><strong>Favorite Ingredients</strong>:{userFavs.join(", ") }</h5>
+   <h5><strong>Avoidances</strong>:{userAvoidances.join(", ")}</h5>  
    <Button variant="primary" type="submit">
          Edit
         </Button>

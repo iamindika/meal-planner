@@ -2,7 +2,7 @@ INSERT INTO
 diets (name, description)
 VALUES 
 (
-  'Vegeterian',
+  'Vegetarian',
   'No ingredients may contain meat or meat by-products, such as bones or gelatin.'
 ),
 (

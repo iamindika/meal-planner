@@ -5,23 +5,36 @@ const auth = require('../middleware/auth');
 
 module.exports = ({
   getDietId,
-  getIngredientIdAvoidance,
-  getIngredientIdFavs
+  addUserDiet,
+  getIngredientId,
+  addAvoidances,
+  addUserIngredientFav
 }) => {
   router.post("/", auth, (req,res, err)=>{ 
   const {diet,avoidances,favorites,id} = req.body;
   
-  const userDiet = getDietId(id,diet)
-  
-   const userAvoidances = avoidances.forEach((avoidance)=>{
-    getIngredientIdAvoidance(id,avoidance,false)
-    });
-  
-  const userFavs = favorites.forEach((favorite)=>{
-     getIngredientIdFavs(id,favorite,true)
+   getDietId(diet)
+   .then((dietId)=>{
+     addUserDiet(id,dietId)
+     .then((result)=>console.log(result))
    })
-  Promise.all([userDiet,userAvoidances,userFavs])
-  .then((all)=>res.json(all))
+   .then(()=>{
+    avoidances.forEach((avoidance)=>{
+      getIngredientId(avoidance)
+      .then((ingredientId)=>{
+        addAvoidances(id,ingredientId,false)
+        .then((result)=>console.log(result))
+      })
+    })
+   }).then(()=>{
+    favorites.forEach((favorite)=>{
+      getIngredientId(favorite)
+      .then((ingredientId)=>{
+    addUserIngredientFav(id,ingredientId,true)
+    .then((result)=>console.log(result))
+      })
+    })
+   })
   });
   return router;
   }
