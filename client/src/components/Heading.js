@@ -26,7 +26,7 @@ export default function Heading(){
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/">Login</NavLink>
                 </> :
                 <>
-                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/new/profile">Profile</NavLink>
+                  <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/profile">Profile</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/search">Search</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/favorites">Favourites</NavLink>
                   <NavLink id="RouterNavLink" style={{color:"white",padding:"10px"}} to="/schedule">Schedule</NavLink>

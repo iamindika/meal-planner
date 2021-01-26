@@ -1,95 +1,76 @@
-import {Form,Button,Col,Image} from 'react-bootstrap';
 import axios from "axios";
-import { useState,useContext } from 'react';
+import { useEffect, useState,useContext } from 'react';
 import {useHistory} from "react-router-dom";
 import {AuthContext} from "../context/authContext";
+import ProfileEdit from './ProfileEdit';
+import ProfileShow from './ProfileShow';
 
 export default function Profile(){
-const [diet,setDiet] = useState("");
-const [avoidances,setAvoidances] = useState([]);
-const [favorites,setFavorites] = useState("");
-const {user} = useContext(AuthContext);
-const history = useHistory();
+  const [state, setState] = useState({
+    user: useContext(AuthContext),
+    diet: "Vegetarian",
+    avoidances: ["Eggs", "Bacon", "Dairy"],
+    favorites: ["Peanut", "Caffeine", "Peanut"],
+    hasPreferences: true
+  });
+  const history = useHistory();
 
-function handleSubmit(event){
-event.preventDefault();
-axios.post('/profile/new',
-  {diet, avoidances, favorites,id:user.id},
-  {headers: {"x-auth-token": localStorage.getItem("token")}}
-)
-  .then(({
-   data
-  }) => {
-     console.log(data)
-  })
-  .catch((err) => console.log(err));
-   history.push("/profile");
+  return (
+    <>
+      {state.hasPreferences ? 
+        <ProfileShow user={state.user} diet={state.diet} favorites={state.favorites}
+          avoidances={state.avoidances}/> : 
+        <ProfileEdit/>}
+    </>
+  )
 }
 
-  return <section>
-       <Col md={{ span: 3, offset: 4 }}>
-      <Image style={{textAlign:"center"}} src="https://cdn.dribbble.com/users/1070859/screenshots/5869416/gal-_dribbble__still_2x.gif?compress=1&resize=200x200" roundedCircle />
-    </Col>
-    <Col  md={{ span: 3, offset: 4 }} xs={2}> 
-    <Form>
-      <br />
+// const [diet,setDiet] = useState("");
+// const [avoidances,setAvoidances] = useState([]);
+// const [favorites,setFavorites] = useState("");
+// const {user} = useContext(AuthContext);
 
 
-<Form.Group controlId="exampleForm.SelectCustomSizeLg">
-<Form.Label><strong>Diet</strong></Form.Label>
-    <Form.Control as="select" size="lg" style={{border:"solid grey"}} custom value={diet} onChange={(e) => setDiet(e.target.value)}>
-    <option>Select your Diet</option>
-      <option>Vegetarian</option>
-      <option>Gluten Free</option>
-      <option>Ketogenic</option>
-      <option>Lacto-Vegetarian</option>
-      <option>Pescetarian</option>
-      <option>Paleo</option>
-      <option>Primal</option>
-      <option>Whole30</option>
-    </Form.Control>
-  </Form.Group>
-<Form.Group controlId="exampleForm.SelectCustomSizeLg">
-<Form.Label><strong>Avoidances</strong></Form.Label>
-    <Form.Control multiple as="select" size="lg"  style={{border:"solid grey"}} custom value={avoidances} onChange={(e) => setAvoidances((prev)=>[...prev,e.target.value])}>
-      <option>Alcohol</option>
-      <option>Caffeine</option>
-      <option>Celery</option>
-      <option>Egg</option>
-      <option>Gluten</option>
-      <option>Peanut</option>
-      <option>Dairy</option>
-      <option>Sesame</option>
-      <option>Soy</option>
-      <option>Tree nut</option>
-      <option>Shellfish</option>
-      <option>Wheat</option>
-      <option>Yeast</option>
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.SelectCustomSizeLg">
-<Form.Label><strong>Favourite Ingredients</strong></Form.Label>
-    <Form.Control multiple as="select" size="lg"  style={{border:"solid grey"}} custom value={favorites} onChange={(e) => setFavorites((prev)=>[...prev,e.target.value])}>
-      <option>Egg</option>
-      <option>Bacon</option>
-      <option>Steak</option>
-      <option>Bread</option>
-      <option>Apple</option>
-      <option>Banana</option>
-      <option>Mayo</option>
-      <option>Butter</option>
-      <option>Cheese</option>
-      <option>Broccoli</option>
-      <option>Kale</option>
-      <option>Potato</option>
-      <option>Pizza</option>
-    </Form.Control>
-  </Form.Group>
-  <br />
-  <Button variant="primary" type="submit" onClick={handleSubmit}>
-    Submit
-  </Button>
-</Form>
-</Col>
-  </section>
-}
+// function handleSubmit(event){
+// event.preventDefault();
+// axios.post('/profile/new',
+//   {diet, avoidances, favorites,id:user.id},
+//   {headers: {"x-auth-token": localStorage.getItem("token")}}
+// )
+//   .then(({
+//    data
+//   }) => {
+//      console.log(data)
+//   })
+//   .catch((err) => console.log(err));
+//    history.push("/profile");
+// }
+
+// const {user} = useContext(AuthContext);
+// const [diet,setDiet] = useState([]);
+// const [avoidances, setAvoidances] = useState([]);
+// const [favs,setFavs] = useState([]);
+// //  console.log(user)
+  // useEffect(()=>{
+  //   axios.get(`/profile/view/${user.id}`,
+  //   {headers: {"x-auth-token": localStorage.getItem("token")}}
+  // )
+  //   .then(({
+  //    data
+  //   }) => {
+  //       setDiet(data.diet.name);
+  //      setAvoidances(data.avoidances);
+  //       setFavs(data.favs);
+  //   })
+  //   .catch((err) => console.log(err));
+  // },[user.id])
+
+//   const userAvoidances = avoidances.map((avoid)=>{
+//     return avoid.name
+//   });
+
+//   const userFavs = favs.map((fav)=>{
+//     return fav.name
+//   })
+
+//   
