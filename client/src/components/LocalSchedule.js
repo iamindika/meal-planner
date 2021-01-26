@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState} from "react";
 import { Table, Form  } from "react-bootstrap";
 import axios from "axios";
 import SmallRecipeCard from './SmallRecipeCard'
 
 import "./LocalSchedule.scss";
-import { Prev } from "react-bootstrap/esm/PageItem";
+
 
 
 export default function LocalSchedule (props) {

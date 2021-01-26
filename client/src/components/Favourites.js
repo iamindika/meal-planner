@@ -26,7 +26,7 @@ export default function Favourites() {
           setFavs(response.data)
       })
       .catch((err) => console.log(err));
-   },[removedFav]);
+   },[removedFav,user.id]);
 
 // removing favs of a particular user
   function handleSubmit(id) {
@@ -47,7 +47,7 @@ export default function Favourites() {
 
   return (
     <section>
-      <h1>Favourites</h1>
+      <h1>Favourites<i class="fas fa-heart" style={{color:"red"}}></i></h1>
           <CardGroup >
          {favourites} 
       </CardGroup>    
