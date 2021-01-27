@@ -2,10 +2,8 @@ $card-min-width: 15rem;
 $card-max-width: 15rem;
 
 .card.small {
-  // padding: 1rem;
   min-width: $card-min-width;
   max-width: $card-max-width;
-  // width: 30rem;
   .card-bottom-small {
     display: flex;
     flex-direction: row;
