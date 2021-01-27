@@ -64,5 +64,4 @@ export default function Profile(){
     </>
   )
 }
-
-//    history.push("/profile");
+  //  history.push("/profile")

@@ -57,12 +57,12 @@ export default function IngredientsForm(props){
     return <Redirect to='/' />
   }
   return (
-  <section>
+  <section >
     <Col md={{ span: 3, offset: 4 }} xs={2}>
       <Form>
         <div id="dynamicInput">
           {ingredients.map( (ingredient, index) => 
-            <Form.Row key={index}>
+            <Form.Row key={index} style={{paddingLeft:"120px"}}>
               <Col>
               <Form.Group controlId={"name-" + index}>
                 <Form.Control 
@@ -103,13 +103,14 @@ export default function IngredientsForm(props){
           )}
         </div>
         <div className="mb-2">
-          <Button variant="primary" size="lg" onClick={appendFormRow}>
+          <Button variant="primary" style={{backgroundColor:'#4B7DFE',margin:"10px"}} size="lg" onClick={appendFormRow}>
             +
           </Button>{' '}
         </div>
         <div className="mb-2">
           <Button 
-            variant="primary"  
+            variant="primary" 
+            style={{backgroundColor:'#4B7DFE',margin:"10px"}} 
             size="lg" 
             onClick={handleSubmit}
           >

@@ -1,13 +1,3 @@
-// var express = require('express');
-// var router = express.Router();
-
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
-// module.exports = router;
-// **
 const express = require('express');
 const router = express.Router();
 const {
@@ -52,7 +42,6 @@ module.exports = ({
             }));
     });
 
-    // /recipes/user/${id}/free
     router.get('/:id/free', (req, res) => {
         getFreeUserRecipes(req.params.id)
             .then((userRecipes) => res.json(userRecipes)
@@ -62,8 +51,6 @@ module.exports = ({
             }));
     });
 
-
-// **
     router.post('/new', (req, res) => {
 
         const {
@@ -91,7 +78,6 @@ module.exports = ({
 
     });
 
-    // /recipes/${selectedRecipe}/user/${id}/add
     router.post('/:id/user/:userId/add', (req, res) => {
         const {
             day,

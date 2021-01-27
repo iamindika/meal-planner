@@ -1,6 +1,15 @@
 #register{
   background-image: 
-  url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80");
+  url("https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80");
   background-size: cover;
-  height: 900px;
+  height: 1300px;
+  padding-top: 50px;
+  text-align: center;
+  padding-left: 30px;
+  .register{
+    color:#26466D;
+    font-family: 'Oxygen', sans-serif;
+    font-size:3em;
+    padding-left:230px;
+  }
 }

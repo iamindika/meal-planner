@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from "react";
 import axios from "axios";
-import CardGroup from 'react-bootstrap/CardGroup';
+import {CardColumns} from "react-bootstrap"
 import LocalRecipeCard from "./LocalRecipeCard";
-import "./Favourites.scss";
 import {AuthContext} from "../context/authContext";
+import "./Favourites.scss";
 
 export default function Favourites() {
 
@@ -46,11 +46,11 @@ export default function Favourites() {
   )
 
   return (
-    <section>
-      <h1>Favourites<i class="fas fa-heart" style={{color:"red"}}></i></h1>
-          <CardGroup >
+    <section >
+      <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",margin:"30px",fontSize:"4em"}}>Favourites</h1>
+      <CardColumns>
          {favourites} 
-      </CardGroup>    
+      </CardColumns>    
     </section>
   );
 }

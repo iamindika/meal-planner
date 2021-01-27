@@ -7,11 +7,9 @@ import { useState, useEffect } from "react";
 import "./SmallRecipeCard.scss";
 
 export default function SmallRecipeCard (props) {
-  const [showInstructions, setShowInstructions] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
-  // console.log("SmallRecipeCard props:", props);
-  
-  const [removed, setRemoved ] = useState({ 
+  const [ showInstructions, setShowInstructions ] = useState(false);
+  const [ ingredients, setIngredients ] = useState([]);
+  const [ removed ] = useState({ 
     userId: props.userId,
     recipeId: props.recipeId,
     name: props.name,
@@ -29,7 +27,6 @@ export default function SmallRecipeCard (props) {
       .then((
         response
       ) => {
-        // console.log(response.data)
         setIngredients([...response.data])
       })
       .catch((err) => console.log(err));
@@ -37,13 +34,11 @@ export default function SmallRecipeCard (props) {
 
   let ingredientsWithAmount=[]
   if(ingredients.length) {
-    // console.log("**** ingredients: ", ingredients)
     ingredientsWithAmount = ingredients.map((ingredient)=>{
       return<Card.Text key={ingredient.id} >
-       {ingredient.name} - {ingredient.quantity} {ingredient.unit}</Card.Text>
+       {ingredient.name} - {Math.round(ingredient.quantity * 100) / 100} {ingredient.unit}</Card.Text>
     })
   }
-  // console.log("ingredientsWithAmount: ", ingredientsWithAmount);
 
   function handleClick(){
     setShowInstructions(!showInstructions)
@@ -51,7 +46,6 @@ export default function SmallRecipeCard (props) {
 
   function handleClickRemove(event){
     event.preventDefault();
-    // console.log("removed: ", removed)
     axios({
       method: 'POST',
       url:`/recipes/${props.recipeId}/user/${props.userId}/remove`,
@@ -60,8 +54,6 @@ export default function SmallRecipeCard (props) {
       .then((
        data
       ) => {
-          console.log("handleClick data IN SMALLRECIPECARD: ", data)
-          console.log("^^^ removed: ", removed)
           if(props.onSuccess) {
             props.onSuccess(removed);
           };
@@ -72,19 +64,19 @@ export default function SmallRecipeCard (props) {
   
   return (
     <Card className="small">
-      <Card.Img variant="top" src={props.image} />
+      <Card.Img  src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         {showInstructions &&
-        <div>
+        <div className="ing-inst">
           {ingredientsWithAmount}
         <Card.Text>
           {props.instructions}
         </Card.Text>
         </div>}
-        <div className="card-bottom">
+        <div className="card-bottom-small">
           <div className="button-container">
-            <Button variant="primary" onClick={handleClick}>{!showInstructions? "View Recipe" : "Collapse"}</Button>
+            <Button variant="primary" style={{backgroundColor:'#4B7DFE'}} onClick={handleClick}>{!showInstructions? "View Recipe" : "Collapse"}</Button>
           </div>
           <div className="minus-circle-container">
             <button type="submit" onClick={handleClickRemove} style={{ border: "none",backgroundColor: "Transparent"}}>

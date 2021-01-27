@@ -2,11 +2,9 @@ $card-min-width: 15rem;
 $card-max-width: 15rem;
 
 .card.small {
-  // padding: 1rem;
   min-width: $card-min-width;
   max-width: $card-max-width;
-  // width: 30rem;
-  .card-bottom {
+  .card-bottom-small {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,8 +22,10 @@ $card-max-width: 15rem;
       size: 1rem;
     }
 
-    .card-img-top {
-      // width: 20%;
+    .card-img {
+      border-radius:50px;
+      width:10rem;
+      height:10rem;
     }
   }
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 import {Form,Button,Col,CardGroup} from "react-bootstrap"
 import RecipeCard from "./RecipeCard";
 import {AuthContext} from "../context/authContext";
+import "./Search.scss";
 
 
 export default function Search(){
@@ -22,7 +23,7 @@ export default function Search(){
        data
       }) => {
         var json = JSON.parse(data);
-      //  console.log(json.results)
+       console.log(data)
        setSearchResults(json.results)
       })
       .catch((err) => console.log(err));
@@ -42,7 +43,7 @@ export default function Search(){
   return <div>
    <Col md={{ span: 4, offset: 4 }} xs={2}>
   <Form onSubmit={handleSubmit} role="form" style={{paddingTop:"40px"}}>
-  <Form.Control style={{paddingTop:"10px"}}
+  <Form.Control size="lg" style={{paddingTop:"10px",width: "500px",height:"60px" , border: "2px solid #999999",borderRadius:"50px",marginLeft:"150px"}}
                 placeholder="Search"
                 type="text"
                 name="search"
@@ -50,14 +51,15 @@ export default function Search(){
                 onChange={handleChange}
               />
     <br />
-    <Button type="submit" size="lg" style={{backgroundColor:'#4B7DFE'}}><i class="fas fa-hamburger" style={{color:'#e6af5d'}}></i> Search</Button>
+    <Button type="submit" size="lg" style={{backgroundColor:'#4B7DFE',padding:"20px",fontSize:"1.55em",borderRadius:"20px"}}><i class="fas fa-hamburger" style={{color:'#e6af5d'}}></i> Search</Button>
   </Form>
   {showSearch &&
-  <div>
-  <h1>Search results</h1>
-      <CardGroup>
-         {finalResults}  
-      </CardGroup></div>}
+   <section style={{marginRight:"30px"}}>
+   <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",marginBottom:"30px",marginTop:"30px",marginRight:"30px"}}>Search Results For {"'" + value +"'"}</h1>
+       <CardGroup>
+      {finalResults} 
+   </CardGroup>    
+ </section>}
   </Col>
 </div>
 }
