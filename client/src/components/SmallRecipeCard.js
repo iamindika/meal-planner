@@ -7,11 +7,9 @@ import { useState, useEffect } from "react";
 import "./SmallRecipeCard.scss";
 
 export default function SmallRecipeCard (props) {
-  const [showInstructions, setShowInstructions] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
-  // console.log("SmallRecipeCard props:", props);
-  
-  const [removed, setRemoved ] = useState({ 
+  const [ showInstructions, setShowInstructions ] = useState(false);
+  const [ ingredients, setIngredients ] = useState([]);
+  const [ removed ] = useState({ 
     userId: props.userId,
     recipeId: props.recipeId,
     name: props.name,
@@ -29,7 +27,6 @@ export default function SmallRecipeCard (props) {
       .then((
         response
       ) => {
-        // console.log(response.data)
         setIngredients([...response.data])
       })
       .catch((err) => console.log(err));
@@ -37,13 +34,11 @@ export default function SmallRecipeCard (props) {
 
   let ingredientsWithAmount=[]
   if(ingredients.length) {
-    // console.log("**** ingredients: ", ingredients)
     ingredientsWithAmount = ingredients.map((ingredient)=>{
       return<Card.Text key={ingredient.id} >
        {ingredient.name} - {Math.round(ingredient.quantity * 100) / 100} {ingredient.unit}</Card.Text>
     })
   }
-  // console.log("ingredientsWithAmount: ", ingredientsWithAmount);
 
   function handleClick(){
     setShowInstructions(!showInstructions)
@@ -51,7 +46,6 @@ export default function SmallRecipeCard (props) {
 
   function handleClickRemove(event){
     event.preventDefault();
-    // console.log("removed: ", removed)
     axios({
       method: 'POST',
       url:`/recipes/${props.recipeId}/user/${props.userId}/remove`,
@@ -60,8 +54,6 @@ export default function SmallRecipeCard (props) {
       .then((
        data
       ) => {
-          console.log("handleClick data IN SMALLRECIPECARD: ", data)
-          console.log("^^^ removed: ", removed)
           if(props.onSuccess) {
             props.onSuccess(removed);
           };
