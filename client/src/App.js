@@ -9,49 +9,40 @@ import Register from "./components/Register";
 import Search from "./components/Search"
 import LocalRecipes from "./components/LocalRecipes"
 import LocalSchedule  from "./components/LocalSchedule"
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import ViewProfile from './components/ViewProfile';
-
-const fakeAuth = {
-  isAuthenticated:  false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100);
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
-}
-
-function PrivateRoute({children, ...rest}) {
-  return(
-    <Route {...rest} render={() => {
-      return fakeAuth.isAutheticated === true
-        ? children
-        : <Redirect to='/' />
-    }} />
-  )
-}
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return(
-    <Router>
-      <div className="App">
-      <Heading />
+    <div className="App">
+      <Router>
+        <Heading />
         <Switch>
           <Route path="/" exact component={Login} />
-          <Route path="/schedule" component={LocalSchedule} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/search" component={Search} />
-          <Route path="/favorites"  component={Favourites} />
           <Route path="/register" component={Register} />
-          <Route path="/new" component={RecipeForm} />
-          <Route path="/recipes" component={LocalRecipes} />
+          <PrivateRoute path="/schedule" >
+            <LocalSchedule />
+          </PrivateRoute>
+          <PrivateRoute path="/profile" >
+            <Profile />
+          </PrivateRoute>
+          <PrivateRoute path="/search" >
+            <Search />
+          </PrivateRoute>
+          <PrivateRoute path="/favorites" >
+            <Favourites />
+          </PrivateRoute>
+          <PrivateRoute path="/new" >
+            <RecipeForm />
+          </PrivateRoute>
+          <PrivateRoute path="/recipes" >
+            <LocalRecipes />
+          </PrivateRoute>
         </Switch>
-      </div >
-    </Router>
-)};
+      </Router>
+    </div >
+  )
+};
 
 export default App;
 
