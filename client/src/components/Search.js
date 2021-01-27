@@ -43,7 +43,7 @@ export default function Search(){
   return <div>
    <Col md={{ span: 4, offset: 4 }} xs={2}>
   <Form onSubmit={handleSubmit} role="form" style={{paddingTop:"40px"}}>
-  <Form.Control style={{paddingTop:"10px"}}
+  <Form.Control size="lg" style={{paddingTop:"10px",width: "500px",height:"60px" , border: "2px solid #999999",borderRadius:"50px",marginLeft:"150px"}}
                 placeholder="Search"
                 type="text"
                 name="search"
@@ -51,11 +51,11 @@ export default function Search(){
                 onChange={handleChange}
               />
     <br />
-    <Button type="submit" size="lg" style={{backgroundColor:'#4B7DFE'}}><i class="fas fa-hamburger" style={{color:'#e6af5d'}}></i> Search</Button>
+    <Button type="submit" size="lg" style={{backgroundColor:'#4B7DFE',padding:"20px",fontSize:"1.55em",borderRadius:"20px"}}><i class="fas fa-hamburger" style={{color:'#e6af5d'}}></i> Search</Button>
   </Form>
   {showSearch &&
-   <section>
-   <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",marginBottom:"30px",marginTop:"30px"}}>Search Results For {"'" + value +"'"}</h1>
+   <section style={{marginRight:"30px"}}>
+   <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",marginBottom:"30px",marginTop:"30px",marginRight:"30px"}}>Search Results For {"'" + value +"'"}</h1>
        <CardGroup>
       {finalResults} 
    </CardGroup>    

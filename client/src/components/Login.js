@@ -42,15 +42,17 @@ export default function Login(){
     <section id="login">
       <Col md={{ span: 3, offset: 4 }} xs={2}>
         <Form>
-        <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>Login</h1>
+        <h1 className="login">Login</h1>
         <Form.Group controlId="formBasicEmail">
-          <Form.Control type="email" size="lg" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
+          <Form.Control type="email"
+          style={{paddingTop:"10px",width: "580px",height:"60px" , border: "2px solid #999999",borderRadius:"30px",marginLeft:"130px"}} size="lg" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
+          <Form.Control size="lg"
+          style={{paddingTop:"10px",width: "580px",height:"60px" , border: "2px solid #999999",borderRadius:"30px",marginLeft:"130px"}} type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
         </Form.Group>
-        <Button variant="primary"  style={{backgroundColor:'#4B7DFE'}} size="md" type="submit" onClick={handleSubmit}>
+        <Button variant="primary"  style={{backgroundColor:'#4B7DFE',marginLeft:"230px"}} size="lg" type="submit" onClick={handleSubmit}>
           Submit
         </Button>
         </Form>

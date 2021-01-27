@@ -1,9 +1,6 @@
 .scrollTop {
-  position:fixed;
   width: 100%;
-  bottom: 20px;
   align-items: center;
-  height: 30px;
   justify-content: center;
   z-index: 1000;
   cursor: pointer;
@@ -12,7 +9,7 @@
   opacity: 0.5;
   position:absolute !important;
   bottom: auto !important;
-  padding-left: 70em;
+  padding-left: 900px;
   color:#FF8600;
 }
 

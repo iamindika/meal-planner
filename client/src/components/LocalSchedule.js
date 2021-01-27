@@ -180,32 +180,50 @@ export default function LocalSchedule (props) {
 
   return (
     <section>
-      <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}> Schedule </h1>
+      <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",fontSize:"4em"}}> Schedule </h1>
+      {/* <ul> {JSON.stringify(breakfast)} </ul> */}
       
-      <Table responsive>
-        <thead>
-          <tr style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>
-            <th></th>
-            {WEEKDAYS.map((weekday, index) => (
-              <th key={index}>{weekday}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}><strong>Breakfast</strong></td>
-            { user && getSpotRecipes(breakfast, 1) }
-          </tr>
-          <tr>
-            <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}><strong>Lunch</strong></td>
-            { user && getSpotRecipes(lunch, 2) }
-          </tr>
-          <tr>
-            <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}><strong>Dinner</strong></td>
-            { user && getSpotRecipes(dinner, 3) }
-          </tr>
-        </tbody>
-      </Table>
+    <Table responsive>
+      <thead>
+        <tr style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",fontSize:"2em"}}>
+          <th></th>
+          {WEEKDAYS.map((weekday, index) => (
+            <th key={index}>{weekday}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",fontSize:"2em"}}><strong>Breakfast</strong></td>
+          {/* {Array.from({ length: 7 }).map((_, index) => (
+            <td key={index}>Table cell {index}</td>
+          ))} */}
+          { user && getSpotRecipes(breakfast, 1) }
+
+        </tr>
+        <tr>
+          <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",fontSize:"2em"}}><strong>Lunch</strong></td>
+          {/* {Array.from({ length: 7 }).map((_, index) => (
+            <td key={index}>Table cell {index}</td>
+          ))} */}
+          { user && getSpotRecipes(lunch, 2) }
+
+        </tr>
+        <tr>
+          <td style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif",fontSize:"2em"}}><strong>Dinner</strong></td>
+          {/* {Array.from({ length: 7 }).map((_, index) => (
+            <td key={index}>Table cell {index}</td>
+          ))} */}
+          { user && getSpotRecipes(dinner, 3) }
+        </tr>
+      </tbody>
+    </Table>
+
+      {/* <CardGroup>
+
+        {myRecipes}
+
+      </CardGroup> */}
     </section>
   );
 }

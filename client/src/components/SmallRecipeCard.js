@@ -64,7 +64,7 @@ export default function SmallRecipeCard (props) {
   
   return (
     <Card className="small">
-      <Card.Img className="small" variant="top" src={props.image} />
+      <Card.Img  src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         {showInstructions &&

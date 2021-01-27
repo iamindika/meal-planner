@@ -22,8 +22,10 @@ $card-max-width: 15rem;
       size: 1rem;
     }
 
-    .card-img-top.small {
+    .card-img {
       border-radius:50px;
+      width:10rem;
+      height:10rem;
     }
   }
 }
