@@ -55,26 +55,30 @@ export default function Register(props){
     <section id="register">
       <Col md={{ span: 3, offset: 4 }} xs={2}>
         <Form>
-          <h1 style={{color:"#26466D",fontFamily: "'Oxygen', sans-serif"}}>Register</h1>
+          <h1 className="register">Register</h1>
           <Form.Group controlId="formBasicFirstName">
-            <Form.Control type="text" placeholder="Enter First Name" value={fName} onChange={handleFirstNameChange}/>
+            <Form.Control size="lg"
+            style={{paddingTop:"10px",width: "580px",height:"60px" , border: "2px solid #999999",borderRadius:"30px",marginLeft:"130px"}} type="text" placeholder="Enter First Name" value={fName} onChange={handleFirstNameChange}/>
             <p></p>
           </Form.Group>
 
           <Form.Group controlId="formBasicLastName">
-            <Form.Control type="text" placeholder="Enter Last Name" value={lName} onChange={handleLastNameChange}/>
+            <Form.Control type="text"
+            style={{paddingTop:"10px",width: "580px",height:"60px" , border: "2px solid #999999",borderRadius:"30px",marginLeft:"130px"}}size="lg" placeholder="Enter Last Name" value={lName} onChange={handleLastNameChange}/>
             <p></p>
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
+            <Form.Control type="email"
+            style={{paddingTop:"10px",width: "580px",height:"60px" , border: "2px solid #999999",borderRadius:"30px",marginLeft:"130px"}} size="lg" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
+            <Form.Control type="password"
+            style={{paddingTop:"10px",width: "580px",height:"60px" , border: "2px solid #999999",borderRadius:"30px",marginLeft:"130px"}}size="lg" placeholder="Password" value={password} onChange={handlePasswordChange}/>
           </Form.Group>
 
-          <Button variant="primary" style={{backgroundColor:'#4B7DFE'}} type="submit" onClick={handleSubmit}>
+          <Button variant="primary" style={{backgroundColor:'#4B7DFE',marginLeft:"230px"}} size="lg" type="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </Form>

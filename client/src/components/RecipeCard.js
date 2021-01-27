@@ -68,7 +68,7 @@ import {AuthContext} from "../context/authContext";
     
   })
   return (
-    <Card>
+    <Card className="search-card">
       <Card.Img  className="search" variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
@@ -84,7 +84,7 @@ import {AuthContext} from "../context/authContext";
         </Card.Text>
         </div>}
         <div className="card-bottom">
-          <Button variant="primary" type="submit" style={{backgroundColor:'#4B7DFE'}} onClick={handleSubmit} value={props.id} >{!showInstructions?"View Recipe":"Collapse"}</Button>
+          <Button variant="primary" type="submit" style={{backgroundColor:'#4B7DFE',fontSize:"1.25em",borderRadius:"10px"}} onClick={handleSubmit} value={props.id} >{!showInstructions?"View Recipe":"Collapse"}</Button>
           {showInstructions && 
           <div className="heart-container">
             <button type="submit" onClick={handleClick} style={{ border: "none",backgroundColor: "Transparent"}}>{userFav?<i class="fas fa-heart" style={{color:"red"}}></i>:<i class="far fa-heart" style={{color:"red"}}></i>}</button>

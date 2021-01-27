@@ -18,12 +18,13 @@ export default function LocalRecipeCard (props) {
   }
 
   return (
-    <Card>
-      <Card.Img  className="local"variant="top" src={props.image} />
+    <Card className="local">
+      
+      <Card.Img  className="local" variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         {showInstructions &&
-        <div className="ing-inst">
+       <div className="ing-inst">
       <Card.Text>
         <h3 style={{color:"#26466D"}}><strong>Ingredients</strong></h3>
           {ingredientsWithAmount}
@@ -32,8 +33,9 @@ export default function LocalRecipeCard (props) {
           <h3 style={{color:"#26466D"}}><strong>Cooking Instructions</strong></h3>
           {props.instructions}
         </Card.Text></div>}
+        
         <div class="card-bottom">
-          <Button variant="primary" style={{backgroundColor:'#4B7DFE'}} onClick={handleClick}>{!showInstructions?"View Recipe":"Collapse"}</Button>
+          <Button variant="primary" size="lg" style={{backgroundColor:'#4B7DFE',fontSize:"1.25em",borderRadius:"10px"}} onClick={handleClick}>{!showInstructions?"View Recipe":"Collapse"}</Button>
           <div class="heart-container">
             <button type="submit" value={props.value} onClick={()=>{
               props.onSubmit(props.value)
