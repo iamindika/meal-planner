@@ -12,10 +12,10 @@ export default function ProfileShow(props) {
         <h5><strong>Diet</strong>: {props.diet ? props.diet : "No Diet Preferences"}</h5>
         <h5><strong>Favorite Ingredients</strong>:{props.favorites.length > 0 ? props.favorites.join(", ") : "No Favorites"}</h5>
         <h5><strong>Avoidances</strong>:{props.avoidances.length > 0 ? props.avoidances.join(", ") : "No Avoidances"}</h5>  
-        <Button>Edit</Button>
       </section> 
     </Col>
   )
 } 
 
+{/* <Button>Edit</Button> */}
 // href="/new/profile"
